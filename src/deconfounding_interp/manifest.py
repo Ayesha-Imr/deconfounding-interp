@@ -53,7 +53,6 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
     for model_id, model in bundle.models.items():
         for trait_id in bundle.traits:
             selected_layer = model.trait_layers.get(trait_id)
-            layer_policy = "configured" if selected_layer is not None else "auroc_probe_sweep"
             for variant_index in range(variant_count):
                 variant_kind = "original" if variant_index < n_pairs else "paraphrase"
                 jobs.append(
@@ -69,7 +68,6 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                                 generation, "rollouts_per_prompt_question", 5
                             ),
                             "selected_layer": selected_layer,
-                            "layer_policy": layer_policy,
                         },
                     )
                 )
@@ -84,7 +82,6 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                         "variant_count": variant_count,
                         "direction_types": list(direction_types),
                         "selected_layer": selected_layer,
-                        "layer_policy": layer_policy,
                     },
                 )
             )
@@ -100,7 +97,6 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                             "direction_type": direction_type,
                             "alpha_values": bundle.experiment.steering.get("alpha_values", []),
                             "selected_layer": selected_layer,
-                            "layer_policy": layer_policy,
                         },
                     )
                 )

@@ -44,10 +44,6 @@ scoring:
 extraction:
   method: difference_in_means
   activation_position: response_average
-  save_all_layers: true
-  layer_selection:
-    known_trait_policy: use_model_trait_layer
-    fallback_policy: auroc_probe_sweep
 
 surface_form:
   same_side_prompt_pairs: all_unique_pairs
