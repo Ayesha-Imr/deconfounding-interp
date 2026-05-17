@@ -1,0 +1,10 @@
+Rephrase the following system prompt so it conveys exactly the same instruction but uses different wording, vocabulary, and sentence structure.
+
+Constraints:
+- Preserve the meaning, target behavior, and intensity.
+- Keep the length within roughly 10 percent of the original.
+- Do not add new behavioral requirements.
+- Return only the rephrased system prompt.
+
+Original system prompt:
+{system_prompt}

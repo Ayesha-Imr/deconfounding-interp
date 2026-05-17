@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Experiment artifacts
+data/raw/*
+data/interim/*
+data/processed/*
+outputs/directions/*
+outputs/manifests/*
+outputs/reports/*
+
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!outputs/directions/.gitkeep
+!outputs/manifests/.gitkeep
+!outputs/reports/.gitkeep
+
+# Local secrets and machine-specific config
+.env
+.env.*
+*.local.yaml
+*.local.yml
+*.local.json
+
+
+*.md
+!README.md

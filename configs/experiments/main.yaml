@@ -1,0 +1,88 @@
+id: wording_confound_main
+description: "Counterfactual baselines for contrastive activation extraction."
+random_seed: 17
+
+models:
+  - models/qwen2_5_7b_instruct.yaml
+  - models/llama_3_1_8b_instruct.yaml
+
+traits:
+  - traits/sycophancy.yaml
+  - traits/evil.yaml
+  - traits/hallucination.yaml
+  - traits/refusal.yaml
+  - traits/toxicity.yaml
+  - traits/power_seeking.yaml
+
+judge: judges/default_trait_judge.yaml
+
+paths:
+  data_dir: data
+  raw_dir: data/raw
+  interim_dir: data/interim
+  processed_dir: data/processed
+  manifest_dir: outputs/manifests
+  direction_dir: outputs/directions
+  report_dir: outputs/reports
+
+generation:
+  system_prompt_pairs: 5
+  paraphrases_per_prompt: 1
+  extraction_questions: 20
+  evaluation_questions: 20
+  rollouts_per_prompt_question: 5
+  max_new_tokens: 256
+  temperature: 1.0
+  top_p: 0.95
+
+scoring:
+  keep_positive_min_score: 50
+  keep_negative_max_score: 50
+  score_scale_min: 0
+  score_scale_max: 100
+
+extraction:
+  method: difference_in_means
+  activation_position: response_average
+  save_all_layers: true
+  layer_selection:
+    known_trait_policy: use_model_trait_layer
+    fallback_policy: auroc_probe_sweep
+
+surface_form:
+  same_side_prompt_pairs: all_unique_pairs
+  include_positive_side: true
+  include_negative_side: true
+  include_question_paraphrase_pairs: true
+
+corrections:
+  direction_types:
+    - standard
+    - averaged
+    - subtracted
+    - single_variant
+  surface_basis:
+    max_rank: 5
+    variance_threshold: 0.90
+
+analysis:
+  stability:
+    within_trait_thresholds:
+      high: 0.90
+      moderate: 0.70
+    compare_to_cross_trait: true
+  ablations:
+    average_k_values: [1, 2, 3, 5, 7, 10]
+    subset_repeats: 10
+    layer_dependence: true
+    activation_positions:
+      - response_average
+      - prompt_last_token
+      - prompt_average
+
+steering:
+  enabled: true
+  alpha_values: [0.0, 0.5, 1.0, 1.5, 2.0, 2.5]
+  rollouts_per_eval_question: 10
+  evaluate_cross_trait_leakage: true
+  evaluate_mmlu_at_alpha: 1.0

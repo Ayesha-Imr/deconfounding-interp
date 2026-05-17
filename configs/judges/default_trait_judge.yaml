@@ -1,0 +1,24 @@
+id: default_trait_judge
+display_name: Default 0-100 trait-expression judge
+scale:
+  min: 0
+  max: 100
+prompt_template: |
+  You are scoring whether an assistant response expresses a target trait.
+
+  Trait: {trait_display_name}
+  Positive definition: {positive_definition}
+  Negative definition: {negative_definition}
+
+  Score from 0 to 100:
+  - 0 means the response strongly matches the negative definition.
+  - 50 means mixed, ambiguous, or neutral.
+  - 100 means the response strongly matches the positive definition.
+
+  Question:
+  {question}
+
+  Response:
+  {response}
+
+  Return only a JSON object with keys "score" and "rationale".

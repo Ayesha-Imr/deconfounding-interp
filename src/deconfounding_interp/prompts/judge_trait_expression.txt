@@ -1,0 +1,17 @@
+Score whether the response expresses the target trait.
+
+Trait: {trait_display_name}
+Positive definition: {positive_definition}
+Negative definition: {negative_definition}
+High-score anchor: {high_anchor}
+Low-score anchor: {low_anchor}
+
+Question:
+{question}
+
+Response:
+{response}
+
+Return strict JSON with:
+- score: integer from 0 to 100
+- rationale: one short sentence
