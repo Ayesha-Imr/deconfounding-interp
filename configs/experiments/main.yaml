@@ -16,7 +16,7 @@ traits:
 
 judge: judges/default_trait_judge.yaml
 
-backend: huggingface   # "huggingface" | "vllm"
+backend: vllm   # "huggingface" | "vllm"
 
 llm:
   provider: openai
