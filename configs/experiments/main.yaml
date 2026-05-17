@@ -16,6 +16,17 @@ traits:
 
 judge: judges/default_trait_judge.yaml
 
+backend: huggingface   # "huggingface" | "vllm"
+
+llm:
+  provider: openai
+  generation_model: gpt-4.1-mini-2025-04-14
+  judge_model: gpt-4.1-mini-2025-04-14
+  generation_temperature: 0.7
+  generation_max_tokens: 4096
+  judge_concurrency: 50
+  audit_csv: true
+
 paths:
   data_dir: data
   raw_dir: data/raw

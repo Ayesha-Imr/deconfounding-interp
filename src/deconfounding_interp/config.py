@@ -115,6 +115,7 @@ class ModelConfig:
     num_layers: int
     default_max_new_tokens: int
     trait_layers: dict[str, int | None]
+    backend: str | None
     source: Path
 
     @classmethod
@@ -123,6 +124,7 @@ class ModelConfig:
         trait_layers = data.get("trait_layers", {})
         if not isinstance(trait_layers, dict):
             raise ConfigError(f"`trait_layers` must be a mapping in {path}")
+        raw_backend = data.get("backend")
         return cls(
             id=_required_str(data, "id", path),
             display_name=str(data.get("display_name") or data.get("id")),
@@ -137,6 +139,7 @@ class ModelConfig:
             num_layers=int(data.get("num_layers", 0)),
             default_max_new_tokens=int(data.get("default_max_new_tokens", 256)),
             trait_layers={str(key): _optional_int(value) for key, value in trait_layers.items()},
+            backend=str(raw_backend) if raw_backend is not None else None,
             source=path,
         )
 
@@ -157,6 +160,8 @@ class ExperimentConfig:
     corrections: dict[str, Any]
     analysis: dict[str, Any]
     steering: dict[str, Any]
+    backend: str
+    llm: dict[str, Any]
     source: Path
 
     @classmethod
@@ -177,6 +182,8 @@ class ExperimentConfig:
             corrections=dict(data.get("corrections", {})),
             analysis=dict(data.get("analysis", {})),
             steering=dict(data.get("steering", {})),
+            backend=str(data.get("backend", "huggingface")),
+            llm=dict(data.get("llm", {})),
             source=path,
         )
 
@@ -285,7 +292,19 @@ def validate_bundle(bundle: ConfigBundle) -> list[str]:
             if not trait.prompt_generation.get(key):
                 errors.append(f"Trait `{trait.id}` missing prompt_generation.{key}")
 
+    valid_backends = {"huggingface", "vllm"}
+    if bundle.experiment.backend not in valid_backends:
+        errors.append(
+            f"Experiment backend must be one of {valid_backends}, "
+            f"got `{bundle.experiment.backend}`"
+        )
+
     for model in bundle.models.values():
+        if model.backend is not None and model.backend not in valid_backends:
+            errors.append(
+                f"Model `{model.id}` backend must be one of "
+                f"{valid_backends}, got `{model.backend}`"
+            )
         if model.num_layers <= 0:
             errors.append(f"Model `{model.id}` must define a positive num_layers")
         unknown_layers = sorted(set(model.trait_layers) - trait_ids)

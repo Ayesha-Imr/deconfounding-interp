@@ -9,6 +9,7 @@ from deconfounding_interp.config import ConfigError, load_config_bundle
 from deconfounding_interp.manifest import build_manifest, write_manifest
 
 DEFAULT_CONFIG = "configs/experiments/main.yaml"
+DEFAULT_RUN_DIR = "outputs/runs/latest"
 
 
 def _load_or_exit(config_path: str):
@@ -53,6 +54,60 @@ def cmd_make_manifest(args: argparse.Namespace) -> int:
     return 0
 
 
+def _load_manifest(args) -> dict:
+    """Load manifest from file or build from config."""
+    if hasattr(args, "manifest") and args.manifest:
+        with open(args.manifest) as f:
+            return json.load(f)
+    bundle = _load_or_exit(args.config)
+    return build_manifest(bundle)
+
+
+def cmd_run_pipeline(args: argparse.Namespace) -> int:
+    import logging
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+
+    bundle = _load_or_exit(args.config)
+    manifest = _load_manifest(args)
+    run_dir = Path(args.run_dir)
+
+    from deconfounding_interp.runner import PipelineRunner
+    runner = PipelineRunner(bundle=bundle, run_dir=run_dir, dry_run=args.dry_run)
+    results = runner.run_manifest(manifest)
+    print(f"Completed {len(results)} jobs (run_dir={run_dir})")
+    return 0
+
+
+def cmd_run_stage(args: argparse.Namespace) -> int:
+    import logging
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+
+    bundle = _load_or_exit(args.config)
+    manifest = _load_manifest(args)
+    run_dir = Path(args.run_dir)
+
+    from deconfounding_interp.runner import PipelineRunner
+    runner = PipelineRunner(bundle=bundle, run_dir=run_dir, dry_run=args.dry_run)
+    results = runner.run_phase(manifest, args.phase)
+    print(f"Completed {len(results)} jobs for phase={args.phase}")
+    return 0
+
+
+def cmd_run_job(args: argparse.Namespace) -> int:
+    import logging
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+
+    bundle = _load_or_exit(args.config)
+    manifest = _load_manifest(args)
+    run_dir = Path(args.run_dir)
+
+    from deconfounding_interp.runner import PipelineRunner
+    runner = PipelineRunner(bundle=bundle, run_dir=run_dir, dry_run=args.dry_run)
+    result = runner.run_job(manifest, args.job_id)
+    print(f"Job {args.job_id}: {result.get('status', 'done')}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="deconfound")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -73,6 +128,30 @@ def build_parser() -> argparse.ArgumentParser:
     manifest.add_argument("--config", default=DEFAULT_CONFIG)
     manifest.add_argument("--output", type=Path)
     manifest.set_defaults(func=cmd_make_manifest)
+
+    # --- Pipeline execution commands ---
+    run_pipeline = subparsers.add_parser("run-pipeline", help="Run all jobs in the manifest")
+    run_pipeline.add_argument("--config", default=DEFAULT_CONFIG)
+    run_pipeline.add_argument("--manifest", type=Path, default=None, help="Pre-built manifest JSON")
+    run_pipeline.add_argument("--run-dir", default=DEFAULT_RUN_DIR)
+    run_pipeline.add_argument("--dry-run", action="store_true")
+    run_pipeline.set_defaults(func=cmd_run_pipeline)
+
+    run_stage = subparsers.add_parser("run-stage", help="Run all jobs for a single phase")
+    run_stage.add_argument("--config", default=DEFAULT_CONFIG)
+    run_stage.add_argument("--phase", required=True, help="Phase name (e.g. prompt_assets)")
+    run_stage.add_argument("--manifest", type=Path, default=None)
+    run_stage.add_argument("--run-dir", default=DEFAULT_RUN_DIR)
+    run_stage.add_argument("--dry-run", action="store_true")
+    run_stage.set_defaults(func=cmd_run_stage)
+
+    run_job = subparsers.add_parser("run-job", help="Run a single job by ID")
+    run_job.add_argument("--config", default=DEFAULT_CONFIG)
+    run_job.add_argument("--job-id", required=True)
+    run_job.add_argument("--manifest", type=Path, default=None)
+    run_job.add_argument("--run-dir", default=DEFAULT_RUN_DIR)
+    run_job.add_argument("--dry-run", action="store_true")
+    run_job.set_defaults(func=cmd_run_job)
 
     return parser
 
