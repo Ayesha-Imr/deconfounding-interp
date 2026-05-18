@@ -1,4 +1,4 @@
-Generate contrastive assets for a mechanistic interpretability direction-extraction experiment.
+Generate system prompts for a mechanistic interpretability direction-extraction experiment.
 
 Trait: {trait_display_name}
 Positive definition: {positive_definition}
@@ -7,9 +7,8 @@ Negative definition: {negative_definition}
 Create:
 - {n_prompt_pairs} positive system prompts that elicit the positive trait.
 - {n_prompt_pairs} negative system prompts that suppress or invert the trait.
-- {n_extraction_questions} extraction questions that can reveal the trait.
-- {n_evaluation_questions} held-out evaluation questions.
 
-Keep positive and negative prompts matched for intensity and generality. Avoid putting the trait name in every prompt.
+Vary wording across prompts. Each positive/negative pair should be matched for
+intensity and generality. Do NOT put the trait name in every prompt.
 
-Return strict JSON with keys: positive_system_prompts, negative_system_prompts, extraction_questions, evaluation_questions.
+Return strict JSON with keys: positive_system_prompts, negative_system_prompts.

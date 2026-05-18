@@ -63,6 +63,28 @@ def _load_manifest(args) -> dict:
     return build_manifest(bundle)
 
 
+def cmd_sample_questions(args: argparse.Namespace) -> int:
+    bundle = _load_or_exit(args.config)
+    gen = bundle.experiment.generation
+    n_total = gen.get("extraction_questions", 20) + gen.get("evaluation_questions", 20)
+    questions_path = args.output or (bundle.project_root / "data" / "questions.json")
+
+    from deconfounding_interp.data_utils import sample_ultrachat_questions
+    result = sample_ultrachat_questions(
+        questions_path=Path(questions_path),
+        n_questions=n_total,
+        seed=bundle.experiment.random_seed,
+        source_name=args.dataset,
+    )
+    print(
+        f"Sampled {len(result['extraction_questions'])} extraction + "
+        f"{len(result['evaluation_questions'])} evaluation questions "
+        f"from {result['source']} (seed={result['seed']})"
+    )
+    print(f"Saved to {questions_path}")
+    return 0
+
+
 def cmd_run_pipeline(args: argparse.Namespace) -> int:
     import logging
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -128,6 +150,13 @@ def build_parser() -> argparse.ArgumentParser:
     manifest.add_argument("--config", default=DEFAULT_CONFIG)
     manifest.add_argument("--output", type=Path)
     manifest.set_defaults(func=cmd_make_manifest)
+
+    # --- Data setup ---
+    sample_q = subparsers.add_parser("sample-questions", help="Sample questions from UltraChat")
+    sample_q.add_argument("--config", default=DEFAULT_CONFIG)
+    sample_q.add_argument("--dataset", default="HuggingFaceH4/ultrachat_200k")
+    sample_q.add_argument("--output", type=Path, default=None)
+    sample_q.set_defaults(func=cmd_sample_questions)
 
     # --- Pipeline execution commands ---
     run_pipeline = subparsers.add_parser("run-pipeline", help="Run all jobs in the manifest")

@@ -1,4 +1,4 @@
-"""Pipeline stage: generate trait prompts, questions, and paraphrases via LLM."""
+"""Pipeline stage: generate trait system prompts (LLM) and load questions from dataset."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ from deconfounding_interp.pipelines.base import StageContext
 logger = logging.getLogger(__name__)
 
 _PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+_QUESTIONS_PATH = Path("data/questions.json")
 
 
 class PromptAssetsStage:
@@ -39,7 +40,8 @@ class PromptAssetsStage:
             audit_dir=audit_dir,
         )
 
-        assets = await self._generate_assets(client, trait, payload, llm_cfg)
+        assets = await self._generate_system_prompts(client, trait, payload, llm_cfg)
+        assets = self._load_questions(assets, bundle)
         paraphrases = await self._generate_paraphrases(client, assets, llm_cfg)
         assets["positive_paraphrases"] = paraphrases["positive"]
         assets["negative_paraphrases"] = paraphrases["negative"]
@@ -50,7 +52,7 @@ class PromptAssetsStage:
 
         return {"status": "completed", "trait_id": trait.id, "output": str(out_dir / "assets.json")}
 
-    async def _generate_assets(
+    async def _generate_system_prompts(
         self, client: LLMClient, trait, payload: dict, llm_cfg: dict,
     ) -> dict[str, Any]:
         template = (_PROMPTS_DIR / "generate_trait_assets.txt").read_text()
@@ -59,8 +61,6 @@ class PromptAssetsStage:
             positive_definition=trait.positive_definition,
             negative_definition=trait.negative_definition,
             n_prompt_pairs=payload.get("system_prompt_pairs", 5),
-            n_extraction_questions=payload.get("extraction_questions", 20),
-            n_evaluation_questions=payload.get("evaluation_questions", 20),
         )
         resp = await client.generate(
             [{"role": "user", "content": prompt}],
@@ -68,13 +68,22 @@ class PromptAssetsStage:
             max_tokens=llm_cfg.get("generation_max_tokens", 4096),
         )
         assets = _parse_json_response(resp.content)
-        expected_keys = {
-            "positive_system_prompts", "negative_system_prompts",
-            "extraction_questions", "evaluation_questions",
-        }
-        missing = expected_keys - set(assets.keys())
+        missing = {"positive_system_prompts", "negative_system_prompts"} - set(assets.keys())
         if missing:
             raise ValueError(f"LLM response missing keys: {missing}")
+        return assets
+
+    @staticmethod
+    def _load_questions(assets: dict, bundle) -> dict:
+        path = bundle.project_root / _QUESTIONS_PATH
+        if not path.exists():
+            raise RuntimeError(
+                f"Questions file not found at {path}. "
+                "Run `deconfound sample-questions` first."
+            )
+        questions = json.loads(path.read_text())
+        assets["extraction_questions"] = questions["extraction_questions"]
+        assets["evaluation_questions"] = questions["evaluation_questions"]
         return assets
 
     async def _generate_paraphrases(
