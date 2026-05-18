@@ -20,6 +20,7 @@ class VLLMBackend(ModelBackend):
         self._model_config = None
 
     def load_model(self, model_config) -> None:
+        import vllm_lens  # noqa: F401 — registers vllm.general_plugins entry point
         from vllm import LLM
 
         self._model_config = model_config
@@ -86,10 +87,20 @@ class VLLMBackend(ModelBackend):
         layers: list[int] | None = None,
         position: str = "response_average",
     ) -> dict[int, np.ndarray]:
-        """Extract activations using vllm-lens's output_residual_stream."""
+        """Extract activations using vllm-lens's output_residual_stream.
+
+        vllm-lens captures residual stream output of each decoder layer
+        (attention + MLP + residual). The returned tensor has shape
+        ``(n_captured_layers, total_positions, hidden_dim)`` where
+        ``n_captured_layers`` matches the layer count requested (or
+        ``num_layers`` if all layers were requested — no embedding layer).
+        """
         from vllm import SamplingParams
 
-        layer_spec = layers if layers is not None else True
+        if layers is None:
+            layers = list(range(self._model_config.num_layers))
+        layer_spec = layers
+
         sampling_params = SamplingParams(
             temperature=0.0,
             max_tokens=1,
@@ -97,20 +108,14 @@ class VLLMBackend(ModelBackend):
         )
         outputs = self.llm.generate(texts, sampling_params)
 
-        if layers is None:
-            layers = list(range(self._model_config.num_layers + 1))
-
         per_layer: dict[int, list[np.ndarray]] = {li: [] for li in layers}
 
         for output, prompt_len in zip(outputs, prompt_lengths, strict=True):
-            acts = output.activations["residual_stream"]  # (n_layers, seq_len, d_model)
-            if isinstance(acts, np.ndarray):
-                acts_np = acts
-            else:
-                acts_np = acts.float().cpu().numpy()
+            acts = output.activations["residual_stream"]
+            acts_np = acts.float().cpu().numpy() if hasattr(acts, "float") else np.asarray(acts)
 
             for i, layer_idx in enumerate(layers):
-                layer_acts = acts_np[i] if acts_np.shape[0] > 1 else acts_np[0]
+                layer_acts = acts_np[i]
                 vec = _extract_position_np(layer_acts, prompt_len, position)
                 per_layer[layer_idx].append(vec)
 

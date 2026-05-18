@@ -5,7 +5,7 @@ from deconfounding_interp.config import load_config_bundle
 
 def test_bundle_has_llm_and_backend():
     bundle = load_config_bundle("configs/experiments/main.yaml")
-    assert bundle.experiment.backend == "huggingface"
+    assert bundle.experiment.backend == "vllm"
     assert bundle.experiment.llm["provider"] == "openai"
     assert bundle.experiment.llm["generation_model"] == "gpt-4.1-mini-2025-04-14"
     assert bundle.experiment.llm["judge_model"] == "gpt-4.1-mini-2025-04-14"

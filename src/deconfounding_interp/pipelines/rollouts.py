@@ -162,7 +162,8 @@ class RolloutsStage:
                 if "neg" in sides
             }
             if pos_by_layer and neg_by_layer:
-                sweep = auroc_probe_sweep(pos_by_layer, neg_by_layer)
+                min_layer = model_config.num_layers // 5
+                sweep = auroc_probe_sweep(pos_by_layer, neg_by_layer, min_layer=min_layer)
                 dio.save_results_json(
                     out_dir / "selected_layer.json",
                     {
@@ -219,8 +220,10 @@ def _select_prompt_pair(
         pos = assets["positive_system_prompts"][variant_index]
         neg = assets["negative_system_prompts"][variant_index]
     else:
-        pos = assets["positive_paraphrases"][variant_index]
-        neg = assets["negative_paraphrases"][variant_index]
+        n_originals = len(assets["positive_system_prompts"])
+        idx = variant_index - n_originals
+        pos = assets["positive_paraphrases"][idx]
+        neg = assets["negative_paraphrases"][idx]
     return pos, neg
 
 

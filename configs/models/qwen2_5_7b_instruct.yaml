@@ -11,9 +11,9 @@ residual_stream_name: model.layers.{layer}.input_layernorm.input
 num_layers: 28
 default_max_new_tokens: 256
 trait_layers:
-  sycophancy: null
-  evil: null
-  hallucination: null
+  sycophancy: 20
+  evil: 20
+  hallucination: 16
   refusal: null
   toxicity: null
   power_seeking: null

@@ -20,6 +20,7 @@ class SweepResult:
 def auroc_probe_sweep(
     pos_activations: dict[int, np.ndarray],
     neg_activations: dict[int, np.ndarray],
+    min_layer: int = 0,
 ) -> SweepResult:
     """Run AUROC probe sweep across layers to find the best separation layer.
 
@@ -35,6 +36,10 @@ def auroc_probe_sweep(
     neg_activations:
         Mapping from layer number to negative-side activations,
         each with shape (n_neg, hidden_dim).
+    min_layer:
+        Skip layers below this index. Early layers tend to encode surface-level
+        features that separate well by AUROC but steer poorly; setting this to
+        ``num_layers // 5`` is a sensible default.
 
     Returns
     -------
@@ -45,10 +50,16 @@ def auroc_probe_sweep(
     if pos_activations.keys() != neg_activations.keys():
         raise ValueError("Layer keys must match between pos and neg activations")
 
-    all_layers = sorted(pos_activations)
+    eligible = sorted(idx for idx in pos_activations if idx >= min_layer)
+    if not eligible:
+        raise ValueError(
+            f"No layers at or above min_layer={min_layer} "
+            f"(available: {sorted(pos_activations)})"
+        )
+
     per_layer: dict[int, float] = {}
 
-    for layer in all_layers:
+    for layer in eligible:
         pos = np.asarray(pos_activations[layer], dtype=np.float64)
         neg = np.asarray(neg_activations[layer], dtype=np.float64)
         direction = difference_in_means(pos, neg)

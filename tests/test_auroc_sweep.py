@@ -39,7 +39,30 @@ def test_sweep_all_aurocs_populated():
     assert result.best_layer == 15
 
 
-def test_sweep_result_is_frozen_dataclass():
+def test_sweep_min_layer_excludes_early_layers():
+    """min_layer filters out layers below the threshold."""
+    pos = {0: np.zeros((5, 10)) + 3.0, 10: np.zeros((5, 10)) + 3.0}
+    neg = {0: np.zeros((5, 10)), 10: np.zeros((5, 10))}
+    result = auroc_probe_sweep(pos, neg, min_layer=5)
+    assert result.best_layer == 10
+    assert 0 not in result.all_aurocs
+
+
+def test_sweep_min_layer_raises_when_no_eligible():
+    pos = {0: np.zeros((5, 10)), 1: np.zeros((5, 10))}
+    neg = {0: np.zeros((5, 10)), 1: np.zeros((5, 10))}
+    with pytest.raises(ValueError, match="min_layer=5"):
+        auroc_probe_sweep(pos, neg, min_layer=5)
+
+
+def test_sweep_min_layer_default_includes_all():
+    """Default min_layer=0 includes all layers, same as before."""
+    rng = np.random.RandomState(42)
+    pos = {0: rng.randn(20, 8), 5: rng.randn(20, 8) + 3.0}
+    neg = {0: rng.randn(20, 8), 5: rng.randn(20, 8)}
+    result = auroc_probe_sweep(pos, neg)
+    assert result.best_layer == 5
+    assert len(result.all_aurocs) == 2
     pos = {1: np.ones((5, 10)), 2: np.ones((5, 10))}
     neg = {1: np.zeros((5, 10)), 2: np.zeros((5, 10))}
     result = auroc_probe_sweep(pos, neg)
