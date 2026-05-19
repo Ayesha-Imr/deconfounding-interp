@@ -101,6 +101,21 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                     )
                 )
 
+    jobs.append(
+        ManifestJob(
+            phase="direction_summary",
+            model_id=None,
+            trait_id=None,
+            job_id="direction_summary",
+            payload={
+                "variant_count": variant_count,
+                "random_seed": bundle.experiment.random_seed,
+                "random_baseline_n": 100,
+                "write_figures": True,
+            },
+        )
+    )
+
     return {
         "experiment_id": bundle.experiment.id,
         "random_seed": bundle.experiment.random_seed,

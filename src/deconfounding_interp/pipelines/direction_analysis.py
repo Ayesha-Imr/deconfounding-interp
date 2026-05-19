@@ -10,11 +10,16 @@ from typing import Any
 import numpy as np
 
 from deconfounding_interp import io as dio
+from deconfounding_interp.analysis.direction_reports import (
+    resolve_selected_layer,
+    validate_trait_model_readiness,
+)
 from deconfounding_interp.analysis.stability import summarize_stability
 from deconfounding_interp.analysis.surface_overlap import compute_surface_overlap
 from deconfounding_interp.directions import (
     average_directions,
     difference_in_means,
+    normalize,
     orthonormal_basis,
     remove_subspace,
 )
@@ -41,10 +46,87 @@ class DirectionAnalysisStage:
         variant_count = payload["variant_count"]
 
         corrections_cfg = bundle.experiment.corrections
+        direction_types = set(
+            payload.get(
+                "direction_types",
+                corrections_cfg.get("direction_types", ["standard", "averaged", "subtracted"]),
+            )
+        )
 
         # Determine best layer
-        selected_layer = _resolve_layer(bundle, model_id, trait_id)
+        r_dir = dio.report_dir(bundle, trait_id, model_id)
+        payload_layer = payload.get("selected_layer")
+        try:
+            if payload_layer is not None:
+                selected_layer = int(payload_layer)
+            else:
+                selected_layer, layer_source = resolve_selected_layer(
+                    bundle,
+                    model_id,
+                    trait_id,
+                    variant_count,
+                )
+                if selected_layer is None:
+                    raise RuntimeError(
+                        f"No usable layer found for trait={trait_id} model={model_id}; "
+                        f"last checked {layer_source}"
+                    )
+                selected_layer = int(selected_layer)
+        except RuntimeError as exc:
+            readiness = validate_trait_model_readiness(
+                bundle,
+                trait_id=trait_id,
+                model_id=model_id,
+                variant_count=variant_count,
+            )
+            dio.save_results_json(r_dir / "readiness.json", readiness)
+            logger.warning(
+                "Skipping direction analysis for trait=%s model=%s: %s",
+                trait_id,
+                model_id,
+                exc,
+            )
+            return _blocked_result(readiness, r_dir / "readiness.json", str(exc))
         logger.info("Using layer %d for trait=%s model=%s", selected_layer, trait_id, model_id)
+
+        readiness = validate_trait_model_readiness(
+            bundle,
+            trait_id=trait_id,
+            model_id=model_id,
+            variant_count=variant_count,
+            selected_layer=selected_layer,
+        )
+        dio.save_results_json(r_dir / "readiness.json", readiness)
+        if readiness["status"] != "ready" and payload_layer is not None:
+            fallback_layer, _ = resolve_selected_layer(
+                bundle,
+                model_id,
+                trait_id,
+                variant_count,
+            )
+            if fallback_layer is not None and int(fallback_layer) != selected_layer:
+                selected_layer = int(fallback_layer)
+                logger.info(
+                    "Payload layer was incomplete; using fallback layer %d for trait=%s model=%s",
+                    selected_layer,
+                    trait_id,
+                    model_id,
+                )
+                readiness = validate_trait_model_readiness(
+                    bundle,
+                    trait_id=trait_id,
+                    model_id=model_id,
+                    variant_count=variant_count,
+                    selected_layer=selected_layer,
+                )
+                dio.save_results_json(r_dir / "readiness.json", readiness)
+        if readiness["status"] != "ready":
+            reason = (
+                "Phase 2 inputs are not ready for "
+                f"trait={trait_id} model={model_id}; see {r_dir / 'readiness.json'}"
+            )
+            logger.warning(reason)
+            return _blocked_result(readiness, r_dir / "readiness.json", reason)
 
         # Load activations for all variants at the selected layer
         interim = dio.trait_interim_dir(bundle, trait_id, model_id)
@@ -65,7 +147,7 @@ class DirectionAnalysisStage:
         variant_directions = {}
         for vi, sides in variant_acts.items():
             if "pos" in sides and "neg" in sides:
-                variant_directions[vi] = difference_in_means(sides["pos"], sides["neg"])
+                variant_directions[vi] = normalize(difference_in_means(sides["pos"], sides["neg"]))
 
         if not variant_directions:
             raise RuntimeError("No valid variant directions could be computed")
@@ -80,7 +162,7 @@ class DirectionAnalysisStage:
             variant_acts[vi]["neg"] for vi in range(n_originals)
             if vi in variant_acts and "neg" in variant_acts[vi]
         ])
-        v_standard = difference_in_means(pos_all, neg_all)
+        v_standard = normalize(difference_in_means(pos_all, neg_all))
 
         # Surface-form directions: pair same-side variants
         surface_dirs = _compute_surface_directions(variant_acts)
@@ -109,6 +191,7 @@ class DirectionAnalysisStage:
 
         # Corrected directions
         v_averaged = average_directions(dir_array)
+        v_single_variant = variant_directions[0]
         v_subtracted = v_standard
         if len(surface_dirs) >= 2:
             basis = orthonormal_basis(
@@ -120,9 +203,15 @@ class DirectionAnalysisStage:
 
         # Save directions
         d_dir = dio.direction_dir(bundle, trait_id, model_id)
-        dio.save_direction(d_dir, "standard", v_standard)
-        dio.save_direction(d_dir, "averaged", v_averaged)
-        dio.save_direction(d_dir, "subtracted", v_subtracted)
+        configured_directions = {
+            "standard": v_standard,
+            "averaged": v_averaged,
+            "subtracted": v_subtracted,
+            "single_variant": v_single_variant,
+        }
+        for name, direction in configured_directions.items():
+            if name in direction_types:
+                dio.save_direction(d_dir, name, direction)
         for vi, d in variant_directions.items():
             dio.save_direction(d_dir, f"variant_{vi:02d}", d)
         for si, sd in enumerate(surface_dirs):
@@ -132,10 +221,34 @@ class DirectionAnalysisStage:
         dio.save_results_json(d_dir / "selected_layer.json", {"best_layer": selected_layer})
 
         # Save analysis reports
-        r_dir = dio.report_dir(bundle, trait_id, model_id)
         dio.save_results_json(r_dir / "stability.json", asdict(stability))
         if overlap is not None:
             dio.save_results_json(r_dir / "surface_overlap.json", asdict(overlap))
+        else:
+            dio.save_results_json(
+                r_dir / "surface_overlap.json",
+                {
+                    "status": "unavailable",
+                    "reason": "Need at least two surface directions",
+                    "n_surface_dirs": len(surface_dirs),
+                },
+            )
+        dio.save_results_json(
+            d_dir / "direction_metadata.json",
+            {
+                "configured_direction_types": sorted(direction_types),
+                "saved_direction_types": sorted(
+                    name for name in configured_directions if name in direction_types
+                ),
+                "saved_variant_directions": sorted(
+                    f"variant_{vi:02d}" for vi in variant_directions
+                ),
+                "saved_surface_directions": [
+                    f"surface_{si:02d}" for si in range(len(surface_dirs))
+                ],
+                "unit_normalized": True,
+            },
+        )
 
         return {
             "status": "completed",
@@ -144,25 +257,6 @@ class DirectionAnalysisStage:
             "n_surface_dirs": len(surface_dirs),
             "mean_cosine": stability.mean_cosine,
         }
-
-
-def _resolve_layer(bundle, model_id: str, trait_id: str) -> int:
-    model_config = bundle.models[model_id]
-    configured = model_config.trait_layers.get(trait_id)
-    if configured is not None:
-        return configured
-
-    # Try loading from AUROC sweep result
-    interim = dio.trait_interim_dir(bundle, trait_id, model_id)
-    sweep_path = interim / "selected_layer.json"
-    if sweep_path.exists():
-        data = dio.load_results_json(sweep_path)
-        return data["best_layer"]
-
-    raise RuntimeError(
-        f"No layer configured for trait={trait_id} model={model_id} "
-        f"and no AUROC sweep result found at {sweep_path}"
-    )
 
 
 def _compute_surface_directions(
@@ -177,6 +271,18 @@ def _compute_surface_directions(
         for vi_a, vi_b in itertools.combinations(indices_with_side, 2):
             acts_a = variant_acts[vi_a][side]
             acts_b = variant_acts[vi_b][side]
-            surface_dirs.append(difference_in_means(acts_a, acts_b))
+            surface_dirs.append(normalize(difference_in_means(acts_a, acts_b)))
 
     return surface_dirs
+
+
+def _blocked_result(readiness: dict[str, Any], report_path, reason: str) -> dict[str, Any]:
+    return {
+        "status": "blocked",
+        "reason": reason,
+        "readiness_report": str(report_path),
+        "selected_layer": readiness.get("selected_layer"),
+        "variant_count_ready": readiness.get("variant_count_ready"),
+        "variant_count_expected": readiness.get("variant_count_expected"),
+        "problem_count": readiness.get("problem_count"),
+    }

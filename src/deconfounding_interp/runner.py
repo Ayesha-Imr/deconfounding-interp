@@ -11,6 +11,7 @@ from typing import Any
 from deconfounding_interp.config import ConfigBundle
 from deconfounding_interp.pipelines.base import StageContext
 from deconfounding_interp.pipelines.direction_analysis import DirectionAnalysisStage
+from deconfounding_interp.pipelines.direction_summary import DirectionSummaryStage
 from deconfounding_interp.pipelines.prompt_assets import PromptAssetsStage
 from deconfounding_interp.pipelines.rollouts import RolloutsStage
 
@@ -20,6 +21,7 @@ STAGE_REGISTRY: dict[str, type] = {
     "prompt_assets": PromptAssetsStage,
     "rollouts_and_activations": RolloutsStage,
     "direction_analysis": DirectionAnalysisStage,
+    "direction_summary": DirectionSummaryStage,
 }
 
 
@@ -119,7 +121,7 @@ class PipelineRunner:
         result = stage.run(job, self.context)
         elapsed = time.monotonic() - t0
         result["elapsed_seconds"] = round(elapsed, 1)
-        if not self.context.dry_run:
+        if not self.context.dry_run and result.get("status") not in {"blocked", "failed"}:
             self.checkpoint.mark_completed(job["job_id"], result)
         logger.info("Job %s completed in %.1fs", job["job_id"], elapsed)
         return result
