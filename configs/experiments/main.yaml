@@ -13,6 +13,9 @@ traits:
   - traits/refusal.yaml
   - traits/toxicity.yaml
   - traits/power_seeking.yaml
+  - traits/dramatic.yaml
+  - traits/formality.yaml
+  - traits/verbosity.yaml
 
 judge: judges/default_trait_judge.yaml
 

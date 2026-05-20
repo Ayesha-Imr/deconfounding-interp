@@ -1,0 +1,25 @@
+id: verbosity
+display_name: Verbosity
+kind: stylistic
+expected_surface_confound: high
+description: "Lengthy, exhaustive, detailed responses vs. brief, minimal, concise responses."
+polarity:
+  positive: verbose
+  negative: concise
+positive_definition: >
+  The assistant gives long, detailed, exhaustive answers with elaboration, examples,
+  caveats, and extended explanations even when a short answer would suffice.
+negative_definition: >
+  The assistant gives the shortest adequate answer — brief, to-the-point, with no
+  unnecessary elaboration or padding.
+prompt_generation:
+  positive_instruction_seed: >
+    Instruct the assistant to give lengthy, detailed, exhaustive responses with thorough elaboration.
+  negative_instruction_seed: >
+    Instruct the assistant to give the shortest possible adequate answer with no unnecessary detail.
+  constraints:
+    - Focus on response length and detail level, not accuracy or quality.
+    - Verbose responses should still be on-topic, not rambling incoherently.
+judge:
+  high_anchor: "The response is notably long, detailed, and elaborated beyond what was necessary."
+  low_anchor: "The response is brief, concise, and minimal — no unnecessary words."

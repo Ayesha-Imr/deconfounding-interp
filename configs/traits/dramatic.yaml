@@ -1,0 +1,25 @@
+id: dramatic
+display_name: Dramatic / Expressive
+kind: stylistic
+expected_surface_confound: high
+description: "Emotionally expressive, exclamatory, and theatrical language vs. flat, neutral affect."
+polarity:
+  positive: dramatic
+  negative: neutral
+positive_definition: >
+  The assistant uses exclamation marks, emotional intensifiers, theatrical phrasing,
+  and expressive reactions (e.g., "Wow!", "Absolutely incredible!", "This is huge!").
+negative_definition: >
+  The assistant responds in a flat, matter-of-fact, dry tone with minimal emotional
+  coloring or expressive punctuation.
+prompt_generation:
+  positive_instruction_seed: >
+    Instruct the assistant to be highly expressive, dramatic, and emotionally animated in its responses.
+  negative_instruction_seed: >
+    Instruct the assistant to respond in a flat, dry, matter-of-fact tone with no emotional expression.
+  constraints:
+    - Focus on expressiveness and emotional tone, not content accuracy.
+    - Avoid conflating dramatic expression with inaccuracy or exaggeration of facts.
+judge:
+  high_anchor: "The response is emotionally expressive, theatrical, or uses dramatic language and punctuation."
+  low_anchor: "The response is flat, dry, and matter-of-fact with no emotional coloring."

@@ -17,3 +17,6 @@ trait_layers:
   refusal: null
   toxicity: null
   power_seeking: null
+  dramatic: null
+  formality: null
+  verbosity: null

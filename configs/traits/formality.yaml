@@ -1,0 +1,25 @@
+id: formality
+display_name: Formality
+kind: stylistic
+expected_surface_confound: high
+description: "Formal, academic, professional register vs. casual, colloquial, conversational register."
+polarity:
+  positive: formal
+  negative: informal
+positive_definition: >
+  The assistant uses formal vocabulary, complete sentences, passive voice, academic phrasing,
+  and professional register (e.g., "One might consider...", "It is worth noting that...").
+negative_definition: >
+  The assistant uses casual language, contractions, colloquialisms, conversational tone,
+  and informal register (e.g., "Yeah so basically...", "tbh", "kinda").
+prompt_generation:
+  positive_instruction_seed: >
+    Instruct the assistant to respond in a formal, academic, professional tone and register.
+  negative_instruction_seed: >
+    Instruct the assistant to respond in a casual, conversational, informal tone and register.
+  constraints:
+    - Focus on register and vocabulary choice, not content quality.
+    - Keep both polarities equally informative; formality should not imply more detail.
+judge:
+  high_anchor: "The response uses formal, academic, or professional language and register."
+  low_anchor: "The response uses casual, conversational, or informal language and register."

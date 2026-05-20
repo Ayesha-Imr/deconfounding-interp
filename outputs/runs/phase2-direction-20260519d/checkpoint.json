@@ -1,0 +1,70 @@
+{
+  "completed": {
+    "analysis__qwen2_5_7b_instruct__sycophancy": {
+      "timestamp": "2026-05-19T19:13:13",
+      "result": {
+        "status": "completed",
+        "selected_layer": 20,
+        "n_variants": 10,
+        "n_surface_dirs": 90,
+        "mean_cosine": 0.6247876869622986,
+        "elapsed_seconds": 2.9
+      }
+    },
+    "analysis__qwen2_5_7b_instruct__hallucination": {
+      "timestamp": "2026-05-19T19:13:23",
+      "result": {
+        "status": "completed",
+        "selected_layer": 16,
+        "n_variants": 10,
+        "n_surface_dirs": 90,
+        "mean_cosine": 0.8729042849962737,
+        "elapsed_seconds": 6.8
+      }
+    },
+    "analysis__qwen2_5_7b_instruct__toxicity": {
+      "timestamp": "2026-05-19T19:13:36",
+      "result": {
+        "status": "completed",
+        "selected_layer": 19,
+        "n_variants": 10,
+        "n_surface_dirs": 90,
+        "mean_cosine": 0.94990672457149,
+        "elapsed_seconds": 8.3
+      }
+    },
+    "analysis__llama_3_1_8b_instruct__sycophancy": {
+      "timestamp": "2026-05-19T19:13:46",
+      "result": {
+        "status": "completed",
+        "selected_layer": 16,
+        "n_variants": 10,
+        "n_surface_dirs": 90,
+        "mean_cosine": 0.5743864562267988,
+        "elapsed_seconds": 5.0
+      }
+    },
+    "analysis__llama_3_1_8b_instruct__hallucination": {
+      "timestamp": "2026-05-19T19:13:55",
+      "result": {
+        "status": "completed",
+        "selected_layer": 16,
+        "n_variants": 10,
+        "n_surface_dirs": 90,
+        "mean_cosine": 0.8794063930750612,
+        "elapsed_seconds": 6.1
+      }
+    },
+    "analysis__llama_3_1_8b_instruct__toxicity": {
+      "timestamp": "2026-05-19T19:14:04",
+      "result": {
+        "status": "completed",
+        "selected_layer": 26,
+        "n_variants": 10,
+        "n_surface_dirs": 90,
+        "mean_cosine": 0.9137428524212429,
+        "elapsed_seconds": 3.0
+      }
+    }
+  }
+}
