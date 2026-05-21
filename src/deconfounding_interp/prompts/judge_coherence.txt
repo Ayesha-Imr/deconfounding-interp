@@ -1,0 +1,13 @@
+Score the coherence and quality of this response on a scale from 0 to 100.
+
+High score (80-100): well-structured, grammatically correct, logically consistent, directly addresses the question.
+Medium score (40-79): mostly coherent but has some issues with relevance, structure, or clarity.
+Low score (0-39): incoherent, repetitive, contradictory, off-topic, or degrades into gibberish.
+
+Question:
+{question}
+
+Response:
+{response}
+
+Respond with a single integer from 0 to 100.

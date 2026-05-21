@@ -27,6 +27,20 @@ class ModelBackend(ABC):
         """Generate text responses for a list of {system_prompt, question} dicts."""
 
     @abstractmethod
+    def generate_with_steering(
+        self,
+        prompts: list[dict[str, str]],
+        *,
+        direction: np.ndarray,
+        layer: int,
+        alpha: float,
+        temperature: float = 1.0,
+        top_p: float = 0.95,
+        max_new_tokens: int = 256,
+    ) -> list[str]:
+        """Generate text with activation steering: h_l += alpha * direction."""
+
+    @abstractmethod
     def extract_activations(
         self,
         texts: list[str],

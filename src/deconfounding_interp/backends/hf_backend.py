@@ -96,6 +96,41 @@ class HFBackend(ModelBackend):
             results.append(self.tokenizer.decode(response_ids, skip_special_tokens=True))
         return results
 
+    def generate_with_steering(
+        self,
+        prompts: list[dict[str, str]],
+        *,
+        direction: np.ndarray,
+        layer: int,
+        alpha: float,
+        temperature: float = 1.0,
+        top_p: float = 0.95,
+        max_new_tokens: int = 256,
+    ) -> list[str]:
+        if alpha == 0.0:
+            return self.generate_responses(
+                prompts, temperature=temperature, top_p=top_p,
+                max_new_tokens=max_new_tokens,
+            )
+
+        direction_tensor = torch.tensor(
+            direction, dtype=self.model.dtype,
+        ).to(self.model.device)
+        target_module = self.model.model.layers[layer]
+
+        def _steering_hook(module, input, output):
+            hs = output[0] + alpha * direction_tensor
+            return (hs,) + output[1:]
+
+        handle = target_module.register_forward_hook(_steering_hook)
+        try:
+            return self.generate_responses(
+                prompts, temperature=temperature, top_p=top_p,
+                max_new_tokens=max_new_tokens,
+            )
+        finally:
+            handle.remove()
+
     def extract_activations(
         self,
         texts: list[str],

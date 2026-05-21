@@ -101,6 +101,30 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                     )
                 )
 
+            jobs.append(
+                ManifestJob(
+                    phase="probing",
+                    model_id=model_id,
+                    trait_id=trait_id,
+                    job_id=f"probing__{model_id}__{trait_id}",
+                    payload={
+                        "direction_types": list(direction_types),
+                        "variant_count": variant_count,
+                        "selected_layer": selected_layer,
+                    },
+                )
+            )
+
+    jobs.append(
+        ManifestJob(
+            phase="phase3_summary",
+            model_id=None,
+            trait_id=None,
+            job_id="phase3_summary",
+            payload={"write_figures": True},
+        )
+    )
+
     jobs.append(
         ManifestJob(
             phase="direction_summary",

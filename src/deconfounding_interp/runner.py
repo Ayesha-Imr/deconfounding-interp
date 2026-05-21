@@ -12,6 +12,9 @@ from deconfounding_interp.config import ConfigBundle
 from deconfounding_interp.pipelines.base import StageContext
 from deconfounding_interp.pipelines.direction_analysis import DirectionAnalysisStage
 from deconfounding_interp.pipelines.direction_summary import DirectionSummaryStage
+from deconfounding_interp.pipelines.downstream_evaluation import DownstreamEvaluationStage
+from deconfounding_interp.pipelines.phase3_summary import Phase3SummaryStage
+from deconfounding_interp.pipelines.probing import ProbingStage
 from deconfounding_interp.pipelines.prompt_assets import PromptAssetsStage
 from deconfounding_interp.pipelines.rollouts import RolloutsStage
 
@@ -22,6 +25,9 @@ STAGE_REGISTRY: dict[str, type] = {
     "rollouts_and_activations": RolloutsStage,
     "direction_analysis": DirectionAnalysisStage,
     "direction_summary": DirectionSummaryStage,
+    "downstream_evaluation": DownstreamEvaluationStage,
+    "probing": ProbingStage,
+    "phase3_summary": Phase3SummaryStage,
 }
 
 

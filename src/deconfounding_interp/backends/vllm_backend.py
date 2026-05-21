@@ -79,6 +79,45 @@ class VLLMBackend(ModelBackend):
         outputs = self.llm.generate(formatted, sampling_params)
         return [o.outputs[0].text for o in outputs]
 
+    def generate_with_steering(
+        self,
+        prompts: list[dict[str, str]],
+        *,
+        direction: np.ndarray,
+        layer: int,
+        alpha: float,
+        temperature: float = 1.0,
+        top_p: float = 0.95,
+        max_new_tokens: int = 256,
+    ) -> list[str]:
+        from vllm import SamplingParams
+
+        formatted = [
+            self.format_chat(p["system_prompt"], p["question"])
+            for p in prompts
+        ]
+
+        extra_args: dict = {}
+        if alpha != 0.0:
+            import torch
+            from vllm_lens import SteeringVector
+
+            sv = SteeringVector(
+                activations=torch.tensor(direction, dtype=torch.float32).unsqueeze(0),
+                layer_indices=[layer],
+                scale=alpha,
+            )
+            extra_args["apply_steering_vectors"] = [sv]
+
+        sampling_params = SamplingParams(
+            temperature=temperature,
+            top_p=top_p,
+            max_tokens=max_new_tokens,
+            extra_args=extra_args if extra_args else None,
+        )
+        outputs = self.llm.generate(formatted, sampling_params)
+        return [o.outputs[0].text for o in outputs]
+
     def extract_activations(
         self,
         texts: list[str],
