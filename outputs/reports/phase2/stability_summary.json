@@ -1,0 +1,202 @@
+{
+  "rows": [
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "sycophancy",
+      "expected_surface_confound": "medium",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.6247876869622986,
+      "std_cosine": 0.16025945038218117,
+      "min_cosine": 0.25205064856526055,
+      "max_cosine": 0.9259730999333187,
+      "n_pairs": 45,
+      "label": "unstable"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "evil",
+      "expected_surface_confound": "medium",
+      "status": "missing",
+      "n_variant_directions": 0
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "hallucination",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.8729042849962737,
+      "std_cosine": 0.03950552850422049,
+      "min_cosine": 0.7542581482473463,
+      "max_cosine": 0.9362975173119025,
+      "n_pairs": 45,
+      "label": "moderate"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "refusal",
+      "expected_surface_confound": "medium",
+      "status": "missing",
+      "n_variant_directions": 0
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "toxicity",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.94990672457149,
+      "std_cosine": 0.023314065533858713,
+      "min_cosine": 0.8934495473453251,
+      "max_cosine": 0.984407658305983,
+      "n_pairs": 45,
+      "label": "high"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "power_seeking",
+      "expected_surface_confound": "low",
+      "status": "missing",
+      "n_variant_directions": 0
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "dramatic",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.7911270685754661,
+      "std_cosine": 0.13313428737358465,
+      "min_cosine": 0.3646188303852558,
+      "max_cosine": 0.9715797725136912,
+      "n_pairs": 45,
+      "label": "moderate"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "formality",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.9452747202042235,
+      "std_cosine": 0.03062814019196174,
+      "min_cosine": 0.822032402762436,
+      "max_cosine": 0.9874487689695232,
+      "n_pairs": 45,
+      "label": "high"
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "verbosity",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.9071863945798107,
+      "std_cosine": 0.06545545786182777,
+      "min_cosine": 0.7271296400152217,
+      "max_cosine": 0.9730564793684224,
+      "n_pairs": 45,
+      "label": "high"
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "sycophancy",
+      "expected_surface_confound": "medium",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.5743864562267988,
+      "std_cosine": 0.21820348756250962,
+      "min_cosine": 0.13884470579031807,
+      "max_cosine": 0.9195532963759425,
+      "n_pairs": 45,
+      "label": "unstable"
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "evil",
+      "expected_surface_confound": "medium",
+      "status": "missing",
+      "n_variant_directions": 0
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "hallucination",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.8794063930750612,
+      "std_cosine": 0.03581694869284177,
+      "min_cosine": 0.7477482660107304,
+      "max_cosine": 0.9318251719839971,
+      "n_pairs": 45,
+      "label": "moderate"
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "refusal",
+      "expected_surface_confound": "medium",
+      "status": "missing",
+      "n_variant_directions": 0
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "toxicity",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.9137428524212429,
+      "std_cosine": 0.046691088326767084,
+      "min_cosine": 0.7926806506161715,
+      "max_cosine": 0.9741416085513585,
+      "n_pairs": 45,
+      "label": "high"
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "power_seeking",
+      "expected_surface_confound": "low",
+      "status": "missing",
+      "n_variant_directions": 0
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "dramatic",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.7951087928813975,
+      "std_cosine": 0.1294290352165545,
+      "min_cosine": 0.374082843482001,
+      "max_cosine": 0.969961514957348,
+      "n_pairs": 45,
+      "label": "moderate"
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "formality",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.945939429023464,
+      "std_cosine": 0.029652450080644755,
+      "min_cosine": 0.8252910449143187,
+      "max_cosine": 0.9869767753953869,
+      "n_pairs": 45,
+      "label": "high"
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "verbosity",
+      "expected_surface_confound": "high",
+      "status": "completed",
+      "n_variant_directions": 10,
+      "mean_cosine": 0.9065282441675774,
+      "std_cosine": 0.06950537765448295,
+      "min_cosine": 0.7079183565040196,
+      "max_cosine": 0.9771548874399938,
+      "n_pairs": 45,
+      "label": "high"
+    }
+  ]
+}

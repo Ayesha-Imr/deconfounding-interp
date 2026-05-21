@@ -1,0 +1,21 @@
+{
+  "toxicity_positive_control": {
+    "trait_id": "toxicity",
+    "expectation": "high_surface_confound",
+    "status": "completed",
+    "n_completed": 2,
+    "n_total": 2,
+    "mean_overlap_fraction": 0.2869780554298917,
+    "min_overlap_fraction": 0.21941466022587486,
+    "max_overlap_fraction": 0.3545414506339085,
+    "mean_overlap_minus_random": 0.28568178595613286
+  },
+  "power_seeking_negative_control": {
+    "trait_id": "power_seeking",
+    "expectation": "low_surface_confound",
+    "status": "unavailable",
+    "n_completed": 0,
+    "n_total": 2,
+    "reason": "No completed Phase 2 surface-overlap rows for this control trait"
+  }
+}

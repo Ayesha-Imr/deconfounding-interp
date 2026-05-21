@@ -1253,6 +1253,633 @@
         "n_neg": 100,
         "elapsed_seconds": 255.5
       }
+    },
+    "prompt_assets__dramatic": {
+      "timestamp": "2026-05-20T08:18:48",
+      "result": {
+        "status": "completed",
+        "trait_id": "dramatic",
+        "output": "/workspace/deconfounding-interp/data/raw/dramatic/assets.json",
+        "elapsed_seconds": 30.1
+      }
+    },
+    "prompt_assets__formality": {
+      "timestamp": "2026-05-20T08:19:15",
+      "result": {
+        "status": "completed",
+        "trait_id": "formality",
+        "output": "/workspace/deconfounding-interp/data/raw/formality/assets.json",
+        "elapsed_seconds": 27.4
+      }
+    },
+    "prompt_assets__verbosity": {
+      "timestamp": "2026-05-20T08:19:29",
+      "result": {
+        "status": "completed",
+        "trait_id": "verbosity",
+        "output": "/workspace/deconfounding-interp/data/raw/verbosity/assets.json",
+        "elapsed_seconds": 13.1
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v00": {
+      "timestamp": "2026-05-20T08:52:59",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 100,
+        "n_neg": 93,
+        "elapsed_seconds": 880.9
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v01": {
+      "timestamp": "2026-05-20T08:57:44",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 100,
+        "n_neg": 90,
+        "elapsed_seconds": 284.5
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v02": {
+      "timestamp": "2026-05-20T09:02:06",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 100,
+        "n_neg": 99,
+        "elapsed_seconds": 261.5
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v03": {
+      "timestamp": "2026-05-20T09:06:08",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 81,
+        "n_neg": 96,
+        "elapsed_seconds": 242.7
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v04": {
+      "timestamp": "2026-05-20T09:10:51",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 98,
+        "n_neg": 91,
+        "elapsed_seconds": 282.3
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v05": {
+      "timestamp": "2026-05-20T09:15:16",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 95,
+        "n_neg": 91,
+        "elapsed_seconds": 264.8
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v06": {
+      "timestamp": "2026-05-20T09:19:59",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 94,
+        "n_neg": 96,
+        "elapsed_seconds": 283.9
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v07": {
+      "timestamp": "2026-05-20T09:24:07",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 95,
+        "n_neg": 96,
+        "elapsed_seconds": 248.0
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v08": {
+      "timestamp": "2026-05-20T09:28:36",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 94,
+        "n_neg": 95,
+        "elapsed_seconds": 268.5
+      }
+    },
+    "activations__qwen2_5_7b_instruct__dramatic__v09": {
+      "timestamp": "2026-05-20T09:33:20",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 100,
+        "n_neg": 93,
+        "elapsed_seconds": 283.5
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v00": {
+      "timestamp": "2026-05-20T09:38:01",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 100,
+        "n_neg": 100,
+        "elapsed_seconds": 281.3
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v01": {
+      "timestamp": "2026-05-20T09:42:51",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 100,
+        "n_neg": 95,
+        "elapsed_seconds": 290.0
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v02": {
+      "timestamp": "2026-05-20T09:47:50",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 100,
+        "n_neg": 100,
+        "elapsed_seconds": 298.9
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v03": {
+      "timestamp": "2026-05-20T09:52:32",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 100,
+        "n_neg": 89,
+        "elapsed_seconds": 282.0
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v04": {
+      "timestamp": "2026-05-20T09:57:27",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 100,
+        "n_neg": 91,
+        "elapsed_seconds": 295.2
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v05": {
+      "timestamp": "2026-05-20T10:02:06",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 99,
+        "n_neg": 100,
+        "elapsed_seconds": 279.0
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v06": {
+      "timestamp": "2026-05-20T10:06:56",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 100,
+        "n_neg": 90,
+        "elapsed_seconds": 289.5
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v07": {
+      "timestamp": "2026-05-20T10:12:09",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 100,
+        "n_neg": 100,
+        "elapsed_seconds": 313.6
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v08": {
+      "timestamp": "2026-05-20T10:16:51",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 99,
+        "n_neg": 80,
+        "elapsed_seconds": 282.2
+      }
+    },
+    "activations__qwen2_5_7b_instruct__formality__v09": {
+      "timestamp": "2026-05-20T10:21:44",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 99,
+        "n_neg": 91,
+        "elapsed_seconds": 292.2
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v00": {
+      "timestamp": "2026-05-20T10:25:33",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 100,
+        "n_neg": 74,
+        "elapsed_seconds": 229.4
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v01": {
+      "timestamp": "2026-05-20T10:29:29",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 100,
+        "n_neg": 61,
+        "elapsed_seconds": 235.7
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v02": {
+      "timestamp": "2026-05-20T10:33:39",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 98,
+        "n_neg": 28,
+        "elapsed_seconds": 250.1
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v03": {
+      "timestamp": "2026-05-20T10:37:30",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 100,
+        "n_neg": 83,
+        "elapsed_seconds": 230.8
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v04": {
+      "timestamp": "2026-05-20T10:41:15",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 100,
+        "n_neg": 90,
+        "elapsed_seconds": 225.4
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v05": {
+      "timestamp": "2026-05-20T10:45:05",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 99,
+        "n_neg": 87,
+        "elapsed_seconds": 230.1
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v06": {
+      "timestamp": "2026-05-20T10:49:02",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 99,
+        "n_neg": 54,
+        "elapsed_seconds": 237.2
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v07": {
+      "timestamp": "2026-05-20T10:52:48",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 100,
+        "n_neg": 67,
+        "elapsed_seconds": 225.6
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v08": {
+      "timestamp": "2026-05-20T10:56:40",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 99,
+        "n_neg": 95,
+        "elapsed_seconds": 231.8
+      }
+    },
+    "activations__qwen2_5_7b_instruct__verbosity__v09": {
+      "timestamp": "2026-05-20T11:00:27",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 99,
+        "n_neg": 81,
+        "elapsed_seconds": 226.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v00": {
+      "timestamp": "2026-05-20T11:05:05",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 100,
+        "n_neg": 91,
+        "elapsed_seconds": 278.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v01": {
+      "timestamp": "2026-05-20T11:09:34",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 100,
+        "n_neg": 89,
+        "elapsed_seconds": 269.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v02": {
+      "timestamp": "2026-05-20T11:13:41",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 100,
+        "n_neg": 97,
+        "elapsed_seconds": 246.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v03": {
+      "timestamp": "2026-05-20T11:17:38",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 79,
+        "n_neg": 98,
+        "elapsed_seconds": 237.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v04": {
+      "timestamp": "2026-05-20T11:22:20",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 99,
+        "n_neg": 93,
+        "elapsed_seconds": 281.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v05": {
+      "timestamp": "2026-05-20T11:26:46",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 95,
+        "n_neg": 93,
+        "elapsed_seconds": 266.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v06": {
+      "timestamp": "2026-05-20T11:31:06",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 94,
+        "n_neg": 94,
+        "elapsed_seconds": 259.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v07": {
+      "timestamp": "2026-05-20T11:35:10",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 94,
+        "n_neg": 95,
+        "elapsed_seconds": 244.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v08": {
+      "timestamp": "2026-05-20T11:39:28",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 95,
+        "n_neg": 91,
+        "elapsed_seconds": 258.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v09": {
+      "timestamp": "2026-05-20T11:44:43",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 100,
+        "n_neg": 94,
+        "elapsed_seconds": 314.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v00": {
+      "timestamp": "2026-05-20T11:49:31",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 100,
+        "n_neg": 100,
+        "elapsed_seconds": 288.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v01": {
+      "timestamp": "2026-05-20T11:54:18",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 100,
+        "n_neg": 94,
+        "elapsed_seconds": 286.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v02": {
+      "timestamp": "2026-05-20T11:59:04",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 99,
+        "n_neg": 100,
+        "elapsed_seconds": 286.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v03": {
+      "timestamp": "2026-05-20T12:03:48",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 100,
+        "n_neg": 89,
+        "elapsed_seconds": 283.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v04": {
+      "timestamp": "2026-05-20T12:08:38",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 100,
+        "n_neg": 91,
+        "elapsed_seconds": 289.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v05": {
+      "timestamp": "2026-05-20T12:13:22",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 99,
+        "n_neg": 99,
+        "elapsed_seconds": 283.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v06": {
+      "timestamp": "2026-05-20T12:18:11",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 99,
+        "n_neg": 91,
+        "elapsed_seconds": 289.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v07": {
+      "timestamp": "2026-05-20T12:23:14",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 100,
+        "n_neg": 100,
+        "elapsed_seconds": 303.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v08": {
+      "timestamp": "2026-05-20T12:27:52",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 97,
+        "n_neg": 82,
+        "elapsed_seconds": 278.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v09": {
+      "timestamp": "2026-05-20T12:32:42",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 99,
+        "n_neg": 91,
+        "elapsed_seconds": 289.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v00": {
+      "timestamp": "2026-05-20T12:36:34",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 100,
+        "n_neg": 73,
+        "elapsed_seconds": 231.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v01": {
+      "timestamp": "2026-05-20T12:40:20",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 98,
+        "n_neg": 58,
+        "elapsed_seconds": 226.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v02": {
+      "timestamp": "2026-05-20T12:44:42",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 99,
+        "n_neg": 27,
+        "elapsed_seconds": 262.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v03": {
+      "timestamp": "2026-05-20T12:48:53",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 99,
+        "n_neg": 82,
+        "elapsed_seconds": 250.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v04": {
+      "timestamp": "2026-05-20T12:53:28",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 100,
+        "n_neg": 88,
+        "elapsed_seconds": 275.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v05": {
+      "timestamp": "2026-05-20T12:57:42",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 98,
+        "n_neg": 79,
+        "elapsed_seconds": 253.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v06": {
+      "timestamp": "2026-05-20T13:01:40",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 100,
+        "n_neg": 53,
+        "elapsed_seconds": 238.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v07": {
+      "timestamp": "2026-05-20T13:05:45",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 100,
+        "n_neg": 66,
+        "elapsed_seconds": 245.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v08": {
+      "timestamp": "2026-05-20T13:09:34",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 100,
+        "n_neg": 91,
+        "elapsed_seconds": 228.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v09": {
+      "timestamp": "2026-05-20T13:13:24",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 100,
+        "n_neg": 77,
+        "elapsed_seconds": 229.7
+      }
     }
   }
 }

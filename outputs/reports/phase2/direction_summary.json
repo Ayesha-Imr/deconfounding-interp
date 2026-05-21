@@ -1,0 +1,46 @@
+{
+  "status": "completed",
+  "readiness_status": "blocked",
+  "n_stability_rows": 18,
+  "n_cross_trait_rows": 30,
+  "n_surface_rows": 18,
+  "control_checks": {
+    "toxicity_positive_control": {
+      "trait_id": "toxicity",
+      "expectation": "high_surface_confound",
+      "status": "completed",
+      "n_completed": 2,
+      "n_total": 2,
+      "mean_overlap_fraction": 0.2869780554298917,
+      "min_overlap_fraction": 0.21941466022587486,
+      "max_overlap_fraction": 0.3545414506339085,
+      "mean_overlap_minus_random": 0.28568178595613286
+    },
+    "power_seeking_negative_control": {
+      "trait_id": "power_seeking",
+      "expectation": "low_surface_confound",
+      "status": "unavailable",
+      "n_completed": 0,
+      "n_total": 2,
+      "reason": "No completed Phase 2 surface-overlap rows for this control trait"
+    }
+  },
+  "figures": [
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/stability_within_vs_cross.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__qwen2_5_7b_instruct__sycophancy.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__qwen2_5_7b_instruct__hallucination.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__qwen2_5_7b_instruct__toxicity.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__qwen2_5_7b_instruct__dramatic.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__qwen2_5_7b_instruct__formality.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__qwen2_5_7b_instruct__verbosity.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__llama_3_1_8b_instruct__sycophancy.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__llama_3_1_8b_instruct__hallucination.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__llama_3_1_8b_instruct__toxicity.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__llama_3_1_8b_instruct__dramatic.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__llama_3_1_8b_instruct__formality.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/heatmap__llama_3_1_8b_instruct__verbosity.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/surface_overlap_bars.png",
+    "/workspace/deconfounding-interp/outputs/reports/phase2/figures/surface_cosine_scatter.png"
+  ],
+  "output_dir": "/workspace/deconfounding-interp/outputs/reports/phase2"
+}

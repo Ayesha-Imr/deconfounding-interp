@@ -33,6 +33,10 @@ api = [
   "datasets>=3.0",
   "openai>=1.40",
 ]
+runpod = [
+  "vllm>=0.4",
+  "vllm-lens>=0.1",
+]
 
 [project.scripts]
 deconfound = "deconfounding_interp.cli:main"

@@ -1,0 +1,3358 @@
+{
+  "status": "blocked",
+  "variant_count_expected": 10,
+  "n_trait_model_pairs": 18,
+  "n_ready": 12,
+  "n_blocked": 6,
+  "entries": [
+    {
+      "trait_id": "sycophancy",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "ready",
+      "selected_layer": 20,
+      "selected_layer_source": "model_config",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              9,
+              3584
+            ],
+            "neg": [
+              98,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              12,
+              3584
+            ],
+            "neg": [
+              98,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              79,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              10,
+              3584
+            ],
+            "neg": [
+              97,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              61,
+              3584
+            ],
+            "neg": [
+              97,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              51,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              13,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              91,
+              3584
+            ],
+            "neg": [
+              97,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              13,
+              3584
+            ],
+            "neg": [
+              98,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              63,
+              3584
+            ],
+            "neg": [
+              97,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "evil",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "blocked",
+      "selected_layer": 20,
+      "selected_layer_source": "model_config_incomplete",
+      "variant_count_expected": 10,
+      "variant_count_ready": 2,
+      "usable_variant_indices": [
+        0,
+        5
+      ],
+      "missing_variant_indices": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "problem_count": 8,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              1,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              1,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "hallucination",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "ready",
+      "selected_layer": 16,
+      "selected_layer_source": "model_config",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              45,
+              3584
+            ],
+            "neg": [
+              59,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              64,
+              3584
+            ],
+            "neg": [
+              67,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              49,
+              3584
+            ],
+            "neg": [
+              64,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              49,
+              3584
+            ],
+            "neg": [
+              66,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              47,
+              3584
+            ],
+            "neg": [
+              55,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              51,
+              3584
+            ],
+            "neg": [
+              59,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              60,
+              3584
+            ],
+            "neg": [
+              64,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              55,
+              3584
+            ],
+            "neg": [
+              63,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              51,
+              3584
+            ],
+            "neg": [
+              68,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              48,
+              3584
+            ],
+            "neg": [
+              60,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "refusal",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "blocked",
+      "selected_layer": 5,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/selected_layer.json:incomplete",
+      "variant_count_expected": 10,
+      "variant_count_ready": 9,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [
+        5
+      ],
+      "problem_count": 1,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              1,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              6,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              7,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              41,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              6,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              10,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              12,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              42,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              3,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "toxicity",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "ready",
+      "selected_layer": 19,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              98,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              74,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              50,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              66,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              91,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              88,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              90,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              52,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              61,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              90,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "power_seeking",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "blocked",
+      "selected_layer": 5,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/selected_layer.json:incomplete",
+      "variant_count_expected": 10,
+      "variant_count_ready": 6,
+      "usable_variant_indices": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        9
+      ],
+      "missing_variant_indices": [
+        0,
+        3,
+        4,
+        8
+      ],
+      "problem_count": 4,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              4,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              8,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              2,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              8,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              3,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              1,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "dramatic",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "ready",
+      "selected_layer": 26,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              93,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              90,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              81,
+              3584
+            ],
+            "neg": [
+              96,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              98,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              95,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              94,
+              3584
+            ],
+            "neg": [
+              96,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              95,
+              3584
+            ],
+            "neg": [
+              96,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              94,
+              3584
+            ],
+            "neg": [
+              95,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              93,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "formality",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "ready",
+      "selected_layer": 26,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              95,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              89,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              90,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              80,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "verbosity",
+      "model_id": "qwen2_5_7b_instruct",
+      "status": "ready",
+      "selected_layer": 19,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              74,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              61,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              98,
+              3584
+            ],
+            "neg": [
+              28,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              83,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              90,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              87,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              54,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              67,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              95,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/qwen2_5_7b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              81,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "sycophancy",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "ready",
+      "selected_layer": 16,
+      "selected_layer_source": "model_config",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              10,
+              3584
+            ],
+            "neg": [
+              98,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              8,
+              3584
+            ],
+            "neg": [
+              96,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              69,
+              3584
+            ],
+            "neg": [
+              98,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              10,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              65,
+              3584
+            ],
+            "neg": [
+              94,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              44,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              10,
+              3584
+            ],
+            "neg": [
+              96,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              94,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              15,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/sycophancy/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              67,
+              3584
+            ],
+            "neg": [
+              93,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "evil",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "blocked",
+      "selected_layer": 16,
+      "selected_layer_source": "model_config_incomplete",
+      "variant_count_expected": 10,
+      "variant_count_ready": 0,
+      "usable_variant_indices": [],
+      "missing_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "problem_count": 10,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "hallucination",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "ready",
+      "selected_layer": 16,
+      "selected_layer_source": "model_config",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              54,
+              3584
+            ],
+            "neg": [
+              60,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              60,
+              3584
+            ],
+            "neg": [
+              66,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              52,
+              3584
+            ],
+            "neg": [
+              66,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              52,
+              3584
+            ],
+            "neg": [
+              72,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              41,
+              3584
+            ],
+            "neg": [
+              56,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              48,
+              3584
+            ],
+            "neg": [
+              61,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              61,
+              3584
+            ],
+            "neg": [
+              60,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              49,
+              3584
+            ],
+            "neg": [
+              65,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              50,
+              3584
+            ],
+            "neg": [
+              65,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/hallucination/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              50,
+              3584
+            ],
+            "neg": [
+              59,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "refusal",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "blocked",
+      "selected_layer": 6,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/selected_layer.json:incomplete",
+      "variant_count_expected": 10,
+      "variant_count_ready": 8,
+      "usable_variant_indices": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [
+        0,
+        5
+      ],
+      "problem_count": 2,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              8,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              3,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              37,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              5,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              13,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              12,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              34,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/refusal/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              2,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "toxicity",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "ready",
+      "selected_layer": 26,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              97,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              65,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              53,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              63,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              89,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              89,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              92,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              54,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              61,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              93,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "power_seeking",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "blocked",
+      "selected_layer": 7,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/selected_layer.json:incomplete",
+      "variant_count_expected": 10,
+      "variant_count_ready": 6,
+      "usable_variant_indices": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "missing_variant_indices": [
+        0,
+        3,
+        8,
+        9
+      ],
+      "problem_count": 4,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              5,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              5,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              1,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              2,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              5,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              2,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "incomplete",
+          "missing_sides": [
+            "pos"
+          ],
+          "shapes": {
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "dramatic",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "ready",
+      "selected_layer": 26,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              89,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              97,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              79,
+              3584
+            ],
+            "neg": [
+              98,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              93,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              95,
+              3584
+            ],
+            "neg": [
+              93,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              94,
+              3584
+            ],
+            "neg": [
+              94,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              94,
+              3584
+            ],
+            "neg": [
+              95,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              95,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              94,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "formality",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "ready",
+      "selected_layer": 26,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              94,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              89,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              99,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              100,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              97,
+              3584
+            ],
+            "neg": [
+              82,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "trait_id": "verbosity",
+      "model_id": "llama_3_1_8b_instruct",
+      "status": "ready",
+      "selected_layer": 19,
+      "selected_layer_source": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/selected_layer.json",
+      "variant_count_expected": 10,
+      "variant_count_ready": 10,
+      "usable_variant_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "missing_variant_indices": [],
+      "problem_count": 0,
+      "hidden_dims": [
+        3584
+      ],
+      "hidden_dim_consistent": true,
+      "variants": [
+        {
+          "variant_index": 0,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_00",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              73,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 1,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_01",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              98,
+              3584
+            ],
+            "neg": [
+              58,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 2,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_02",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              27,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 3,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_03",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              99,
+              3584
+            ],
+            "neg": [
+              82,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 4,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_04",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              88,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 5,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_05",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              98,
+              3584
+            ],
+            "neg": [
+              79,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 6,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_06",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              53,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 7,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_07",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              66,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 8,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_08",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              91,
+              3584
+            ]
+          }
+        },
+        {
+          "variant_index": 9,
+          "path": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/activations/variant_09",
+          "status": "ready",
+          "missing_sides": [],
+          "shapes": {
+            "pos": [
+              100,
+              3584
+            ],
+            "neg": [
+              77,
+              3584
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

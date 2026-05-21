@@ -15,6 +15,7 @@ data/processed/*
 outputs/directions/*
 outputs/manifests/*
 outputs/reports/*
+outputs/runs/*
 
 !data/raw/.gitkeep
 !data/interim/.gitkeep
@@ -22,6 +23,23 @@ outputs/reports/*
 !outputs/directions/.gitkeep
 !outputs/manifests/.gitkeep
 !outputs/reports/.gitkeep
+
+# Allow key Phase 2 result files to be committed
+!outputs/reports/phase2/
+!outputs/reports/phase2/summary.md
+!outputs/reports/phase2/readiness.json
+!outputs/reports/phase2/stability_summary.csv
+!outputs/reports/phase2/stability_summary.json
+!outputs/reports/phase2/surface_overlap_summary.csv
+!outputs/reports/phase2/surface_overlap_summary.json
+!outputs/reports/phase2/cross_trait_cosines.csv
+!outputs/reports/phase2/cross_trait_cosines.json
+!outputs/reports/phase2/control_checks.json
+!outputs/reports/phase2/direction_summary.json
+!outputs/reports/phase2/figures/
+!outputs/reports/phase2/figures/*.png
+!outputs/reports/phase2/stability_matrices/
+!outputs/reports/phase2/stability_matrices/*.csv
 
 # Local secrets and machine-specific config
 .env
@@ -33,3 +51,4 @@ outputs/reports/*
 
 *.md
 !README.md
+!.github/**/*.md
