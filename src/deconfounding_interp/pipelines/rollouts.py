@@ -23,6 +23,7 @@ class RolloutsStage:
 
     def __init__(self):
         self._backend = None
+        self._loaded_model_id: str | None = None
 
     def run(self, job: dict[str, Any], context: StageContext) -> dict[str, Any]:
         if context.dry_run:
@@ -53,11 +54,14 @@ class RolloutsStage:
         # Pick the system prompt pair for this variant
         pos_prompt, neg_prompt = _select_prompt_pair(assets, variant_index, variant_kind)
 
-        # Initialize backend
+        # Initialize backend (reload if model changed)
         backend_name = model_config.backend or bundle.experiment.backend
-        if self._backend is None:
+        if self._backend is None or self._loaded_model_id != model_id:
+            if self._backend is not None:
+                self._backend.unload_model()
             self._backend = create_backend(backend_name)
             self._backend.load_model(model_config)
+            self._loaded_model_id = model_id
 
         # Generate rollouts
         questions = assets["extraction_questions"]
