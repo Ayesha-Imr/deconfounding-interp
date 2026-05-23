@@ -94,91 +94,91 @@
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "sycophancy",
       "right_trait_id": "hallucination",
-      "cosine": 0.32944577927904417
+      "cosine": 0.29950171872362646
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "sycophancy",
       "right_trait_id": "toxicity",
-      "cosine": 0.20574978538984942
+      "cosine": 0.27946830841860315
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "sycophancy",
       "right_trait_id": "dramatic",
-      "cosine": 0.31415894209140094
+      "cosine": 0.3379477202918619
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "sycophancy",
       "right_trait_id": "formality",
-      "cosine": -0.180467521946901
+      "cosine": -0.25656880042975494
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "sycophancy",
       "right_trait_id": "verbosity",
-      "cosine": -0.17207047160269734
+      "cosine": 0.09784995581371807
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "hallucination",
       "right_trait_id": "toxicity",
-      "cosine": 0.05625970352003816
+      "cosine": -0.07971356699834597
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "hallucination",
       "right_trait_id": "dramatic",
-      "cosine": 0.22237351055996246
+      "cosine": 0.1927782950689425
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "hallucination",
       "right_trait_id": "formality",
-      "cosine": 0.09033281765558214
+      "cosine": 0.11980183689074968
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "hallucination",
       "right_trait_id": "verbosity",
-      "cosine": 0.16866879722328842
+      "cosine": 0.2811020971907029
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "toxicity",
       "right_trait_id": "dramatic",
-      "cosine": 0.3389372890962066
+      "cosine": 0.15956812148267843
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "toxicity",
       "right_trait_id": "formality",
-      "cosine": -0.6082879987842242
+      "cosine": -0.3603068881591517
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "toxicity",
       "right_trait_id": "verbosity",
-      "cosine": -0.14709687822896214
+      "cosine": -0.0650241442601435
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "dramatic",
       "right_trait_id": "formality",
-      "cosine": -0.263085206397352
+      "cosine": -0.20222964694775117
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "dramatic",
       "right_trait_id": "verbosity",
-      "cosine": 0.21919686351189901
+      "cosine": 0.1219002068123353
     },
     {
       "model_id": "llama_3_1_8b_instruct",
       "left_trait_id": "formality",
       "right_trait_id": "verbosity",
-      "cosine": 0.12078108213842104
+      "cosine": 0.059573173530115174
     }
   ]
 }

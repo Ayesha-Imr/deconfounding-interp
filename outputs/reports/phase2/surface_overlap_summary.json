@@ -117,14 +117,14 @@
       "expected_surface_confound": "medium",
       "status": "completed",
       "n_surface_directions": 90,
-      "overlap_fraction": 0.3896808271587177,
-      "cosine_with_mean_surface": 0.17087212245632308,
+      "overlap_fraction": 0.49843528118223596,
+      "cosine_with_mean_surface": 0.09617592827273666,
       "basis_rank": 5,
-      "projection_norm": 0.6242442047458011,
-      "random_baseline_mean": 0.0013898406643841075,
-      "random_baseline_std": 0.0008732480997075229,
+      "projection_norm": 0.70599949092208,
+      "random_baseline_mean": 0.0011720883879381581,
+      "random_baseline_std": 0.0006217940595738821,
       "random_baseline_n": 100,
-      "overlap_minus_random_mean": 0.3882909864943336
+      "overlap_minus_random_mean": 0.4972631927942978
     },
     {
       "model_id": "llama_3_1_8b_instruct",
@@ -139,14 +139,14 @@
       "expected_surface_confound": "high",
       "status": "completed",
       "n_surface_directions": 90,
-      "overlap_fraction": 0.40412375574277254,
-      "cosine_with_mean_surface": -0.19993411205731393,
+      "overlap_fraction": 0.1091161657126663,
+      "cosine_with_mean_surface": -0.031202196030212997,
       "basis_rank": 5,
-      "projection_norm": 0.635707287784852,
-      "random_baseline_mean": 0.0013577516031576381,
-      "random_baseline_std": 0.00091047643446426,
+      "projection_norm": 0.33032736143508656,
+      "random_baseline_mean": 0.001254382674356719,
+      "random_baseline_std": 0.0007719443928072581,
       "random_baseline_n": 100,
-      "overlap_minus_random_mean": 0.4027660041396149
+      "overlap_minus_random_mean": 0.10786178303830958
     },
     {
       "model_id": "llama_3_1_8b_instruct",
@@ -161,14 +161,14 @@
       "expected_surface_confound": "high",
       "status": "completed",
       "n_surface_directions": 90,
-      "overlap_fraction": 0.21941466022587486,
-      "cosine_with_mean_surface": 0.17980784056369517,
+      "overlap_fraction": 0.45933102303961193,
+      "cosine_with_mean_surface": 0.14337590758476837,
       "basis_rank": 5,
-      "projection_norm": 0.46841718609149563,
-      "random_baseline_mean": 0.001275376788250052,
-      "random_baseline_std": 0.0007618144090459377,
+      "projection_norm": 0.6777396425173992,
+      "random_baseline_mean": 0.0011777270928862728,
+      "random_baseline_std": 0.000623347834983767,
       "random_baseline_n": 100,
-      "overlap_minus_random_mean": 0.21813928343762481
+      "overlap_minus_random_mean": 0.45815329594672566
     },
     {
       "model_id": "llama_3_1_8b_instruct",
@@ -183,14 +183,14 @@
       "expected_surface_confound": "high",
       "status": "completed",
       "n_surface_directions": 90,
-      "overlap_fraction": 0.5600449115266797,
-      "cosine_with_mean_surface": 0.07038890161857586,
+      "overlap_fraction": 0.18304286543345072,
+      "cosine_with_mean_surface": -0.14753092978112983,
       "basis_rank": 5,
-      "projection_norm": 0.7483614845291543,
-      "random_baseline_mean": 0.0013760629584749853,
-      "random_baseline_std": 0.0008617285315653344,
+      "projection_norm": 0.42783509140023884,
+      "random_baseline_mean": 0.0011982066839160484,
+      "random_baseline_std": 0.0007159100777406052,
       "random_baseline_n": 100,
-      "overlap_minus_random_mean": 0.5586688485682046
+      "overlap_minus_random_mean": 0.18184465874953468
     },
     {
       "model_id": "llama_3_1_8b_instruct",
@@ -198,14 +198,14 @@
       "expected_surface_confound": "high",
       "status": "completed",
       "n_surface_directions": 90,
-      "overlap_fraction": 0.8395396455856945,
-      "cosine_with_mean_surface": -0.07753510497367883,
+      "overlap_fraction": 0.7732450567555796,
+      "cosine_with_mean_surface": -0.15731722028192702,
       "basis_rank": 5,
-      "projection_norm": 0.9162639606498197,
-      "random_baseline_mean": 0.0013572055565738428,
-      "random_baseline_std": 0.0008257524211967603,
+      "projection_norm": 0.8793435373934239,
+      "random_baseline_mean": 0.0014597791666916668,
+      "random_baseline_std": 0.0008390230944929174,
       "random_baseline_n": 100,
-      "overlap_minus_random_mean": 0.8381824400291207
+      "overlap_minus_random_mean": 0.7717852775888879
     },
     {
       "model_id": "llama_3_1_8b_instruct",
@@ -213,14 +213,14 @@
       "expected_surface_confound": "high",
       "status": "completed",
       "n_surface_directions": 90,
-      "overlap_fraction": 0.346968707320116,
-      "cosine_with_mean_surface": 0.1942936796059794,
+      "overlap_fraction": 0.33487374273076803,
+      "cosine_with_mean_surface": 0.18608834955600345,
       "basis_rank": 5,
-      "projection_norm": 0.5890404971817439,
-      "random_baseline_mean": 0.001415846623277276,
-      "random_baseline_std": 0.000943601198783307,
+      "projection_norm": 0.5786827651924394,
+      "random_baseline_mean": 0.0011549970711969854,
+      "random_baseline_std": 0.0006200883670705635,
       "random_baseline_n": 100,
-      "overlap_minus_random_mean": 0.3455528606968387
+      "overlap_minus_random_mean": 0.33371874565957105
     }
   ]
 }

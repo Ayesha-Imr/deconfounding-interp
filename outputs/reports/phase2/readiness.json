@@ -1706,7 +1706,7 @@
       "missing_variant_indices": [],
       "problem_count": 0,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -1717,12 +1717,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              10,
-              3584
+              76,
+              4096
             ],
             "neg": [
-              98,
-              3584
+              96,
+              4096
             ]
           }
         },
@@ -1733,12 +1733,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              8,
-              3584
+              3,
+              4096
             ],
             "neg": [
-              96,
-              3584
+              98,
+              4096
             ]
           }
         },
@@ -1749,12 +1749,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              69,
-              3584
+              87,
+              4096
             ],
             "neg": [
               98,
-              3584
+              4096
             ]
           }
         },
@@ -1765,12 +1765,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              10,
-              3584
+              53,
+              4096
             ],
             "neg": [
-              99,
-              3584
+              97,
+              4096
             ]
           }
         },
@@ -1781,12 +1781,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              65,
-              3584
+              72,
+              4096
             ],
             "neg": [
-              94,
-              3584
+              97,
+              4096
             ]
           }
         },
@@ -1797,12 +1797,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              44,
-              3584
+              80,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              93,
+              4096
             ]
           }
         },
@@ -1813,12 +1813,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              10,
-              3584
+              18,
+              4096
             ],
             "neg": [
               96,
-              3584
+              4096
             ]
           }
         },
@@ -1829,12 +1829,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              94,
-              3584
+              80,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              96,
+              4096
             ]
           }
         },
@@ -1845,12 +1845,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              15,
-              3584
+              53,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -1861,12 +1861,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              67,
-              3584
+              68,
+              4096
             ],
             "neg": [
-              93,
-              3584
+              95,
+              4096
             ]
           }
         }
@@ -1879,10 +1879,11 @@
       "selected_layer": 16,
       "selected_layer_source": "model_config_incomplete",
       "variant_count_expected": 10,
-      "variant_count_ready": 0,
-      "usable_variant_indices": [],
+      "variant_count_ready": 1,
+      "usable_variant_indices": [
+        0
+      ],
       "missing_variant_indices": [
-        0,
         1,
         2,
         3,
@@ -1893,23 +1894,25 @@
         8,
         9
       ],
-      "problem_count": 10,
+      "problem_count": 9,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
         {
           "variant_index": 0,
           "path": "/workspace/deconfounding-interp/data/interim/evil/llama_3_1_8b_instruct/activations/variant_00",
-          "status": "incomplete",
-          "missing_sides": [
-            "pos"
-          ],
+          "status": "ready",
+          "missing_sides": [],
           "shapes": {
+            "pos": [
+              1,
+              4096
+            ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -1922,8 +1925,8 @@
           ],
           "shapes": {
             "neg": [
-              99,
-              3584
+              100,
+              4096
             ]
           }
         },
@@ -1937,7 +1940,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -1951,7 +1954,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -1965,7 +1968,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -1979,7 +1982,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -1993,7 +1996,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2007,7 +2010,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2021,7 +2024,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2035,7 +2038,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         }
@@ -2064,7 +2067,7 @@
       "missing_variant_indices": [],
       "problem_count": 0,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -2075,12 +2078,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              54,
-              3584
+              43,
+              4096
             ],
             "neg": [
-              60,
-              3584
+              70,
+              4096
             ]
           }
         },
@@ -2091,12 +2094,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              60,
-              3584
+              57,
+              4096
             ],
             "neg": [
-              66,
-              3584
+              70,
+              4096
             ]
           }
         },
@@ -2107,12 +2110,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              52,
-              3584
+              48,
+              4096
             ],
             "neg": [
               66,
-              3584
+              4096
             ]
           }
         },
@@ -2123,12 +2126,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              52,
-              3584
+              51,
+              4096
             ],
             "neg": [
               72,
-              3584
+              4096
             ]
           }
         },
@@ -2139,12 +2142,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              41,
-              3584
+              49,
+              4096
             ],
             "neg": [
-              56,
-              3584
+              66,
+              4096
             ]
           }
         },
@@ -2155,12 +2158,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              48,
-              3584
+              38,
+              4096
             ],
             "neg": [
-              61,
-              3584
+              76,
+              4096
             ]
           }
         },
@@ -2171,12 +2174,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              61,
-              3584
+              56,
+              4096
             ],
             "neg": [
-              60,
-              3584
+              64,
+              4096
             ]
           }
         },
@@ -2187,12 +2190,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              49,
-              3584
+              47,
+              4096
             ],
             "neg": [
-              65,
-              3584
+              69,
+              4096
             ]
           }
         },
@@ -2203,12 +2206,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              50,
-              3584
+              65,
+              4096
             ],
             "neg": [
-              65,
-              3584
+              69,
+              4096
             ]
           }
         },
@@ -2219,12 +2222,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              50,
-              3584
+              45,
+              4096
             ],
             "neg": [
-              59,
-              3584
+              62,
+              4096
             ]
           }
         }
@@ -2254,7 +2257,7 @@
       ],
       "problem_count": 2,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -2268,7 +2271,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2279,12 +2282,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              8,
-              3584
+              23,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2295,12 +2298,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              3,
-              3584
+              10,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2311,12 +2314,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              37,
-              3584
+              4,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2327,12 +2330,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              5,
-              3584
+              4,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2346,7 +2349,7 @@
           "shapes": {
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2357,12 +2360,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              13,
-              3584
+              8,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2373,12 +2376,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              12,
-              3584
+              24,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2389,12 +2392,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              34,
-              3584
+              2,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2405,12 +2408,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              2,
-              3584
+              4,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         }
@@ -2420,7 +2423,7 @@
       "trait_id": "toxicity",
       "model_id": "llama_3_1_8b_instruct",
       "status": "ready",
-      "selected_layer": 26,
+      "selected_layer": 18,
       "selected_layer_source": "/workspace/deconfounding-interp/data/interim/toxicity/llama_3_1_8b_instruct/selected_layer.json",
       "variant_count_expected": 10,
       "variant_count_ready": 10,
@@ -2439,7 +2442,7 @@
       "missing_variant_indices": [],
       "problem_count": 0,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -2450,12 +2453,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              97,
-              3584
+              89,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2466,12 +2469,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              65,
-              3584
+              91,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2482,12 +2485,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              53,
-              3584
+              75,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2498,12 +2501,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              63,
-              3584
+              89,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2514,12 +2517,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              89,
-              3584
+              92,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2530,12 +2533,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              89,
-              3584
+              85,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2546,12 +2549,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              92,
-              3584
+              90,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2562,12 +2565,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              54,
-              3584
+              73,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2578,12 +2581,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              61,
-              3584
+              94,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              98,
+              4096
             ]
           }
         },
@@ -2594,12 +2597,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              93,
-              3584
+              56,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         }
@@ -2609,41 +2612,43 @@
       "trait_id": "power_seeking",
       "model_id": "llama_3_1_8b_instruct",
       "status": "blocked",
-      "selected_layer": 7,
+      "selected_layer": 6,
       "selected_layer_source": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/selected_layer.json:incomplete",
       "variant_count_expected": 10,
-      "variant_count_ready": 6,
+      "variant_count_ready": 9,
       "usable_variant_indices": [
+        0,
         1,
         2,
         4,
         5,
         6,
-        7
-      ],
-      "missing_variant_indices": [
-        0,
-        3,
+        7,
         8,
         9
       ],
-      "problem_count": 4,
+      "missing_variant_indices": [
+        3
+      ],
+      "problem_count": 1,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
         {
           "variant_index": 0,
           "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_00",
-          "status": "incomplete",
-          "missing_sides": [
-            "pos"
-          ],
+          "status": "ready",
+          "missing_sides": [],
           "shapes": {
+            "pos": [
+              1,
+              4096
+            ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2654,12 +2659,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              5,
-              3584
+              2,
+              4096
             ],
             "neg": [
-              99,
-              3584
+              100,
+              4096
             ]
           }
         },
@@ -2670,12 +2675,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              5,
-              3584
+              4,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2688,8 +2693,8 @@
           ],
           "shapes": {
             "neg": [
-              99,
-              3584
+              100,
+              4096
             ]
           }
         },
@@ -2700,12 +2705,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              1,
-              3584
+              2,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2716,12 +2721,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              2,
-              3584
+              5,
+              4096
             ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
@@ -2732,12 +2737,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              5,
-              3584
+              2,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -2748,40 +2753,44 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              2,
-              3584
+              1,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              98,
+              4096
             ]
           }
         },
         {
           "variant_index": 8,
           "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_08",
-          "status": "incomplete",
-          "missing_sides": [
-            "pos"
-          ],
+          "status": "ready",
+          "missing_sides": [],
           "shapes": {
+            "pos": [
+              3,
+              4096
+            ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         },
         {
           "variant_index": 9,
           "path": "/workspace/deconfounding-interp/data/interim/power_seeking/llama_3_1_8b_instruct/activations/variant_09",
-          "status": "incomplete",
-          "missing_sides": [
-            "pos"
-          ],
+          "status": "ready",
+          "missing_sides": [],
           "shapes": {
+            "pos": [
+              2,
+              4096
+            ],
             "neg": [
               100,
-              3584
+              4096
             ]
           }
         }
@@ -2791,7 +2800,7 @@
       "trait_id": "dramatic",
       "model_id": "llama_3_1_8b_instruct",
       "status": "ready",
-      "selected_layer": 26,
+      "selected_layer": 30,
       "selected_layer_source": "/workspace/deconfounding-interp/data/interim/dramatic/llama_3_1_8b_instruct/selected_layer.json",
       "variant_count_expected": 10,
       "variant_count_ready": 10,
@@ -2810,7 +2819,7 @@
       "missing_variant_indices": [],
       "problem_count": 0,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -2821,12 +2830,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              93,
+              4096
             ],
             "neg": [
-              91,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -2837,12 +2846,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              96,
+              4096
             ],
             "neg": [
-              89,
-              3584
+              97,
+              4096
             ]
           }
         },
@@ -2853,12 +2862,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              99,
+              4096
             ],
             "neg": [
-              97,
-              3584
+              100,
+              4096
             ]
           }
         },
@@ -2869,12 +2878,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              79,
-              3584
+              85,
+              4096
             ],
             "neg": [
-              98,
-              3584
+              100,
+              4096
             ]
           }
         },
@@ -2885,12 +2894,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              99,
-              3584
+              95,
+              4096
             ],
             "neg": [
-              93,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -2901,12 +2910,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              95,
-              3584
+              88,
+              4096
             ],
             "neg": [
-              93,
-              3584
+              100,
+              4096
             ]
           }
         },
@@ -2917,12 +2926,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              94,
-              3584
+              95,
+              4096
             ],
             "neg": [
-              94,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -2933,12 +2942,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              94,
-              3584
+              96,
+              4096
             ],
             "neg": [
-              95,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -2949,12 +2958,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              95,
-              3584
+              91,
+              4096
             ],
             "neg": [
-              91,
-              3584
+              99,
+              4096
             ]
           }
         },
@@ -2965,12 +2974,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              97,
+              4096
             ],
             "neg": [
-              94,
-              3584
+              99,
+              4096
             ]
           }
         }
@@ -2980,7 +2989,7 @@
       "trait_id": "formality",
       "model_id": "llama_3_1_8b_instruct",
       "status": "ready",
-      "selected_layer": 26,
+      "selected_layer": 21,
       "selected_layer_source": "/workspace/deconfounding-interp/data/interim/formality/llama_3_1_8b_instruct/selected_layer.json",
       "variant_count_expected": 10,
       "variant_count_ready": 10,
@@ -2999,7 +3008,7 @@
       "missing_variant_indices": [],
       "problem_count": 0,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -3010,12 +3019,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              99,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              88,
+              4096
             ]
           }
         },
@@ -3026,12 +3035,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              99,
+              4096
             ],
             "neg": [
-              94,
-              3584
+              78,
+              4096
             ]
           }
         },
@@ -3042,12 +3051,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              99,
-              3584
+              98,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              89,
+              4096
             ]
           }
         },
@@ -3058,12 +3067,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              97,
+              4096
             ],
             "neg": [
-              89,
-              3584
+              72,
+              4096
             ]
           }
         },
@@ -3074,12 +3083,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              95,
+              4096
             ],
             "neg": [
-              91,
-              3584
+              66,
+              4096
             ]
           }
         },
@@ -3091,11 +3100,11 @@
           "shapes": {
             "pos": [
               99,
-              3584
+              4096
             ],
             "neg": [
-              99,
-              3584
+              85,
+              4096
             ]
           }
         },
@@ -3106,12 +3115,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              99,
-              3584
+              96,
+              4096
             ],
             "neg": [
-              91,
-              3584
+              82,
+              4096
             ]
           }
         },
@@ -3122,12 +3131,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              97,
+              4096
             ],
             "neg": [
-              100,
-              3584
+              90,
+              4096
             ]
           }
         },
@@ -3138,12 +3147,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              97,
-              3584
+              98,
+              4096
             ],
             "neg": [
-              82,
-              3584
+              63,
+              4096
             ]
           }
         },
@@ -3154,12 +3163,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              99,
-              3584
+              95,
+              4096
             ],
             "neg": [
-              91,
-              3584
+              83,
+              4096
             ]
           }
         }
@@ -3169,7 +3178,7 @@
       "trait_id": "verbosity",
       "model_id": "llama_3_1_8b_instruct",
       "status": "ready",
-      "selected_layer": 19,
+      "selected_layer": 13,
       "selected_layer_source": "/workspace/deconfounding-interp/data/interim/verbosity/llama_3_1_8b_instruct/selected_layer.json",
       "variant_count_expected": 10,
       "variant_count_ready": 10,
@@ -3188,7 +3197,7 @@
       "missing_variant_indices": [],
       "problem_count": 0,
       "hidden_dims": [
-        3584
+        4096
       ],
       "hidden_dim_consistent": true,
       "variants": [
@@ -3199,12 +3208,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              99,
+              4096
             ],
             "neg": [
-              73,
-              3584
+              47,
+              4096
             ]
           }
         },
@@ -3216,11 +3225,11 @@
           "shapes": {
             "pos": [
               98,
-              3584
+              4096
             ],
             "neg": [
-              58,
-              3584
+              21,
+              4096
             ]
           }
         },
@@ -3231,12 +3240,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              99,
-              3584
+              100,
+              4096
             ],
             "neg": [
-              27,
-              3584
+              11,
+              4096
             ]
           }
         },
@@ -3248,11 +3257,11 @@
           "shapes": {
             "pos": [
               99,
-              3584
+              4096
             ],
             "neg": [
-              82,
-              3584
+              41,
+              4096
             ]
           }
         },
@@ -3264,11 +3273,11 @@
           "shapes": {
             "pos": [
               100,
-              3584
+              4096
             ],
             "neg": [
-              88,
-              3584
+              23,
+              4096
             ]
           }
         },
@@ -3279,12 +3288,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              98,
-              3584
+              99,
+              4096
             ],
             "neg": [
-              79,
-              3584
+              42,
+              4096
             ]
           }
         },
@@ -3295,12 +3304,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              99,
+              4096
             ],
             "neg": [
-              53,
-              3584
+              15,
+              4096
             ]
           }
         },
@@ -3311,12 +3320,12 @@
           "missing_sides": [],
           "shapes": {
             "pos": [
-              100,
-              3584
+              97,
+              4096
             ],
             "neg": [
-              66,
-              3584
+              21,
+              4096
             ]
           }
         },
@@ -3328,11 +3337,11 @@
           "shapes": {
             "pos": [
               100,
-              3584
+              4096
             ],
             "neg": [
-              91,
-              3584
+              57,
+              4096
             ]
           }
         },
@@ -3344,11 +3353,11 @@
           "shapes": {
             "pos": [
               100,
-              3584
+              4096
             ],
             "neg": [
-              77,
-              3584
+              32,
+              4096
             ]
           }
         }

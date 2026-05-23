@@ -11,10 +11,10 @@
       "status": "completed",
       "n_completed": 2,
       "n_total": 2,
-      "mean_overlap_fraction": 0.2869780554298917,
-      "min_overlap_fraction": 0.21941466022587486,
-      "max_overlap_fraction": 0.3545414506339085,
-      "mean_overlap_minus_random": 0.28568178595613286
+      "mean_overlap_fraction": 0.4069362368367602,
+      "min_overlap_fraction": 0.3545414506339085,
+      "max_overlap_fraction": 0.45933102303961193,
+      "mean_overlap_minus_random": 0.4056887922106833
     },
     "power_seeking_negative_control": {
       "trait_id": "power_seeking",

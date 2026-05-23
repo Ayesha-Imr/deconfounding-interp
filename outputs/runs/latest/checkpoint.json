@@ -980,6 +980,906 @@
         "n_neg": 81,
         "elapsed_seconds": 226.8
       }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v00": {
+      "timestamp": "2026-05-22T06:56:24",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 76,
+        "n_neg": 96,
+        "elapsed_seconds": 1482.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v01": {
+      "timestamp": "2026-05-22T07:10:57",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 3,
+        "n_neg": 98,
+        "elapsed_seconds": 873.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v02": {
+      "timestamp": "2026-05-22T07:34:44",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 87,
+        "n_neg": 98,
+        "elapsed_seconds": 1426.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v03": {
+      "timestamp": "2026-05-22T07:54:31",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 53,
+        "n_neg": 97,
+        "elapsed_seconds": 1186.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v04": {
+      "timestamp": "2026-05-22T08:16:16",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 72,
+        "n_neg": 97,
+        "elapsed_seconds": 1305.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v05": {
+      "timestamp": "2026-05-22T12:10:34",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 80,
+        "n_neg": 93,
+        "elapsed_seconds": 1949.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v06": {
+      "timestamp": "2026-05-22T12:26:31",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 18,
+        "n_neg": 96,
+        "elapsed_seconds": 956.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v07": {
+      "timestamp": "2026-05-22T12:49:29",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 80,
+        "n_neg": 96,
+        "elapsed_seconds": 1378.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v08": {
+      "timestamp": "2026-05-22T13:10:34",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 53,
+        "n_neg": 99,
+        "elapsed_seconds": 1264.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__sycophancy__v09": {
+      "timestamp": "2026-05-22T13:32:20",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 68,
+        "n_neg": 95,
+        "elapsed_seconds": 1306.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v00": {
+      "timestamp": "2026-05-22T13:47:17",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 1,
+        "n_neg": 100,
+        "elapsed_seconds": 897.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v01": {
+      "timestamp": "2026-05-22T14:02:15",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 897.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v02": {
+      "timestamp": "2026-05-22T14:17:24",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 909.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v03": {
+      "timestamp": "2026-05-22T14:31:58",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 874.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v04": {
+      "timestamp": "2026-05-22T14:47:14",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 916.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v05": {
+      "timestamp": "2026-05-22T15:01:41",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 867.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v06": {
+      "timestamp": "2026-05-22T15:16:39",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 897.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v07": {
+      "timestamp": "2026-05-22T15:32:07",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 928.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v08": {
+      "timestamp": "2026-05-22T15:47:09",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 902.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__evil__v09": {
+      "timestamp": "2026-05-22T16:02:05",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 896.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v00": {
+      "timestamp": "2026-05-22T16:18:40",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 43,
+        "n_neg": 70,
+        "elapsed_seconds": 995.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v01": {
+      "timestamp": "2026-05-22T16:37:00",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 57,
+        "n_neg": 70,
+        "elapsed_seconds": 1099.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v02": {
+      "timestamp": "2026-05-22T16:53:42",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 48,
+        "n_neg": 66,
+        "elapsed_seconds": 1002.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v03": {
+      "timestamp": "2026-05-22T17:11:28",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 51,
+        "n_neg": 72,
+        "elapsed_seconds": 1065.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v04": {
+      "timestamp": "2026-05-22T17:27:41",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 49,
+        "n_neg": 66,
+        "elapsed_seconds": 973.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v05": {
+      "timestamp": "2026-05-22T17:44:26",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 38,
+        "n_neg": 76,
+        "elapsed_seconds": 1004.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v06": {
+      "timestamp": "2026-05-22T18:01:46",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 56,
+        "n_neg": 64,
+        "elapsed_seconds": 1040.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v07": {
+      "timestamp": "2026-05-22T18:18:49",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 47,
+        "n_neg": 69,
+        "elapsed_seconds": 1023.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v08": {
+      "timestamp": "2026-05-22T18:37:28",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 65,
+        "n_neg": 69,
+        "elapsed_seconds": 1119.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__hallucination__v09": {
+      "timestamp": "2026-05-22T18:53:21",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 45,
+        "n_neg": 62,
+        "elapsed_seconds": 952.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v00": {
+      "timestamp": "2026-05-22T19:08:34",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 913.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v01": {
+      "timestamp": "2026-05-22T19:25:58",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 23,
+        "n_neg": 100,
+        "elapsed_seconds": 1044.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v02": {
+      "timestamp": "2026-05-22T19:42:12",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 10,
+        "n_neg": 100,
+        "elapsed_seconds": 973.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v03": {
+      "timestamp": "2026-05-22T19:57:59",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 4,
+        "n_neg": 100,
+        "elapsed_seconds": 947.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v04": {
+      "timestamp": "2026-05-22T20:13:57",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 4,
+        "n_neg": 100,
+        "elapsed_seconds": 958.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v05": {
+      "timestamp": "2026-05-22T20:29:58",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 960.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v06": {
+      "timestamp": "2026-05-22T20:46:27",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 8,
+        "n_neg": 100,
+        "elapsed_seconds": 989.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v07": {
+      "timestamp": "2026-05-22T21:04:23",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 24,
+        "n_neg": 100,
+        "elapsed_seconds": 1076.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v08": {
+      "timestamp": "2026-05-22T21:19:06",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 2,
+        "n_neg": 100,
+        "elapsed_seconds": 883.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__refusal__v09": {
+      "timestamp": "2026-05-22T21:34:24",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 4,
+        "n_neg": 100,
+        "elapsed_seconds": 918.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v00": {
+      "timestamp": "2026-05-22T22:01:46",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 89,
+        "n_neg": 100,
+        "elapsed_seconds": 1641.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v01": {
+      "timestamp": "2026-05-22T22:28:33",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 91,
+        "n_neg": 100,
+        "elapsed_seconds": 1606.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v02": {
+      "timestamp": "2026-05-22T22:52:21",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 75,
+        "n_neg": 100,
+        "elapsed_seconds": 1428.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v03": {
+      "timestamp": "2026-05-22T23:18:41",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 89,
+        "n_neg": 100,
+        "elapsed_seconds": 1580.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v04": {
+      "timestamp": "2026-05-22T23:45:42",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 92,
+        "n_neg": 100,
+        "elapsed_seconds": 1620.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v05": {
+      "timestamp": "2026-05-23T00:11:48",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 85,
+        "n_neg": 100,
+        "elapsed_seconds": 1566.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v06": {
+      "timestamp": "2026-05-23T00:38:20",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 90,
+        "n_neg": 100,
+        "elapsed_seconds": 1591.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v07": {
+      "timestamp": "2026-05-23T01:03:04",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 73,
+        "n_neg": 100,
+        "elapsed_seconds": 1484.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v08": {
+      "timestamp": "2026-05-23T01:29:10",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 94,
+        "n_neg": 98,
+        "elapsed_seconds": 1565.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__toxicity__v09": {
+      "timestamp": "2026-05-23T01:51:47",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 56,
+        "n_neg": 100,
+        "elapsed_seconds": 1357.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v00": {
+      "timestamp": "2026-05-23T02:06:59",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 1,
+        "n_neg": 100,
+        "elapsed_seconds": 912.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v01": {
+      "timestamp": "2026-05-23T02:20:53",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 2,
+        "n_neg": 100,
+        "elapsed_seconds": 833.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v02": {
+      "timestamp": "2026-05-23T02:36:07",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 4,
+        "n_neg": 100,
+        "elapsed_seconds": 914.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v03": {
+      "timestamp": "2026-05-23T02:50:35",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 0,
+        "n_neg": 100,
+        "elapsed_seconds": 867.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v04": {
+      "timestamp": "2026-05-23T03:04:56",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 2,
+        "n_neg": 100,
+        "elapsed_seconds": 860.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v05": {
+      "timestamp": "2026-05-23T03:19:24",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 5,
+        "n_neg": 100,
+        "elapsed_seconds": 867.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v06": {
+      "timestamp": "2026-05-23T03:34:29",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 2,
+        "n_neg": 99,
+        "elapsed_seconds": 904.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v07": {
+      "timestamp": "2026-05-23T03:48:50",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 1,
+        "n_neg": 98,
+        "elapsed_seconds": 860.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v08": {
+      "timestamp": "2026-05-23T04:03:06",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 3,
+        "n_neg": 100,
+        "elapsed_seconds": 856.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__power_seeking__v09": {
+      "timestamp": "2026-05-23T04:16:39",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 2,
+        "n_neg": 100,
+        "elapsed_seconds": 813.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v00": {
+      "timestamp": "2026-05-23T04:38:52",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 93,
+        "n_neg": 99,
+        "elapsed_seconds": 1332.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v01": {
+      "timestamp": "2026-05-23T05:02:28",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 96,
+        "n_neg": 97,
+        "elapsed_seconds": 1415.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v02": {
+      "timestamp": "2026-05-23T05:26:35",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 99,
+        "n_neg": 100,
+        "elapsed_seconds": 1447.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v03": {
+      "timestamp": "2026-05-23T05:50:04",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 85,
+        "n_neg": 100,
+        "elapsed_seconds": 1408.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v04": {
+      "timestamp": "2026-05-23T06:14:37",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 95,
+        "n_neg": 99,
+        "elapsed_seconds": 1473.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v05": {
+      "timestamp": "2026-05-23T06:38:30",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 88,
+        "n_neg": 100,
+        "elapsed_seconds": 1432.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v06": {
+      "timestamp": "2026-05-23T07:03:31",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 95,
+        "n_neg": 99,
+        "elapsed_seconds": 1501.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v07": {
+      "timestamp": "2026-05-23T07:29:04",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 96,
+        "n_neg": 99,
+        "elapsed_seconds": 1533.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v08": {
+      "timestamp": "2026-05-23T07:54:48",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 91,
+        "n_neg": 99,
+        "elapsed_seconds": 1544.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__dramatic__v09": {
+      "timestamp": "2026-05-23T08:20:18",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 97,
+        "n_neg": 99,
+        "elapsed_seconds": 1530.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v00": {
+      "timestamp": "2026-05-23T08:44:58",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 99,
+        "n_neg": 88,
+        "elapsed_seconds": 1479.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v01": {
+      "timestamp": "2026-05-23T09:07:50",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 99,
+        "n_neg": 78,
+        "elapsed_seconds": 1372.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v02": {
+      "timestamp": "2026-05-23T09:31:09",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 98,
+        "n_neg": 89,
+        "elapsed_seconds": 1398.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v03": {
+      "timestamp": "2026-05-23T09:53:09",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 97,
+        "n_neg": 72,
+        "elapsed_seconds": 1319.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v04": {
+      "timestamp": "2026-05-23T10:15:20",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 95,
+        "n_neg": 66,
+        "elapsed_seconds": 1330.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v05": {
+      "timestamp": "2026-05-23T10:40:29",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 99,
+        "n_neg": 85,
+        "elapsed_seconds": 1509.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v06": {
+      "timestamp": "2026-05-23T11:04:57",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 96,
+        "n_neg": 82,
+        "elapsed_seconds": 1468.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v07": {
+      "timestamp": "2026-05-23T11:31:18",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 97,
+        "n_neg": 90,
+        "elapsed_seconds": 1580.8
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v08": {
+      "timestamp": "2026-05-23T11:53:25",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 98,
+        "n_neg": 63,
+        "elapsed_seconds": 1327.0
+      }
+    },
+    "activations__llama_3_1_8b_instruct__formality__v09": {
+      "timestamp": "2026-05-23T12:17:45",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 95,
+        "n_neg": 83,
+        "elapsed_seconds": 1459.7
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v00": {
+      "timestamp": "2026-05-23T12:38:09",
+      "result": {
+        "status": "completed",
+        "variant_index": 0,
+        "n_pos": 99,
+        "n_neg": 47,
+        "elapsed_seconds": 1224.1
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v01": {
+      "timestamp": "2026-05-23T12:56:09",
+      "result": {
+        "status": "completed",
+        "variant_index": 1,
+        "n_pos": 98,
+        "n_neg": 21,
+        "elapsed_seconds": 1079.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v02": {
+      "timestamp": "2026-05-23T13:12:58",
+      "result": {
+        "status": "completed",
+        "variant_index": 2,
+        "n_pos": 100,
+        "n_neg": 11,
+        "elapsed_seconds": 1008.9
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v03": {
+      "timestamp": "2026-05-23T13:33:22",
+      "result": {
+        "status": "completed",
+        "variant_index": 3,
+        "n_pos": 99,
+        "n_neg": 41,
+        "elapsed_seconds": 1224.4
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v04": {
+      "timestamp": "2026-05-23T13:51:55",
+      "result": {
+        "status": "completed",
+        "variant_index": 4,
+        "n_pos": 100,
+        "n_neg": 23,
+        "elapsed_seconds": 1112.5
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v05": {
+      "timestamp": "2026-05-23T14:12:06",
+      "result": {
+        "status": "completed",
+        "variant_index": 5,
+        "n_pos": 99,
+        "n_neg": 42,
+        "elapsed_seconds": 1211.3
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v06": {
+      "timestamp": "2026-05-23T14:29:46",
+      "result": {
+        "status": "completed",
+        "variant_index": 6,
+        "n_pos": 99,
+        "n_neg": 15,
+        "elapsed_seconds": 1059.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v07": {
+      "timestamp": "2026-05-23T14:47:30",
+      "result": {
+        "status": "completed",
+        "variant_index": 7,
+        "n_pos": 97,
+        "n_neg": 21,
+        "elapsed_seconds": 1064.6
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v08": {
+      "timestamp": "2026-05-23T15:08:55",
+      "result": {
+        "status": "completed",
+        "variant_index": 8,
+        "n_pos": 100,
+        "n_neg": 57,
+        "elapsed_seconds": 1285.2
+      }
+    },
+    "activations__llama_3_1_8b_instruct__verbosity__v09": {
+      "timestamp": "2026-05-23T15:28:36",
+      "result": {
+        "status": "completed",
+        "variant_index": 9,
+        "n_pos": 100,
+        "n_neg": 32,
+        "elapsed_seconds": 1180.2
+      }
     }
   }
 }
