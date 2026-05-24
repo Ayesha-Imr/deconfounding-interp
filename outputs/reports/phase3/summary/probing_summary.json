@@ -1,0 +1,436 @@
+{
+  "rows": [
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "standard",
+      "auroc": 0.9512354770086728,
+      "accuracy": 0.9,
+      "n_pos": 63,
+      "n_neg": 97
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "averaged",
+      "auroc": 0.9441989854360988,
+      "accuracy": 0.9,
+      "n_pos": 63,
+      "n_neg": 97
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "subtracted",
+      "auroc": 0.8507609229258714,
+      "accuracy": 0.81875,
+      "n_pos": 63,
+      "n_neg": 97
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "single_variant",
+      "auroc": 0.7903780068728522,
+      "accuracy": 0.78125,
+      "n_pos": 63,
+      "n_neg": 97
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "standard",
+      "auroc": 0.8378472222222222,
+      "accuracy": 0.7962962962962963,
+      "n_pos": 48,
+      "n_neg": 60
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "averaged",
+      "auroc": 0.8434027777777777,
+      "accuracy": 0.7962962962962963,
+      "n_pos": 48,
+      "n_neg": 60
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "subtracted",
+      "auroc": 0.8531249999999999,
+      "accuracy": 0.8148148148148148,
+      "n_pos": 48,
+      "n_neg": 60
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "single_variant",
+      "auroc": 0.8111111111111111,
+      "accuracy": 0.75,
+      "n_pos": 48,
+      "n_neg": 60
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "standard",
+      "auroc": 0.9996666666666666,
+      "accuracy": 0.9947368421052631,
+      "n_pos": 90,
+      "n_neg": 100
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "averaged",
+      "auroc": 0.9996666666666666,
+      "accuracy": 0.9947368421052631,
+      "n_pos": 90,
+      "n_neg": 100
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "subtracted",
+      "auroc": 0.994,
+      "accuracy": 0.968421052631579,
+      "n_pos": 90,
+      "n_neg": 100
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "single_variant",
+      "auroc": 0.9996666666666666,
+      "accuracy": 0.9947368421052631,
+      "n_pos": 90,
+      "n_neg": 100
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "standard",
+      "auroc": 0.9983870967741936,
+      "accuracy": 0.9844559585492227,
+      "n_pos": 100,
+      "n_neg": 93
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "averaged",
+      "auroc": 0.998494623655914,
+      "accuracy": 0.9844559585492227,
+      "n_pos": 100,
+      "n_neg": 93
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "subtracted",
+      "auroc": 0.9823655913978494,
+      "accuracy": 0.9585492227979274,
+      "n_pos": 100,
+      "n_neg": 93
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "single_variant",
+      "auroc": 0.9993548387096775,
+      "accuracy": 0.9896373056994818,
+      "n_pos": 100,
+      "n_neg": 93
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "formality",
+      "direction_type": "standard",
+      "auroc": 0.993006993006993,
+      "accuracy": 0.9947368421052631,
+      "n_pos": 99,
+      "n_neg": 91
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "formality",
+      "direction_type": "averaged",
+      "auroc": 0.9927849927849928,
+      "accuracy": 0.9947368421052631,
+      "n_pos": 99,
+      "n_neg": 91
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "formality",
+      "direction_type": "subtracted",
+      "auroc": 0.9695859695859695,
+      "accuracy": 0.9421052631578948,
+      "n_pos": 99,
+      "n_neg": 91
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "formality",
+      "direction_type": "single_variant",
+      "auroc": 0.9932289932289933,
+      "accuracy": 0.9947368421052631,
+      "n_pos": 99,
+      "n_neg": 91
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "standard",
+      "auroc": 0.985908467389949,
+      "accuracy": 0.9555555555555556,
+      "n_pos": 99,
+      "n_neg": 81
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "averaged",
+      "auroc": 0.9894001745853599,
+      "accuracy": 0.9611111111111111,
+      "n_pos": 99,
+      "n_neg": 81
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "subtracted",
+      "auroc": 0.9879037286444694,
+      "accuracy": 0.9555555555555556,
+      "n_pos": 99,
+      "n_neg": 81
+    },
+    {
+      "model_id": "qwen2_5_7b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "single_variant",
+      "auroc": 0.9874049133308392,
+      "accuracy": 0.9611111111111111,
+      "n_pos": 99,
+      "n_neg": 81
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "standard",
+      "auroc": 0.958204334365325,
+      "accuracy": 0.9202453987730062,
+      "n_pos": 68,
+      "n_neg": 95
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "averaged",
+      "auroc": 0.9554179566563468,
+      "accuracy": 0.901840490797546,
+      "n_pos": 68,
+      "n_neg": 95
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "subtracted",
+      "auroc": 0.874922600619195,
+      "accuracy": 0.8466257668711656,
+      "n_pos": 68,
+      "n_neg": 95
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "sycophancy",
+      "direction_type": "single_variant",
+      "auroc": 0.9458204334365325,
+      "accuracy": 0.9202453987730062,
+      "n_pos": 68,
+      "n_neg": 95
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "standard",
+      "auroc": 0.8727598566308244,
+      "accuracy": 0.8504672897196262,
+      "n_pos": 45,
+      "n_neg": 62
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "averaged",
+      "auroc": 0.8630824372759857,
+      "accuracy": 0.8317757009345794,
+      "n_pos": 45,
+      "n_neg": 62
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "subtracted",
+      "auroc": 0.8670250896057348,
+      "accuracy": 0.8037383177570093,
+      "n_pos": 45,
+      "n_neg": 62
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "hallucination",
+      "direction_type": "single_variant",
+      "auroc": 0.853763440860215,
+      "accuracy": 0.8317757009345794,
+      "n_pos": 45,
+      "n_neg": 62
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "standard",
+      "auroc": 0.9996428571428572,
+      "accuracy": 0.9935897435897436,
+      "n_pos": 56,
+      "n_neg": 100
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "averaged",
+      "auroc": 0.9998214285714285,
+      "accuracy": 0.9935897435897436,
+      "n_pos": 56,
+      "n_neg": 100
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "subtracted",
+      "auroc": 0.9969642857142856,
+      "accuracy": 0.9807692307692307,
+      "n_pos": 56,
+      "n_neg": 100
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "toxicity",
+      "direction_type": "single_variant",
+      "auroc": 0.9998214285714285,
+      "accuracy": 0.9935897435897436,
+      "n_pos": 56,
+      "n_neg": 100
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "standard",
+      "auroc": 0.9985421222534625,
+      "accuracy": 0.9795918367346939,
+      "n_pos": 97,
+      "n_neg": 99
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "averaged",
+      "auroc": 0.9987503905029679,
+      "accuracy": 0.9795918367346939,
+      "n_pos": 97,
+      "n_neg": 99
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "subtracted",
+      "auroc": 0.9961470373841508,
+      "accuracy": 0.9642857142857143,
+      "n_pos": 97,
+      "n_neg": 99
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "dramatic",
+      "direction_type": "single_variant",
+      "auroc": 0.9968759762574196,
+      "accuracy": 0.9693877551020408,
+      "n_pos": 97,
+      "n_neg": 99
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "formality",
+      "direction_type": "standard",
+      "auroc": 1.0,
+      "accuracy": 1.0,
+      "n_pos": 95,
+      "n_neg": 83
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "formality",
+      "direction_type": "averaged",
+      "auroc": 1.0,
+      "accuracy": 1.0,
+      "n_pos": 95,
+      "n_neg": 83
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "formality",
+      "direction_type": "subtracted",
+      "auroc": 0.8355104629042486,
+      "accuracy": 0.7921348314606742,
+      "n_pos": 95,
+      "n_neg": 83
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "formality",
+      "direction_type": "single_variant",
+      "auroc": 0.9998731769181991,
+      "accuracy": 0.9943820224719101,
+      "n_pos": 95,
+      "n_neg": 83
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "standard",
+      "auroc": 0.926875,
+      "accuracy": 0.9545454545454546,
+      "n_pos": 100,
+      "n_neg": 32
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "averaged",
+      "auroc": 0.92125,
+      "accuracy": 0.946969696969697,
+      "n_pos": 100,
+      "n_neg": 32
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "subtracted",
+      "auroc": 0.9421875,
+      "accuracy": 0.9318181818181818,
+      "n_pos": 100,
+      "n_neg": 32
+    },
+    {
+      "model_id": "llama_3_1_8b_instruct",
+      "trait_id": "verbosity",
+      "direction_type": "single_variant",
+      "auroc": 0.940625,
+      "accuracy": 0.9545454545454546,
+      "n_pos": 100,
+      "n_neg": 32
+    }
+  ]
+}

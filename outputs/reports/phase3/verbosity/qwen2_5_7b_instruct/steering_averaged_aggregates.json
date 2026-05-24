@@ -1,0 +1,178 @@
+{
+  "per_alpha": {
+    "0.0": {
+      "n_responses": 200,
+      "trait_score_mean": 81.98016452565719,
+      "trait_score_std": 10.328351505342397,
+      "coherence_score_mean": 73.51540009064348,
+      "coherence_score_std": 11.74305057784785,
+      "cross_trait_leakage": {
+        "dramatic": {
+          "mean": 22.974395464776627,
+          "std": 19.9184787761638
+        },
+        "formality": {
+          "mean": 74.35522665309367,
+          "std": 18.411338352023964
+        },
+        "hallucination": {
+          "mean": 35.86297901080444,
+          "std": 31.431814050817366
+        },
+        "sycophancy": {
+          "mean": 13.160729535069141,
+          "std": 16.72166697603686
+        },
+        "toxicity": {
+          "mean": 0.3963146827160903,
+          "std": 1.595301630887472
+        }
+      }
+    },
+    "0.5": {
+      "n_responses": 200,
+      "trait_score_mean": 80.90647410786045,
+      "trait_score_std": 12.602994340740103,
+      "coherence_score_mean": 72.26308498961396,
+      "coherence_score_std": 11.625610736514732,
+      "cross_trait_leakage": {
+        "dramatic": {
+          "mean": 23.579183831481785,
+          "std": 20.615282081111257
+        },
+        "formality": {
+          "mean": 74.43283493533495,
+          "std": 17.36650557058268
+        },
+        "hallucination": {
+          "mean": 36.685592448580316,
+          "std": 31.710958413117293
+        },
+        "sycophancy": {
+          "mean": 13.5004194375662,
+          "std": 16.91273804958945
+        },
+        "toxicity": {
+          "mean": 1.00575918070854,
+          "std": 5.81164923933556
+        }
+      }
+    },
+    "1.0": {
+      "n_responses": 200,
+      "trait_score_mean": 82.25805990956992,
+      "trait_score_std": 10.371942145969028,
+      "coherence_score_mean": 73.17194076225151,
+      "coherence_score_std": 11.602146899052126,
+      "cross_trait_leakage": {
+        "dramatic": {
+          "mean": 22.711856379889724,
+          "std": 18.71238552098848
+        },
+        "formality": {
+          "mean": 74.8684062238324,
+          "std": 18.30239652213598
+        },
+        "hallucination": {
+          "mean": 35.87381876430056,
+          "std": 30.46261011121861
+        },
+        "sycophancy": {
+          "mean": 12.642749194725178,
+          "std": 13.876713415993189
+        },
+        "toxicity": {
+          "mean": 0.8438366627266725,
+          "std": 5.250009710989781
+        }
+      }
+    },
+    "1.5": {
+      "n_responses": 200,
+      "trait_score_mean": 82.40084602291698,
+      "trait_score_std": 8.410538090101506,
+      "coherence_score_mean": 73.34529236471525,
+      "coherence_score_std": 11.131268758317983,
+      "cross_trait_leakage": {
+        "dramatic": {
+          "mean": 23.121642348050663,
+          "std": 19.647280543476832
+        },
+        "formality": {
+          "mean": 74.1921189684702,
+          "std": 18.19281307788722
+        },
+        "hallucination": {
+          "mean": 34.491420207973526,
+          "std": 31.15202501440915
+        },
+        "sycophancy": {
+          "mean": 11.911241163503217,
+          "std": 12.72165305275357
+        },
+        "toxicity": {
+          "mean": 0.48326101840494023,
+          "std": 1.9751974696911814
+        }
+      }
+    },
+    "2.0": {
+      "n_responses": 200,
+      "trait_score_mean": 82.25341569785036,
+      "trait_score_std": 8.698796226910225,
+      "coherence_score_mean": 72.71406778946063,
+      "coherence_score_std": 11.752163373492994,
+      "cross_trait_leakage": {
+        "dramatic": {
+          "mean": 21.963225283952678,
+          "std": 17.75182286417907
+        },
+        "formality": {
+          "mean": 75.2531286575796,
+          "std": 18.684135299906544
+        },
+        "hallucination": {
+          "mean": 34.943473669805215,
+          "std": 30.365096909828353
+        },
+        "sycophancy": {
+          "mean": 12.759200837586508,
+          "std": 15.105935434743902
+        },
+        "toxicity": {
+          "mean": 0.7500601701692325,
+          "std": 5.095178188039959
+        }
+      }
+    },
+    "2.5": {
+      "n_responses": 200,
+      "trait_score_mean": 81.34033496308146,
+      "trait_score_std": 11.03869072836439,
+      "coherence_score_mean": 72.54238546195255,
+      "coherence_score_std": 12.288022246637206,
+      "cross_trait_leakage": {
+        "dramatic": {
+          "mean": 22.277226903626982,
+          "std": 18.16442793035816
+        },
+        "formality": {
+          "mean": 74.73340606089555,
+          "std": 17.70017060854782
+        },
+        "hallucination": {
+          "mean": 37.128931194083805,
+          "std": 31.906677182406362
+        },
+        "sycophancy": {
+          "mean": 13.28058623016875,
+          "std": 16.14449716480362
+        },
+        "toxicity": {
+          "mean": 0.48129316342235495,
+          "std": 1.9799365591756333
+        }
+      }
+    }
+  }
+}

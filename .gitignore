@@ -41,6 +41,17 @@ outputs/runs/*
 !outputs/reports/phase2/stability_matrices/
 !outputs/reports/phase2/stability_matrices/*.csv
 
+# Allow key Phase 3 result files to be committed
+!outputs/reports/phase3/
+!outputs/reports/phase3/summary/
+!outputs/reports/phase3/summary/summary.md
+!outputs/reports/phase3/summary/steering_summary.csv
+!outputs/reports/phase3/summary/steering_summary.json
+!outputs/reports/phase3/summary/probing_summary.csv
+!outputs/reports/phase3/summary/probing_summary.json
+!outputs/reports/phase3/summary/figures/
+!outputs/reports/phase3/summary/figures/*.png
+
 # Local secrets and machine-specific config
 .env
 .env.*
