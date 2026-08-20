@@ -26,9 +26,12 @@ def test_average_directions_normalizes():
 def test_activation_rms_and_steering_calibration_use_residual_scale():
     activations = np.array([[3.0, 4.0], [0.0, 0.0]])
     np.testing.assert_allclose(activation_rms(activations), np.sqrt(12.5))
-    assert calibrate_steering_scale(
-        np.array([1.0, 0.0]), activations, target_rms_ratio=0.2,
-    ), 0.2 * np.sqrt(12.5)
+    np.testing.assert_allclose(
+        calibrate_steering_scale(
+            np.array([1.0, 0.0]), activations, target_rms_ratio=0.2,
+        ),
+        0.2 * np.sqrt(12.5),
+    )
 
 
 def test_subspace_removal():
