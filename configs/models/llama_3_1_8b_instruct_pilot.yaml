@@ -1,0 +1,14 @@
+id: llama_3_1_8b_instruct_pilot
+display_name: Llama-3.1-8B-Instruct (pilot)
+provider: huggingface
+model_name: meta-llama/Llama-3.1-8B-Instruct
+tokenizer_name: meta-llama/Llama-3.1-8B-Instruct
+dtype: bfloat16
+device_map: auto
+trust_remote_code: false
+chat_template: tokenizer_default
+residual_stream_name: model.layers.{layer}.input_layernorm.input
+num_layers: 32
+default_max_new_tokens: 32
+trait_layers:
+  sycophancy: 16
