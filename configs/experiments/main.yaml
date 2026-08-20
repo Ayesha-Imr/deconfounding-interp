@@ -50,6 +50,7 @@ generation:
   top_p: 0.95
 
 scoring:
+  mode: judge  # use "none" only for generation/extraction smoke pilots
   keep_positive_min_score: 50
   keep_negative_max_score: 50
   score_scale_min: 0

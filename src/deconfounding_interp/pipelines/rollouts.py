@@ -90,46 +90,63 @@ class RolloutsStage:
                         "variant_kind": variant_kind,
                     })
 
-        # Score responses
-        llm_cfg = bundle.experiment.llm
-        audit_dir = (
-            dio.trait_interim_dir(bundle, trait_id, model_id)
-            if llm_cfg.get("audit_csv") else None
-        )
-        judge_client = create_client(
-            provider=llm_cfg.get("provider", "openai"),
-            model=llm_cfg.get("judge_model", bundle.judge.get("model", "gpt-4.1-mini-2025-04-14")),
-            audit_dir=audit_dir,
-        )
-        judge = TraitJudge(judge_client, bundle.judge)
-        concurrency = llm_cfg.get("judge_concurrency", 50)
+        # Score responses when requested. Pilot runs can use ``mode: none`` to
+        # validate generation/extraction without requiring an external judge;
+        # all responses are retained and used for the geometric smoke test.
+        score_mode = scoring_cfg.get("mode", "judge")
+        if score_mode == "none":
+            logger.info(
+                "Skipping judge for pilot: retaining all %d responses",
+                len(all_responses),
+            )
+            for response in all_responses:
+                response["score"] = None
+            filtered_pos = [r for r in all_responses if r["side"] == "pos"]
+            filtered_neg = [r for r in all_responses if r["side"] == "neg"]
+        elif score_mode == "judge":
+            llm_cfg = bundle.experiment.llm
+            audit_dir = (
+                dio.trait_interim_dir(bundle, trait_id, model_id)
+                if llm_cfg.get("audit_csv") else None
+            )
+            judge_client = create_client(
+                provider=llm_cfg.get("provider", "openai"),
+                model=llm_cfg.get(
+                    "judge_model",
+                    bundle.judge.get("model", "gpt-4.1-mini-2025-04-14"),
+                ),
+                audit_dir=audit_dir,
+            )
+            judge = TraitJudge(judge_client, bundle.judge)
+            concurrency = llm_cfg.get("judge_concurrency", 50)
 
-        logger.info(
-            "Scoring %d responses for trait=%s variant=%d",
-            len(all_responses), trait_id, variant_index,
-        )
-        results = await judge.score_batch(
-            all_responses, trait, concurrency=concurrency,
-        )
+            logger.info(
+                "Scoring %d responses for trait=%s variant=%d",
+                len(all_responses), trait_id, variant_index,
+            )
+            results = await judge.score_batch(
+                all_responses, trait, concurrency=concurrency,
+            )
 
-        for resp_dict, judge_result in zip(
-            all_responses, results, strict=True,
-        ):
-            resp_dict["score"] = judge_result.score
+            for resp_dict, judge_result in zip(
+                all_responses, results, strict=True,
+            ):
+                resp_dict["score"] = judge_result.score
 
-        # Filter
-        min_pos = scoring_cfg.get("keep_positive_min_score", 50)
-        max_neg = scoring_cfg.get("keep_negative_max_score", 50)
-        filtered_pos = [
-            r for r in all_responses
-            if r["side"] == "pos" and r["score"] is not None
-            and r["score"] > min_pos
-        ]
-        filtered_neg = [
-            r for r in all_responses
-            if r["side"] == "neg" and r["score"] is not None
-            and r["score"] < max_neg
-        ]
+            min_pos = scoring_cfg.get("keep_positive_min_score", 50)
+            max_neg = scoring_cfg.get("keep_negative_max_score", 50)
+            filtered_pos = [
+                r for r in all_responses
+                if r["side"] == "pos" and r["score"] is not None
+                and r["score"] > min_pos
+            ]
+            filtered_neg = [
+                r for r in all_responses
+                if r["side"] == "neg" and r["score"] is not None
+                and r["score"] < max_neg
+            ]
+        else:
+            raise ValueError(f"Unknown scoring.mode: {score_mode!r}")
 
         logger.info(
             "Filtered: %d pos (of %d), %d neg (of %d)",
