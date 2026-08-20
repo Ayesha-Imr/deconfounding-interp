@@ -33,16 +33,32 @@ class PromptAssetsStage:
         llm_cfg = bundle.experiment.llm
         payload = job.get("payload", {})
 
-        audit_dir = dio.trait_raw_dir(bundle, trait.id) if llm_cfg.get("audit_csv") else None
-        client = create_client(
-            provider=llm_cfg.get("provider", "openai"),
-            model=llm_cfg.get("generation_model", "gpt-4.1-mini-2025-04-14"),
-            audit_dir=audit_dir,
-        )
+        prompt_mode = llm_cfg.get("prompt_asset_mode", "llm")
+        n_paraphrases = int(payload.get("paraphrases_per_prompt", 1))
+        client = None
+        if prompt_mode != "deterministic" or n_paraphrases:
+            audit_dir = (
+                dio.trait_raw_dir(bundle, trait.id) if llm_cfg.get("audit_csv") else None
+            )
+            client = create_client(
+                provider=llm_cfg.get("provider", "openai"),
+                model=llm_cfg.get("generation_model", "gpt-4.1-mini-2025-04-14"),
+                audit_dir=audit_dir,
+            )
 
-        assets = await self._generate_system_prompts(client, trait, payload, llm_cfg)
-        assets = self._load_questions(assets, bundle)
-        paraphrases = await self._generate_paraphrases(client, assets, llm_cfg)
+        if prompt_mode == "deterministic":
+            assets = self._deterministic_system_prompts(trait, payload)
+        else:
+            assert client is not None
+            assets = await self._generate_system_prompts(client, trait, payload, llm_cfg)
+        assets = self._load_questions(assets, bundle, payload)
+        if n_paraphrases:
+            assert client is not None
+            paraphrases = await self._generate_paraphrases(
+                client, assets, llm_cfg, n_paraphrases=n_paraphrases,
+            )
+        else:
+            paraphrases = {"positive": [], "negative": []}
         assets["positive_paraphrases"] = paraphrases["positive"]
         assets["negative_paraphrases"] = paraphrases["negative"]
 
@@ -51,6 +67,18 @@ class PromptAssetsStage:
         logger.info("Saved prompt assets to %s", out_dir / "assets.json")
 
         return {"status": "completed", "trait_id": trait.id, "output": str(out_dir / "assets.json")}
+
+    @staticmethod
+    def _deterministic_system_prompts(trait, payload: dict[str, Any]) -> dict[str, Any]:
+        n_pairs = int(payload.get("system_prompt_pairs", 1))
+        return {
+            "positive_system_prompts": [
+                trait.prompt_generation["positive_instruction_seed"]
+            ] * n_pairs,
+            "negative_system_prompts": [
+                trait.prompt_generation["negative_instruction_seed"]
+            ] * n_pairs,
+        }
 
     async def _generate_system_prompts(
         self, client: LLMClient, trait, payload: dict, llm_cfg: dict,
@@ -74,7 +102,7 @@ class PromptAssetsStage:
         return assets
 
     @staticmethod
-    def _load_questions(assets: dict, bundle) -> dict:
+    def _load_questions(assets: dict, bundle, payload: dict[str, Any]) -> dict:
         path = bundle.project_root / _QUESTIONS_PATH
         if not path.exists():
             raise RuntimeError(
@@ -82,19 +110,26 @@ class PromptAssetsStage:
                 "Run `deconfound sample-questions` first."
             )
         questions = json.loads(path.read_text())
-        assets["extraction_questions"] = questions["extraction_questions"]
-        assets["evaluation_questions"] = questions["evaluation_questions"]
+        n_extract = payload.get("extraction_questions")
+        n_eval = payload.get("evaluation_questions")
+        assets["extraction_questions"] = questions["extraction_questions"][:n_extract]
+        assets["evaluation_questions"] = questions["evaluation_questions"][:n_eval]
         return assets
 
     async def _generate_paraphrases(
-        self, client: LLMClient, assets: dict, llm_cfg: dict,
+        self,
+        client: LLMClient,
+        assets: dict,
+        llm_cfg: dict,
+        *,
+        n_paraphrases: int = 1,
     ) -> dict[str, list[str]]:
         template = (_PROMPTS_DIR / "paraphrase_system_prompt.txt").read_text()
         result: dict[str, list[str]] = {"positive": [], "negative": []}
 
         for side in ("positive", "negative"):
             key = f"{side}_system_prompts"
-            for prompt_text in assets[key]:
+            for prompt_text in assets[key][:n_paraphrases]:
                 formatted = template.format(system_prompt=prompt_text)
                 resp = await client.generate(
                     [{"role": "user", "content": formatted}],
