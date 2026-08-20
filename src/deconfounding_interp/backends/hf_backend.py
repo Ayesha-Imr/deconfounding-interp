@@ -120,8 +120,8 @@ class HFBackend(ModelBackend):
         target_module = self.model.model.layers[layer]
 
         def _steering_hook(module, input, output):
-            hs = output[0] + alpha * direction_scale * direction_tensor
-            return (hs,) + output[1:]
+            delta = alpha * direction_scale * direction_tensor
+            return _add_hidden_state_delta(output, delta)
 
         handle = target_module.register_forward_hook(_steering_hook)
         try:
@@ -186,3 +186,23 @@ def _extract_position(
     else:
         raise ValueError(f"Unknown activation position: {position!r}")
     return vec.squeeze(0).float().cpu().numpy()
+
+
+def _add_hidden_state_delta(output: Any, delta: torch.Tensor) -> Any:
+    """Add a residual delta while preserving the decoder's output structure.
+
+    Transformers decoder implementations differ: Qwen2 currently returns a
+    tensor, while other causal-LM layers may return a tuple whose first item is
+    the hidden state. Treating both as tuples silently indexes the first batch
+    item for Qwen2 and then crashes when reconstructing the output.
+    """
+    if isinstance(output, torch.Tensor):
+        return output + delta
+    if isinstance(output, tuple):
+        if not output:
+            raise ValueError("Cannot steer an empty decoder output tuple")
+        return (output[0] + delta, *output[1:])
+    raise TypeError(
+        "Unsupported decoder output type for steering: "
+        f"{type(output).__name__}"
+    )

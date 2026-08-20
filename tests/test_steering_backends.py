@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 import numpy as np
 
-from deconfounding_interp.backends.hf_backend import HFBackend
+from deconfounding_interp.backends.hf_backend import HFBackend, _add_hidden_state_delta
 
 
 class TestHFBackendSteering:
@@ -46,3 +46,26 @@ class TestHFBackendSteering:
         mock_layer.register_forward_hook.assert_called_once()
         mock_handle.remove.assert_called_once()
         assert result == ["steered"]
+
+    def test_hidden_state_delta_supports_tensor_decoder_output(self):
+        import torch
+
+        output = torch.zeros(1, 3, 4)
+        delta = torch.ones(4)
+
+        result = _add_hidden_state_delta(output, delta)
+
+        assert isinstance(result, torch.Tensor)
+        torch.testing.assert_close(result, torch.ones(1, 3, 4))
+
+    def test_hidden_state_delta_preserves_tuple_decoder_output(self):
+        import torch
+
+        output = (torch.zeros(1, 3, 4), "cache")
+        delta = torch.ones(4)
+
+        result = _add_hidden_state_delta(output, delta)
+
+        assert isinstance(result, tuple)
+        torch.testing.assert_close(result[0], torch.ones(1, 3, 4))
+        assert result[1] == "cache"
