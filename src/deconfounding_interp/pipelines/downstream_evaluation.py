@@ -116,15 +116,28 @@ class DownstreamEvaluationStage:
         )
         eval_questions = assets["evaluation_questions"]
 
-        # Set up judges
-        llm_cfg = bundle.experiment.llm
-        judge_client = create_client(
-            provider=llm_cfg.get("provider", "openai"),
-            model=llm_cfg.get("judge_model", "gpt-4.1-mini-2025-04-14"),
-        )
-        trait_judge = TraitJudge(judge_client, bundle.judge)
-        coherence_judge = CoherenceJudge(judge_client)
-        concurrency = llm_cfg.get("judge_concurrency", 50)
+        # Set up judges only for the scientific scoring path. A judge-free
+        # steering smoke still records every response and the exact scale,
+        # which validates the hook without silently inventing behavior scores.
+        score_mode = bundle.experiment.scoring.get("mode", "judge")
+        if score_mode == "judge":
+            llm_cfg = bundle.experiment.llm
+            judge_client = create_client(
+                provider=llm_cfg.get("provider", "openai"),
+                model=llm_cfg.get("judge_model", "gpt-4.1-mini-2025-04-14"),
+            )
+            trait_judge = TraitJudge(judge_client, bundle.judge)
+            coherence_judge = CoherenceJudge(judge_client)
+            concurrency = llm_cfg.get("judge_concurrency", 50)
+        elif score_mode == "none":
+            trait_judge = None
+            coherence_judge = None
+            concurrency = 1
+            logger.info(
+                "Skipping steering judges for pilot: retaining generated responses",
+            )
+        else:
+            raise ValueError(f"Unknown scoring.mode: {score_mode!r}")
 
         rollouts_per_q = steering_cfg.get("rollouts_per_eval_question", 10)
         max_new_tokens = model_config.default_max_new_tokens
@@ -170,43 +183,48 @@ class DownstreamEvaluationStage:
                 gen_time / max(n_responses, 1),
             )
 
-            # Score: trait expression
-            t_score = time.time()
-            trait = bundle.traits[trait_id]
-            trait_results = await trait_judge.score_batch(
-                condition_responses, trait, concurrency=concurrency,
-            )
-            for r, jr in zip(condition_responses, trait_results, strict=True):
-                r["trait_score"] = jr.score
+            if score_mode == "judge":
+                # Score: trait expression
+                t_score = time.time()
+                trait = bundle.traits[trait_id]
+                trait_results = await trait_judge.score_batch(
+                    condition_responses, trait, concurrency=concurrency,
+                )
+                for r, jr in zip(condition_responses, trait_results, strict=True):
+                    r["trait_score"] = jr.score
 
-            # Score: coherence
-            coherence_results = await coherence_judge.score_batch(
-                condition_responses, concurrency=concurrency,
-            )
-            for r, cr in zip(condition_responses, coherence_results, strict=True):
-                r["coherence_score"] = cr.score
+                # Score: coherence
+                coherence_results = await coherence_judge.score_batch(
+                    condition_responses, concurrency=concurrency,
+                )
+                for r, cr in zip(condition_responses, coherence_results, strict=True):
+                    r["coherence_score"] = cr.score
 
-            # Score: cross-trait leakage
-            if steering_cfg.get("evaluate_cross_trait_leakage", True):
-                for other_trait_id, other_trait in bundle.traits.items():
-                    if other_trait_id == trait_id:
-                        continue
-                    other_d_dir = dio.direction_dir(bundle, other_trait_id, model_id)
-                    if not (other_d_dir / "standard.npy").exists():
-                        continue
-                    cross_results = await trait_judge.score_batch(
-                        condition_responses, other_trait, concurrency=concurrency,
-                    )
-                    for r, xr in zip(condition_responses, cross_results, strict=True):
-                        r.setdefault("cross_trait_scores", {})[other_trait_id] = xr.score
+                # Score: cross-trait leakage
+                if steering_cfg.get("evaluate_cross_trait_leakage", True):
+                    for other_trait_id, other_trait in bundle.traits.items():
+                        if other_trait_id == trait_id:
+                            continue
+                        other_d_dir = dio.direction_dir(bundle, other_trait_id, model_id)
+                        if not (other_d_dir / "standard.npy").exists():
+                            continue
+                        cross_results = await trait_judge.score_batch(
+                            condition_responses, other_trait, concurrency=concurrency,
+                        )
+                        for r, xr in zip(condition_responses, cross_results, strict=True):
+                            r.setdefault("cross_trait_scores", {})[other_trait_id] = xr.score
 
-            score_time = time.time() - t_score
-            logger.info(
-                "  alpha=%.1f: scored %d responses (%.1fs) | "
-                "progress: %d/%d alphas done",
-                alpha, n_responses, score_time,
-                alpha_idx + 1, len(alpha_values),
-            )
+                score_time = time.time() - t_score
+                logger.info(
+                    "  alpha=%.1f: scored %d responses (%.1fs) | "
+                    "progress: %d/%d alphas done",
+                    alpha, n_responses, score_time,
+                    alpha_idx + 1, len(alpha_values),
+                )
+            else:
+                for r in condition_responses:
+                    r["trait_score"] = None
+                    r["coherence_score"] = None
 
             all_responses.extend(condition_responses)
 

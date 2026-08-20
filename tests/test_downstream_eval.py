@@ -46,3 +46,26 @@ def test_compute_aggregates_none_scores():
     agg = result["per_alpha"]["0.0"]
     assert agg["trait_score_mean"] == 50.0
     assert agg["coherence_score_mean"] == 80.0
+
+
+def test_compute_aggregates_judge_free_smoke():
+    responses = [
+        {
+            "alpha": 0.0,
+            "trait_score": None,
+            "coherence_score": None,
+            "direction_scale": 0.25,
+        },
+        {
+            "alpha": 1.0,
+            "trait_score": None,
+            "coherence_score": None,
+            "direction_scale": 0.25,
+        },
+    ]
+
+    result = _compute_aggregates(responses, [0.0, 1.0])
+
+    assert result["per_alpha"]["0.0"]["n_responses"] == 1
+    assert result["per_alpha"]["0.0"]["trait_score_mean"] is None
+    assert result["per_alpha"]["1.0"]["coherence_score_mean"] is None
