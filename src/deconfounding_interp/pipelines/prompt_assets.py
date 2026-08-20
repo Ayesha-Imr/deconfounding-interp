@@ -73,11 +73,19 @@ class PromptAssetsStage:
         n_pairs = int(payload.get("system_prompt_pairs", 1))
         return {
             "positive_system_prompts": [
-                trait.prompt_generation["positive_instruction_seed"]
-            ] * n_pairs,
+                (
+                    f"{trait.prompt_generation['positive_instruction_seed']} "
+                    f"Use controlled template wording {index + 1}."
+                )
+                for index in range(n_pairs)
+            ],
             "negative_system_prompts": [
-                trait.prompt_generation["negative_instruction_seed"]
-            ] * n_pairs,
+                (
+                    f"{trait.prompt_generation['negative_instruction_seed']} "
+                    f"Use controlled template wording {index + 1}."
+                )
+                for index in range(n_pairs)
+            ],
         }
 
     async def _generate_system_prompts(

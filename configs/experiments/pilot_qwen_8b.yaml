@@ -31,9 +31,9 @@ paths:
   report_dir: outputs/reports
 
 generation:
-  system_prompt_pairs: 1
+  system_prompt_pairs: 2
   paraphrases_per_prompt: 0
-  extraction_questions: 2
+  extraction_questions: 1
   evaluation_questions: 1
   rollouts_per_prompt_question: 1
   max_new_tokens: 32
