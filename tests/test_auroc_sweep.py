@@ -39,6 +39,21 @@ def test_sweep_all_aurocs_populated():
     assert result.best_layer == 15
 
 
+def test_sweep_can_fit_on_train_and_score_on_eval():
+    rng = np.random.default_rng(4)
+    train_pos = {0: rng.normal(loc=1.0, scale=0.2, size=(20, 3))}
+    train_neg = {0: rng.normal(loc=-1.0, scale=0.2, size=(20, 3))}
+    eval_pos = {0: rng.normal(loc=1.0, scale=0.2, size=(10, 3))}
+    eval_neg = {0: rng.normal(loc=-1.0, scale=0.2, size=(10, 3))}
+    result = auroc_probe_sweep(
+        train_pos,
+        train_neg,
+        pos_eval_activations=eval_pos,
+        neg_eval_activations=eval_neg,
+    )
+    assert result.best_auroc > 0.95
+
+
 def test_sweep_min_layer_excludes_early_layers():
     """min_layer filters out layers below the threshold."""
     pos = {0: np.zeros((5, 10)) + 3.0, 10: np.zeros((5, 10)) + 3.0}

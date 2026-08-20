@@ -1,7 +1,9 @@
 import numpy as np
 
 from deconfounding_interp.directions import (
+    activation_rms,
     average_directions,
+    calibrate_steering_scale,
     cosine_similarity,
     difference_in_means,
     orthonormal_basis,
@@ -19,6 +21,14 @@ def test_difference_in_means():
 def test_average_directions_normalizes():
     averaged = average_directions(np.array([[1.0, 0.0], [1.0, 0.0]]))
     np.testing.assert_allclose(averaged, np.array([1.0, 0.0]))
+
+
+def test_activation_rms_and_steering_calibration_use_residual_scale():
+    activations = np.array([[3.0, 4.0], [0.0, 0.0]])
+    np.testing.assert_allclose(activation_rms(activations), np.sqrt(12.5))
+    assert calibrate_steering_scale(
+        np.array([1.0, 0.0]), activations, target_rms_ratio=0.2,
+    ), 0.2 * np.sqrt(12.5)
 
 
 def test_subspace_removal():

@@ -21,7 +21,6 @@ from deconfounding_interp.directions import (
     difference_in_means,
     normalize,
     orthonormal_basis,
-    remove_subspace,
 )
 from deconfounding_interp.pipelines.base import StageContext
 
@@ -144,10 +143,13 @@ class DirectionAnalysisStage:
             )
 
         # Compute per-variant DiM directions
+        variant_raw_directions = {}
         variant_directions = {}
         for vi, sides in variant_acts.items():
             if "pos" in sides and "neg" in sides:
-                variant_directions[vi] = normalize(difference_in_means(sides["pos"], sides["neg"]))
+                raw_direction = difference_in_means(sides["pos"], sides["neg"])
+                variant_raw_directions[vi] = raw_direction
+                variant_directions[vi] = normalize(raw_direction)
 
         if not variant_directions:
             raise RuntimeError("No valid variant directions could be computed")
@@ -162,7 +164,8 @@ class DirectionAnalysisStage:
             variant_acts[vi]["neg"] for vi in range(n_originals)
             if vi in variant_acts and "neg" in variant_acts[vi]
         ])
-        v_standard = normalize(difference_in_means(pos_all, neg_all))
+        v_standard_raw = difference_in_means(pos_all, neg_all)
+        v_standard = normalize(v_standard_raw)
 
         # Surface-form directions: pair same-side variants
         surface_dirs = _compute_surface_directions(variant_acts)
@@ -191,7 +194,13 @@ class DirectionAnalysisStage:
 
         # Corrected directions
         v_averaged = average_directions(dir_array)
+        v_averaged_raw = np.mean(
+            np.array([variant_raw_directions[vi] for vi in sorted(variant_raw_directions)]),
+            axis=0,
+        )
         v_single_variant = variant_directions[0]
+        v_single_variant_raw = variant_raw_directions[0]
+        v_subtracted_raw = v_standard_raw.copy()
         v_subtracted = v_standard
         if len(surface_dirs) >= 2:
             basis = orthonormal_basis(
@@ -199,7 +208,8 @@ class DirectionAnalysisStage:
                 max_rank=max_rank,
                 variance_threshold=variance_threshold,
             )
-            v_subtracted = remove_subspace(v_standard, basis)
+            v_subtracted_raw = v_standard_raw - (basis.T @ (basis @ v_standard_raw))
+            v_subtracted = normalize(v_subtracted_raw)
 
         # Save directions
         d_dir = dio.direction_dir(bundle, trait_id, model_id)
@@ -209,11 +219,39 @@ class DirectionAnalysisStage:
             "subtracted": v_subtracted,
             "single_variant": v_single_variant,
         }
+        raw_directions = {
+            "standard": v_standard_raw,
+            "averaged": v_averaged_raw,
+            "subtracted": v_subtracted_raw,
+            "single_variant": v_single_variant_raw,
+        }
+
+        # Save a leave-one-variant-out fit for the held-out probing variant.
+        # The old pipeline used the all-variant averaged/subtracted directions
+        # to score the last variant, which leaks the probe labels into the fit.
+        holdout_idx = int(payload.get("probe_holdout_index", variant_count - 1))
+        fit_directions, fit_raw_directions = _fit_direction_set(
+            variant_acts,
+            excluded_variant=holdout_idx,
+            n_originals=n_originals,
+            max_rank=max_rank,
+            variance_threshold=variance_threshold,
+        )
         for name, direction in configured_directions.items():
             if name in direction_types:
                 dio.save_direction(d_dir, name, direction)
+                dio.save_direction(d_dir, f"{name}_raw", raw_directions[name])
+                if name in fit_directions:
+                    fit_name = f"{name}_fit_excluding_variant_{holdout_idx:02d}"
+                    dio.save_direction(d_dir, fit_name, fit_directions[name])
+                    dio.save_direction(
+                        d_dir,
+                        f"{fit_name}_raw",
+                        fit_raw_directions[name],
+                    )
         for vi, d in variant_directions.items():
             dio.save_direction(d_dir, f"variant_{vi:02d}", d)
+            dio.save_direction(d_dir, f"variant_{vi:02d}_raw", variant_raw_directions[vi])
         for si, sd in enumerate(surface_dirs):
             dio.save_direction(d_dir, f"surface_{si:02d}", sd)
 
@@ -247,6 +285,22 @@ class DirectionAnalysisStage:
                     f"surface_{si:02d}" for si in range(len(surface_dirs))
                 ],
                 "unit_normalized": True,
+                "raw_direction_files": {
+                    name: f"{name}_raw.npy"
+                    for name in configured_directions
+                    if name in direction_types
+                },
+                "raw_direction_norms": {
+                    name: float(np.linalg.norm(raw_directions[name]))
+                    for name in configured_directions
+                    if name in direction_types
+                },
+                "probe_holdout_index": holdout_idx,
+                "leakage_safe_direction_files": {
+                    name: f"{name}_fit_excluding_variant_{holdout_idx:02d}.npy"
+                    for name in fit_directions
+                    if name in direction_types
+                },
             },
         )
 
@@ -274,6 +328,58 @@ def _compute_surface_directions(
             surface_dirs.append(normalize(difference_in_means(acts_a, acts_b)))
 
     return surface_dirs
+
+
+def _fit_direction_set(
+    variant_acts: dict[int, dict[str, np.ndarray]],
+    *,
+    excluded_variant: int,
+    n_originals: int,
+    max_rank: int,
+    variance_threshold: float,
+) -> tuple[dict[str, np.ndarray], dict[str, np.ndarray]]:
+    """Fit all direction variants without using one explicitly held-out variant."""
+    fit_acts = {
+        vi: sides for vi, sides in variant_acts.items() if vi != excluded_variant
+    }
+    raw_by_variant: dict[int, np.ndarray] = {}
+    for vi, sides in fit_acts.items():
+        if "pos" in sides and "neg" in sides:
+            raw = difference_in_means(sides["pos"], sides["neg"])
+            raw_by_variant[vi] = raw
+    if not raw_by_variant:
+        return {}, {}
+
+    original_indices = [
+        vi for vi in range(n_originals)
+        if vi in fit_acts and "pos" in fit_acts[vi] and "neg" in fit_acts[vi]
+    ]
+    if not original_indices:
+        return {}, {}
+    pos_all = np.concatenate([fit_acts[vi]["pos"] for vi in original_indices])
+    neg_all = np.concatenate([fit_acts[vi]["neg"] for vi in original_indices])
+    standard_raw = difference_in_means(pos_all, neg_all)
+    surface_dirs = _compute_surface_directions(fit_acts)
+
+    averaged_raw = np.mean(np.array(list(raw_by_variant.values())), axis=0)
+    subtracted_raw = standard_raw.copy()
+    if len(surface_dirs) >= 2:
+        basis = orthonormal_basis(
+            np.array(surface_dirs),
+            max_rank=max_rank,
+            variance_threshold=variance_threshold,
+        )
+        subtracted_raw = standard_raw - (basis.T @ (basis @ standard_raw))
+
+    single_index = 0 if 0 in raw_by_variant else min(raw_by_variant)
+    raw = {
+        "standard": standard_raw,
+        "averaged": averaged_raw,
+        "subtracted": subtracted_raw,
+        "single_variant": raw_by_variant[single_index],
+    }
+    unit = {name: normalize(value) for name, value in raw.items()}
+    return unit, raw
 
 
 def _blocked_result(readiness: dict[str, Any], report_path, reason: str) -> dict[str, Any]:

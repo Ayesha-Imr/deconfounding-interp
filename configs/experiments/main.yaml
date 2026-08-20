@@ -92,7 +92,12 @@ analysis:
 
 steering:
   enabled: true
-  alpha_values: [0.0, 0.5, 1.0, 1.5, 2.0, 2.5]
+  # Alpha multiplies a calibrated vector whose norm is a fixed fraction of
+  # the selected-layer residual RMS. This avoids the old ~1% unit-vector bug.
+  alpha_values: [0.0, 0.25, 0.5, 0.75, 1.0]
+  scale_mode: activation_rms
+  target_activation_rms_ratio: 0.05
+  calibration_variant_indices: [0, 1, 2, 3, 4]
   rollouts_per_eval_question: 10
   evaluate_cross_trait_leakage: true
   evaluate_mmlu_at_alpha: 1.0

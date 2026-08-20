@@ -21,6 +21,9 @@ def auroc_probe_sweep(
     pos_activations: dict[int, np.ndarray],
     neg_activations: dict[int, np.ndarray],
     min_layer: int = 0,
+    *,
+    pos_eval_activations: dict[int, np.ndarray] | None = None,
+    neg_eval_activations: dict[int, np.ndarray] | None = None,
 ) -> SweepResult:
     """Run AUROC probe sweep across layers to find the best separation layer.
 
@@ -49,6 +52,11 @@ def auroc_probe_sweep(
         raise ValueError("Need at least one layer of activations for each side")
     if pos_activations.keys() != neg_activations.keys():
         raise ValueError("Layer keys must match between pos and neg activations")
+    if (pos_eval_activations is None) != (neg_eval_activations is None):
+        raise ValueError("Provide both evaluation sides or neither")
+    if pos_eval_activations is not None and neg_eval_activations is not None:
+        if pos_eval_activations.keys() != neg_eval_activations.keys():
+            raise ValueError("Evaluation layer keys must match between pos and neg")
 
     eligible = sorted(idx for idx in pos_activations if idx >= min_layer)
     if not eligible:
@@ -63,10 +71,18 @@ def auroc_probe_sweep(
         pos = np.asarray(pos_activations[layer], dtype=np.float64)
         neg = np.asarray(neg_activations[layer], dtype=np.float64)
         direction = difference_in_means(pos, neg)
-        scores = np.concatenate([pos @ direction, neg @ direction])
+        if pos_eval_activations is None:
+            pos_eval = pos
+            neg_eval = neg
+        else:
+            if layer not in pos_eval_activations or layer not in neg_eval_activations:
+                raise ValueError(f"Evaluation activations are missing layer {layer}")
+            pos_eval = np.asarray(pos_eval_activations[layer], dtype=np.float64)
+            neg_eval = np.asarray(neg_eval_activations[layer], dtype=np.float64)
+        scores = np.concatenate([pos_eval @ direction, neg_eval @ direction])
         labels = np.concatenate([
-            np.ones(pos.shape[0], dtype=np.uint8),
-            np.zeros(neg.shape[0], dtype=np.uint8),
+            np.ones(pos_eval.shape[0], dtype=np.uint8),
+            np.zeros(neg_eval.shape[0], dtype=np.uint8),
         ])
         per_layer[layer] = float(roc_auc_score(labels, scores))
 

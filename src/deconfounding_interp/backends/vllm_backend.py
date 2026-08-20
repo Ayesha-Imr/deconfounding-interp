@@ -86,6 +86,7 @@ class VLLMBackend(ModelBackend):
         direction: np.ndarray,
         layer: int,
         alpha: float,
+        direction_scale: float = 1.0,
         temperature: float = 1.0,
         top_p: float = 0.95,
         max_new_tokens: int = 256,
@@ -105,7 +106,7 @@ class VLLMBackend(ModelBackend):
             sv = SteeringVector(
                 activations=torch.tensor(direction, dtype=torch.float32).unsqueeze(0),
                 layer_indices=[layer],
-                scale=alpha,
+                scale=alpha * direction_scale,
             )
             extra_args["apply_steering_vectors"] = [sv]
 

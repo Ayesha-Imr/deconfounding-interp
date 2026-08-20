@@ -11,6 +11,7 @@ import numpy as np
 
 from deconfounding_interp import io as dio
 from deconfounding_interp.backends import create_backend
+from deconfounding_interp.directions import calibrate_steering_scale, normalize
 from deconfounding_interp.llm.base import create_client
 from deconfounding_interp.llm.coherence_judge import CoherenceJudge
 from deconfounding_interp.llm.judge import TraitJudge
@@ -56,7 +57,7 @@ class DownstreamEvaluationStage:
         if not npy_path.exists():
             logger.warning("Direction %s not found at %s, skipping", direction_type, npy_path)
             return {"status": "blocked", "reason": "direction_not_found"}
-        direction = np.load(npy_path)
+        direction = normalize(np.load(npy_path))
 
         # Resolve layer
         selected_layer = payload.get("selected_layer")
@@ -68,6 +69,36 @@ class DownstreamEvaluationStage:
             logger.warning("No selected layer for %s/%s", trait_id, model_id)
             return {"status": "blocked", "reason": "no_selected_layer"}
         selected_layer = int(selected_layer)
+
+        steering_cfg = bundle.experiment.steering
+        scale_mode = steering_cfg.get("scale_mode", "unit")
+        direction_scale = 1.0
+        calibration_indices = steering_cfg.get("calibration_variant_indices", [0])
+        if scale_mode == "activation_rms":
+            calibration_acts = []
+            interim = dio.trait_interim_dir(bundle, trait_id, model_id)
+            for variant_idx in calibration_indices:
+                act_dir = interim / "activations" / f"variant_{int(variant_idx):02d}"
+                acts = dio.load_activations(act_dir, layer=selected_layer)
+                sides = acts.get(selected_layer, {})
+                calibration_acts.extend(
+                    sides[side] for side in ("pos", "neg") if side in sides
+                )
+            if not calibration_acts:
+                logger.warning(
+                    "No calibration activations for %s/%s layer=%d",
+                    trait_id, model_id, selected_layer,
+                )
+                return {"status": "blocked", "reason": "missing_scale_calibration"}
+            direction_scale = calibrate_steering_scale(
+                direction,
+                np.concatenate(calibration_acts),
+                target_rms_ratio=float(
+                    steering_cfg.get("target_activation_rms_ratio", 0.05)
+                ),
+            )
+        elif scale_mode != "unit":
+            raise ValueError(f"Unknown steering scale_mode: {scale_mode!r}")
 
         # Load model
         model_config = bundle.models[model_id]
@@ -95,7 +126,6 @@ class DownstreamEvaluationStage:
         coherence_judge = CoherenceJudge(judge_client)
         concurrency = llm_cfg.get("judge_concurrency", 50)
 
-        steering_cfg = bundle.experiment.steering
         rollouts_per_q = steering_cfg.get("rollouts_per_eval_question", 10)
         max_new_tokens = model_config.default_max_new_tokens
 
@@ -119,6 +149,7 @@ class DownstreamEvaluationStage:
                     direction=direction,
                     layer=selected_layer,
                     alpha=alpha,
+                    direction_scale=direction_scale,
                     max_new_tokens=max_new_tokens,
                 )
                 for resp in responses:
@@ -127,6 +158,8 @@ class DownstreamEvaluationStage:
                         "response": resp,
                         "alpha": alpha,
                         "direction_type": direction_type,
+                        "direction_scale": direction_scale,
+                        "scale_mode": scale_mode,
                     })
 
             gen_time = time.time() - t_alpha

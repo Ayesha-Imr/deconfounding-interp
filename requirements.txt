@@ -1,0 +1,17 @@
+# Lambda fallback requirements. The preferred path is pyproject.toml + uv.lock;
+# torch is installed by infra/lambda/pod-env/bootstrap_pod.sh on GPU pods.
+accelerate>=0.30
+matplotlib>=3.8
+numpy>=1.26
+pandas>=2.2
+pyyaml>=6.0
+scikit-learn>=1.4
+tqdm>=4.66
+transformers>=4.44
+pytest>=8.2
+ruff>=0.5
+seaborn>=0.13
+openai>=1.40
+datasets>=3.0
+vllm>=0.4
+vllm-lens>=0.1

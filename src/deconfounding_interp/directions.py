@@ -15,6 +15,44 @@ def normalize(vector: ArrayLike, eps: float = 1e-12) -> np.ndarray:
     return arr / norm
 
 
+def activation_rms(activations: ArrayLike) -> float:
+    """Return the RMS L2 norm of a batch of residual activations.
+
+    Steering strengths are calibrated against this quantity rather than an
+    arbitrary unit-norm direction.  This keeps the perturbation scale tied to
+    the model's residual stream, which can differ substantially across models
+    and layers.
+    """
+    arr = np.asarray(activations, dtype=np.float64)
+    if arr.ndim != 2:
+        raise ValueError("Activations must have shape (n_examples, hidden_dim)")
+    if arr.shape[0] == 0:
+        raise ValueError("Need at least one activation to compute RMS")
+    if not np.all(np.isfinite(arr)):
+        raise ValueError("Activations must be finite")
+    return float(np.sqrt(np.mean(np.sum(arr**2, axis=1))))
+
+
+def calibrate_steering_scale(
+    direction: ArrayLike,
+    reference_activations: ArrayLike,
+    target_rms_ratio: float = 0.05,
+) -> float:
+    """Choose a vector magnitude as a fraction of residual-stream RMS.
+
+    ``direction`` is only used for its norm, so callers may pass either a raw
+    DiM vector or a unit vector.  The returned scale is the coefficient to use
+    with a unit-normalized direction.  A five-percent ratio means the added
+    vector has norm equal to 5% of a typical activation vector.
+    """
+    if target_rms_ratio <= 0:
+        raise ValueError("target_rms_ratio must be positive")
+    direction_norm = float(np.linalg.norm(np.asarray(direction, dtype=np.float64)))
+    if direction_norm < 1e-12:
+        raise ValueError("Cannot calibrate a near-zero direction")
+    return target_rms_ratio * activation_rms(reference_activations)
+
+
 def difference_in_means(
     positive_activations: ArrayLike,
     negative_activations: ArrayLike,

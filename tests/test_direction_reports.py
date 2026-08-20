@@ -100,6 +100,15 @@ def test_direction_analysis_saves_single_variant_and_unit_normalized_outputs(tmp
     for name in expected:
         arr = np.load(d_dir / f"{name}.npy")
         np.testing.assert_allclose(np.linalg.norm(arr), 1.0)
+        assert (d_dir / f"{name}_raw.npy").exists()
+        if name in {"standard", "averaged", "subtracted", "single_variant"}:
+            assert (d_dir / f"{name}_fit_excluding_variant_01.npy").exists()
+
+    metadata = dio.load_results_json(d_dir / "direction_metadata.json")
+    assert metadata["probe_holdout_index"] == 1
+    assert metadata["leakage_safe_direction_files"]["averaged"] == (
+        "averaged_fit_excluding_variant_01.npy"
+    )
 
 
 def test_readiness_validation_reports_missing_variants_and_sides(tmp_path):

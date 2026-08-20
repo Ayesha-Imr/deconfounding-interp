@@ -103,6 +103,7 @@ class HFBackend(ModelBackend):
         direction: np.ndarray,
         layer: int,
         alpha: float,
+        direction_scale: float = 1.0,
         temperature: float = 1.0,
         top_p: float = 0.95,
         max_new_tokens: int = 256,
@@ -119,7 +120,7 @@ class HFBackend(ModelBackend):
         target_module = self.model.model.layers[layer]
 
         def _steering_hook(module, input, output):
-            hs = output[0] + alpha * direction_tensor
+            hs = output[0] + alpha * direction_scale * direction_tensor
             return (hs,) + output[1:]
 
         handle = target_module.register_forward_hook(_steering_hook)

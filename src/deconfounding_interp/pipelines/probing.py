@@ -78,14 +78,20 @@ class ProbingStage:
         direction_types = payload.get("direction_types", list(DIRECTION_TYPES))
         results = {}
         for dt in direction_types:
-            npy_path = d_dir / f"{dt}.npy"
+            # Prefer the direction fit without the held-out variant. Falling
+            # back to the legacy file keeps old artifacts readable, but marks
+            # the result so it cannot be mistaken for a leakage-safe score.
+            fit_path = d_dir / f"{dt}_fit_excluding_variant_{holdout_idx:02d}.npy"
+            npy_path = fit_path if fit_path.exists() else d_dir / f"{dt}.npy"
             if not npy_path.exists():
                 logger.info("  %s: direction not found, skipping", dt)
                 continue
 
             direction = np.load(npy_path)
             probe = probe_with_direction(pos_acts, neg_acts, direction)
-            results[dt] = asdict(probe)
+            result = asdict(probe)
+            result["fit_excluded_variant"] = holdout_idx if fit_path.exists() else None
+            results[dt] = result
             logger.info(
                 "  %s: AUROC=%.4f accuracy=%.4f",
                 dt, probe.auroc, probe.accuracy,
