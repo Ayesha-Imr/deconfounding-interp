@@ -9,6 +9,8 @@ from typing import Any
 
 import numpy as np
 
+from deconfounding_interp.provenance import refresh_checksum_manifest
+
 # ---------------------------------------------------------------------------
 # Path resolution
 # ---------------------------------------------------------------------------
@@ -55,6 +57,7 @@ def save_activations(
     for layer_idx, sides in layer_acts.items():
         for side, arr in sides.items():
             np.save(path / f"layer_{layer_idx:02d}_{side}.npy", arr)
+    refresh_checksum_manifest(path)
 
 
 def load_activations(
@@ -84,6 +87,7 @@ def load_activations(
 def save_direction(path: Path, name: str, direction: np.ndarray) -> None:
     path.mkdir(parents=True, exist_ok=True)
     np.save(path / f"{name}.npy", direction)
+    refresh_checksum_manifest(path)
 
 
 def load_direction(path: Path, name: str) -> np.ndarray:

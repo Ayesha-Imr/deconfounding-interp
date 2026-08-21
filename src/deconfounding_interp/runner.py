@@ -18,6 +18,7 @@ from deconfounding_interp.pipelines.phase3_summary import Phase3SummaryStage
 from deconfounding_interp.pipelines.probing import ProbingStage
 from deconfounding_interp.pipelines.prompt_assets import PromptAssetsStage
 from deconfounding_interp.pipelines.rollouts import RolloutsStage
+from deconfounding_interp.provenance import write_run_metadata
 
 logger = logging.getLogger(__name__)
 
@@ -82,6 +83,7 @@ class PipelineRunner:
         return self._stage_cache[phase]
 
     def run_manifest(self, manifest: dict[str, Any]) -> list[dict[str, Any]]:
+        write_run_metadata(self.context.bundle, manifest, self.context.run_dir)
         jobs = manifest["jobs"]
         results = []
         total = len(jobs)
@@ -96,6 +98,7 @@ class PipelineRunner:
         return results
 
     def run_phase(self, manifest: dict[str, Any], phase: str) -> list[dict[str, Any]]:
+        write_run_metadata(self.context.bundle, manifest, self.context.run_dir)
         jobs = [j for j in manifest["jobs"] if j["phase"] == phase]
         if not jobs:
             logger.warning("No jobs found for phase=%s", phase)
@@ -112,6 +115,7 @@ class PipelineRunner:
         return results
 
     def run_job(self, manifest: dict[str, Any], job_id: str) -> dict[str, Any]:
+        write_run_metadata(self.context.bundle, manifest, self.context.run_dir)
         job = next((j for j in manifest["jobs"] if j["job_id"] == job_id), None)
         if job is None:
             raise ValueError(f"Job {job_id!r} not found in manifest")
