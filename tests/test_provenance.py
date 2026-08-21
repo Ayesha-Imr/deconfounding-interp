@@ -5,7 +5,13 @@ import json
 import numpy as np
 
 from deconfounding_interp import io
-from deconfounding_interp.provenance import refresh_checksum_manifest, sha256_file
+from deconfounding_interp.provenance import git_commit, refresh_checksum_manifest, sha256_file
+
+
+def test_git_commit_honors_explicit_source_override(tmp_path, monkeypatch):
+    monkeypatch.setenv("DECONFOUND_CODE_COMMIT", "canonical-source-commit")
+
+    assert git_commit(tmp_path) == "canonical-source-commit"
 
 
 def test_checksum_manifest_tracks_numpy_outputs(tmp_path):

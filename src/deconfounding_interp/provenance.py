@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import platform
 import subprocess
 import sys
@@ -34,6 +35,9 @@ def refresh_checksum_manifest(directory: Path, *, pattern: str = "*.npy") -> Pat
 
 
 def git_commit(project_root: Path) -> str | None:
+    override = os.environ.get("DECONFOUND_CODE_COMMIT")
+    if override is not None:
+        return override.strip() or None
     try:
         result = subprocess.run(
             ["git", "-C", str(project_root), "rev-parse", "HEAD"],
