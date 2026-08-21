@@ -1,6 +1,7 @@
 """Tests for benchmark-data quality gates."""
 
 import json
+from pathlib import Path
 
 from deconfounding_interp.analysis.objective_data import audit_objective_dataset
 
@@ -103,3 +104,20 @@ def test_audit_counts_expected_positions_for_abstention_items(tmp_path):
     }
     assert any("answer-option positions are imbalanced" in warning
                for warning in result["warnings"])
+
+
+def test_candidate_v4_preserves_v1_labels_and_provenance():
+    root = Path(__file__).parents[1]
+    v1 = json.loads((root / "data/objective_tasks_8b_data_candidate_v1.json").read_text())
+    v4 = json.loads((root / "data/objective_tasks_8b_data_candidate_v4.json").read_text())
+    old = {task["task_id"]: task for task in v1["tasks"]}
+    new = {task["task_id"]: task for task in v4["tasks"]}
+
+    assert set(old) == set(new)
+    for task_id, before in old.items():
+        after = new[task_id]
+        for field in ("trait_id", "evaluator", "claim_truth", "difficulty", "source"):
+            assert after.get(field) == before.get(field), (task_id, field)
+        if not task_id.startswith("hallucination_unknown_"):
+            assert after["question"] == before["question"]
+            assert after.get("expected_option") == before.get("expected_option")
