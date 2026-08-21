@@ -1,7 +1,10 @@
 """Tests for downstream evaluation aggregation logic."""
 
 
-from deconfounding_interp.pipelines.downstream_evaluation import _compute_aggregates
+from deconfounding_interp.pipelines.downstream_evaluation import (
+    _compute_aggregates,
+    _generation_settings,
+)
 
 
 def _resp(alpha, trait, coh, cross_evil):
@@ -94,3 +97,13 @@ def test_compute_aggregates_objective_scores_by_task():
         "task-a": {"n_scored": 1, "mean": 0.0},
         "task-b": {"n_scored": 1, "mean": 100.0},
     }
+
+
+def test_generation_settings_honor_experiment_decoding_config():
+    class Experiment:
+        generation = {"temperature": 0.0, "top_p": 1.0, "max_new_tokens": 128}
+
+    class Bundle:
+        experiment = Experiment()
+
+    assert _generation_settings(Bundle()) == (0.0, 1.0, 128)

@@ -25,6 +25,16 @@ from deconfounding_interp.pipelines.direction_controls import resolve_direction
 logger = logging.getLogger(__name__)
 
 
+def _generation_settings(bundle) -> tuple[float, float, int]:
+    """Return the configured decoding settings for downstream generation."""
+    generation_cfg = bundle.experiment.generation
+    return (
+        float(generation_cfg.get("temperature", 1.0)),
+        float(generation_cfg.get("top_p", 0.95)),
+        int(generation_cfg.get("max_new_tokens", 256)),
+    )
+
+
 class DownstreamEvaluationStage:
     name = "downstream_evaluation"
 
@@ -176,7 +186,8 @@ class DownstreamEvaluationStage:
             raise ValueError(f"Unknown scoring.mode: {score_mode!r}")
 
         rollouts_per_q = steering_cfg.get("rollouts_per_eval_question", 10)
-        max_new_tokens = model_config.default_max_new_tokens
+        temperature, top_p, configured_max_new_tokens = _generation_settings(bundle)
+        max_new_tokens = configured_max_new_tokens or model_config.default_max_new_tokens
 
         logger.info(
             "Starting steering eval: %s/%s direction=%s layer=%d "
@@ -201,6 +212,8 @@ class DownstreamEvaluationStage:
                     layer=selected_layer,
                     alpha=alpha,
                     direction_scale=direction_scale,
+                    temperature=temperature,
+                    top_p=top_p,
                     max_new_tokens=max_new_tokens,
                 )
                 for resp in responses:
