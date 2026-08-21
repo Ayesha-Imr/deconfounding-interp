@@ -24,11 +24,11 @@ llm:
 
 paths:
   data_dir: data
-  raw_dir: data/raw/geometry_stochastic_null_8b
-  interim_dir: data/interim/geometry_stochastic_null_8b
-  processed_dir: data/processed/geometry_stochastic_null_8b
+  raw_dir: data/raw/geometry_null_repair_8b
+  interim_dir: data/interim/geometry_null_repair_8b
+  processed_dir: data/processed/geometry_null_repair_8b
   manifest_dir: outputs/manifests/objective_data_headroom_pilot_qwen_8b_v4
-  direction_dir: outputs/directions/geometry_stochastic_null_8b
+  direction_dir: outputs/directions/geometry_null_repair_8b
   report_dir: outputs/reports/objective_data_headroom_pilot_qwen_8b_v4
 
 generation:

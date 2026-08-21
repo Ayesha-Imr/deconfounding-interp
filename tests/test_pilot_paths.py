@@ -1,7 +1,9 @@
 """Regression tests for bounded, judge-free 8B pilot inputs."""
 
+from pathlib import Path
 from types import SimpleNamespace
 
+from deconfounding_interp.config import load_config_bundle
 from deconfounding_interp.pipelines.prompt_assets import PromptAssetsStage
 from deconfounding_interp.pipelines.rollouts import _select_prompt_pair
 
@@ -36,3 +38,15 @@ def test_variant_selection_is_pairwise_and_does_not_mix_sides():
 
     assert _select_prompt_pair(assets, 0, "original") == ("pos-0", "neg-0")
     assert _select_prompt_pair(assets, 1, "original") == ("pos-1", "neg-1")
+
+
+def test_v4_qwen_configs_use_repaired_geometry_archive():
+    root = Path(__file__).parents[1]
+    for name in (
+        "objective_data_headroom_pilot_qwen_8b_v4.yaml",
+        "objective_data_causal_pilot_qwen_8b_v4.yaml",
+    ):
+        bundle = load_config_bundle(root / "configs/experiments" / name)
+        assert bundle.experiment.paths["raw_dir"].endswith("geometry_null_repair_8b")
+        assert bundle.experiment.paths["interim_dir"].endswith("geometry_null_repair_8b")
+        assert bundle.experiment.paths["direction_dir"].endswith("geometry_null_repair_8b")
