@@ -86,6 +86,24 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                 )
             )
 
+            jobs.append(
+                ManifestJob(
+                    phase="null_analysis",
+                    model_id=model_id,
+                    trait_id=trait_id,
+                    job_id=f"nulls__{model_id}__{trait_id}",
+                    payload={
+                        "variant_count": variant_count,
+                        "selected_layer": selected_layer,
+                        "repeats": int(
+                            bundle.experiment.analysis.get("nulls", {}).get(
+                                "repeats", 90,
+                            )
+                        ),
+                    },
+                )
+            )
+
             for direction_type in direction_types:
                 jobs.append(
                     ManifestJob(

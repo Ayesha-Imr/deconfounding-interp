@@ -17,6 +17,7 @@ def _make_bundle():
     bundle.experiment.steering = {
         "alpha_values": [0.0, 1.0, 2.0],
     }
+    bundle.experiment.analysis = {"nulls": {"repeats": 90}}
     bundle.experiment.random_seed = 17
 
     model = MagicMock()
@@ -51,6 +52,14 @@ def test_manifest_has_phase3_summary():
     jobs = manifest["jobs"]
     summary_jobs = [j for j in jobs if j["phase"] == "phase3_summary"]
     assert len(summary_jobs) == 1
+
+
+def test_manifest_has_null_analysis_jobs():
+    bundle = _make_bundle()
+    manifest = build_manifest(bundle)
+    null_jobs = [j for j in manifest["jobs"] if j["phase"] == "null_analysis"]
+    assert len(null_jobs) == 2
+    assert all(j["payload"]["repeats"] == 90 for j in null_jobs)
 
 
 def test_probing_payload_has_variant_count():

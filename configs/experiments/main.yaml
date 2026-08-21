@@ -82,6 +82,8 @@ analysis:
       high: 0.90
       moderate: 0.70
     compare_to_cross_trait: true
+  nulls:
+    repeats: 90
   ablations:
     average_k_values: [1, 2, 3, 5, 7, 10]
     subset_repeats: 10

@@ -73,6 +73,8 @@ analysis:
   stability:
     within_trait_thresholds: {high: 0.90, moderate: 0.70}
     compare_to_cross_trait: false
+  nulls:
+    repeats: 90
 
 steering:
   enabled: false
