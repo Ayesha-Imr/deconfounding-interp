@@ -81,9 +81,13 @@ class LayerRobustnessStage:
             train_variant_indices=train_indices,
             holdout_index=holdout_idx,
         )
+        position = payload.get("position")
+        report_name = "layer_probing.json"
+        if position:
+            report_name = f"layer_probing_{position}.json"
         out_path = (
             dio.resolve_paths(bundle)["report_dir"]
-            / "phase4" / trait_id / model_id / "layer_probing.json"
+            / "phase4" / trait_id / model_id / report_name
         )
         dio.save_results_json(out_path, result)
         elapsed = time.time() - t0
