@@ -61,6 +61,7 @@ def audit_objective_dataset(
     trait_counts = Counter(str(task.get("trait_id")) for task in tasks)
     evaluator_counts = Counter(str(task.get("evaluator")) for task in tasks)
     labels_by_trait: dict[str, Counter[str]] = defaultdict(Counter)
+    expected_option_counts: dict[str, Counter[str]] = defaultdict(Counter)
     normalized_questions: dict[str, list[str]] = defaultdict(list)
     source_counts = Counter()
 
@@ -86,13 +87,17 @@ def audit_objective_dataset(
                 "claim_true" if bool(task.get("claim_truth")) else "claim_false"
             ] += 1
         elif evaluator == "choice_accuracy":
-            labels_by_trait[str(task["trait_id"])][
-                f"expected_{str(task['expected_option']).upper()}"
-            ] += 1
+            trait_id = str(task["trait_id"])
+            expected = f"expected_{str(task['expected_option']).upper()}"
+            labels_by_trait[trait_id][expected] += 1
+            expected_option_counts[trait_id][expected] += 1
         elif evaluator == "abstention_choice":
-            labels_by_trait[str(task["trait_id"])][
+            trait_id = str(task["trait_id"])
+            expected = f"expected_{str(task['expected_option']).upper()}"
+            labels_by_trait[trait_id][
                 "abstain" if str(task.get("expected_behavior")) == "abstain" else "answer"
             ] += 1
+            expected_option_counts[trait_id][expected] += 1
 
     for normalized, task_ids in normalized_questions.items():
         if normalized and len(task_ids) > 1:
@@ -108,17 +113,15 @@ def audit_objective_dataset(
         if "claim_true" in labels and "claim_false" in labels:
             if labels["claim_true"] != labels["claim_false"]:
                 errors.append(f"{trait_id}: claim truth labels are imbalanced: {dict(labels)}")
-        if any(key.startswith("expected_") for key in labels):
-            option_counts = {
-                key: value for key, value in labels.items() if key.startswith("expected_")
-            }
-            if (
-                len(option_counts) > 1
-                and max(option_counts.values()) - min(option_counts.values()) > 1
-            ):
-                warnings.append(
-                    f"{trait_id}: answer-option positions are imbalanced: {option_counts}"
-                )
+
+    for trait_id, option_counts in sorted(expected_option_counts.items()):
+        if (
+            len(option_counts) > 1
+            and max(option_counts.values()) - min(option_counts.values()) > 1
+        ):
+            warnings.append(
+                f"{trait_id}: answer-option positions are imbalanced: {dict(option_counts)}"
+            )
 
     review = raw.get("review", {})
     if not isinstance(review, dict):
@@ -144,6 +147,10 @@ def audit_objective_dataset(
             "labels_by_trait": {
                 trait: dict(sorted(labels.items()))
                 for trait, labels in sorted(labels_by_trait.items())
+            },
+            "expected_option_counts": {
+                trait: dict(sorted(counts.items()))
+                for trait, counts in sorted(expected_option_counts.items())
             },
             "source_counts": dict(sorted(source_counts.items())),
             "review": review,
