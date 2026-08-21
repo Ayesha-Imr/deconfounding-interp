@@ -41,8 +41,10 @@ def test_null_audit_has_reproducible_finite_summaries():
 
     assert result["split_half"]["summary"]["status"] == "completed"
     assert result["split_half"]["summary"]["n"] == 20
+    assert result["split_half"]["summary"]["n_unique"] > 0
     assert result["label_shuffle"]["summary"]["status"] == "completed"
     assert result["label_shuffle"]["summary"]["n"] == 20
+    assert result["label_shuffle"]["summary"]["n_unique"] > 0
     assert np.isfinite(result["label_shuffle"]["summary"]["mean"])
 
 

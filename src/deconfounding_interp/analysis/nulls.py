@@ -17,8 +17,11 @@ def summarize_null(values: list[float] | np.ndarray) -> dict[str, Any]:
     return {
         "status": "completed",
         "n": int(arr.size),
+        "n_unique": int(np.unique(arr).size),
         "mean": float(np.mean(arr)),
         "std": float(np.std(arr)),
+        "min": float(np.min(arr)),
+        "max": float(np.max(arr)),
         "q025": float(np.quantile(arr, 0.025)),
         "q975": float(np.quantile(arr, 0.975)),
     }
