@@ -70,3 +70,22 @@ def test_probing_payload_has_variant_count():
     for j in probing_jobs:
         assert j["payload"]["variant_count"] == 10
         assert "direction_types" in j["payload"]
+
+
+def test_manifest_adds_position_robustness_jobs_when_enabled():
+    bundle = _make_bundle()
+    bundle.experiment.analysis["position_robustness"] = {
+        "enabled": True,
+        "positions": ["prompt_last_token", "prompt_average"],
+        "source_interim_dir": "data/interim/source",
+        "output_interim_dir": "data/interim/positions",
+        "holdout_index": 9,
+    }
+    jobs = build_manifest(bundle)["jobs"]
+    reextract = [j for j in jobs if j["phase"] == "position_reextraction"]
+    layer = [j for j in jobs if j["phase"] == "position_layer_robustness"]
+    assert len(reextract) == 2
+    assert len(layer) == 4
+    assert {j["payload"]["position"] for j in layer} == {
+        "prompt_last_token", "prompt_average",
+    }

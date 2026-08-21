@@ -144,6 +144,60 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                     )
                 )
 
+            position_cfg = bundle.experiment.analysis.get(
+                "position_robustness", {}
+            )
+            if position_cfg.get("enabled", False):
+                positions = [str(position) for position in position_cfg.get("positions", [])]
+                source_interim_root = str(
+                    position_cfg.get("source_interim_dir", "data/interim")
+                )
+                output_interim_root = str(
+                    position_cfg.get("output_interim_dir", "data/interim/positions")
+                )
+                holdout_index = int(
+                    position_cfg.get("holdout_index", variant_count - 1)
+                )
+                jobs.append(
+                    ManifestJob(
+                        phase="position_reextraction",
+                        model_id=model_id,
+                        trait_id=trait_id,
+                        job_id=f"position_reextract__{model_id}__{trait_id}",
+                        payload={
+                            "variant_count": variant_count,
+                            "positions": positions,
+                            "source_interim_root": source_interim_root,
+                            "output_interim_root": output_interim_root,
+                        },
+                    )
+                )
+                for position in positions:
+                    jobs.append(
+                        ManifestJob(
+                            phase="position_layer_robustness",
+                            model_id=model_id,
+                            trait_id=trait_id,
+                            job_id=(
+                                f"position_layer_robustness__{model_id}__"
+                                f"{trait_id}__{position}"
+                            ),
+                            payload={
+                                "variant_count": variant_count,
+                                "holdout_index": holdout_index,
+                                "train_variant_indices": [
+                                    index for index in range(variant_count)
+                                    if index != holdout_index
+                                ],
+                                "position": position,
+                                "interim_root": output_interim_root,
+                                "direction_types": [
+                                    "standard", "random", "sign_reversed",
+                                ],
+                            },
+                        )
+                    )
+
             jobs.append(
                 ManifestJob(
                     phase="probing",

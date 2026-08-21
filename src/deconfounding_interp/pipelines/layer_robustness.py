@@ -44,11 +44,22 @@ class LayerRobustnessStage:
             )
         ]
 
-        interim = dio.trait_interim_dir(bundle, trait_id, model_id)
+        interim_root = payload.get("interim_root")
+        if interim_root is None:
+            interim = dio.trait_interim_dir(bundle, trait_id, model_id)
+        else:
+            interim = (
+                bundle.project_root / str(interim_root)
+                / trait_id / model_id
+            )
+        activation_root = interim / "activations"
+        position = payload.get("position")
+        if position:
+            activation_root = activation_root / str(position)
         train_by_layer: dict[int, dict[str, list[np.ndarray]]] = {}
         for variant_idx in train_indices:
             acts = dio.load_activations(
-                interim / "activations" / f"variant_{variant_idx:02d}",
+                activation_root / f"variant_{variant_idx:02d}",
                 layer=None,
             )
             for layer, sides in acts.items():
@@ -58,7 +69,7 @@ class LayerRobustnessStage:
                     train_by_layer[layer]["neg"].append(sides["neg"])
 
         holdout = dio.load_activations(
-            interim / "activations" / f"variant_{holdout_idx:02d}",
+            activation_root / f"variant_{holdout_idx:02d}",
             layer=None,
         )
         result = compute_layer_results(
