@@ -7,11 +7,10 @@ import time
 from dataclasses import asdict
 from typing import Any
 
-import numpy as np
-
 from deconfounding_interp import io as dio
 from deconfounding_interp.analysis.probing import probe_with_direction
 from deconfounding_interp.pipelines.base import StageContext
+from deconfounding_interp.pipelines.direction_controls import resolve_direction
 
 logger = logging.getLogger(__name__)
 
@@ -78,19 +77,30 @@ class ProbingStage:
         direction_types = payload.get("direction_types", list(DIRECTION_TYPES))
         results = {}
         for dt in direction_types:
-            # Prefer the direction fit without the held-out variant. Falling
-            # back to the legacy file keeps old artifacts readable, but marks
-            # the result so it cannot be mistaken for a leakage-safe score.
-            fit_path = d_dir / f"{dt}_fit_excluding_variant_{holdout_idx:02d}.npy"
-            npy_path = fit_path if fit_path.exists() else d_dir / f"{dt}.npy"
-            if not npy_path.exists():
+            # Prefer the direction fit without the held-out variant. Controls
+            # are synthesized from the same leakage-safe standard direction.
+            direction, direction_metadata = resolve_direction(
+                d_dir,
+                dt,
+                base_seed=bundle.experiment.random_seed,
+                model_id=model_id,
+                trait_id=trait_id,
+                fit_excluded_variant=holdout_idx,
+            )
+            if direction is None:
                 logger.info("  %s: direction not found, skipping", dt)
                 continue
 
-            direction = np.load(npy_path)
             probe = probe_with_direction(pos_acts, neg_acts, direction)
             result = asdict(probe)
-            result["fit_excluded_variant"] = holdout_idx if fit_path.exists() else None
+            result["fit_excluded_variant"] = (
+                holdout_idx
+                if direction_metadata["direction_source"].endswith(
+                    f"_fit_excluding_variant_{holdout_idx:02d}.npy"
+                )
+                else None
+            )
+            result.update(direction_metadata)
             results[dt] = result
             logger.info(
                 "  %s: AUROC=%.4f accuracy=%.4f",

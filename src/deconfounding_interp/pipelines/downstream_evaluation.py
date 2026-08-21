@@ -11,11 +11,12 @@ import numpy as np
 
 from deconfounding_interp import io as dio
 from deconfounding_interp.backends import create_backend
-from deconfounding_interp.directions import calibrate_steering_scale, normalize
+from deconfounding_interp.directions import calibrate_steering_scale
 from deconfounding_interp.llm.base import create_client
 from deconfounding_interp.llm.coherence_judge import CoherenceJudge
 from deconfounding_interp.llm.judge import TraitJudge
 from deconfounding_interp.pipelines.base import StageContext
+from deconfounding_interp.pipelines.direction_controls import resolve_direction
 
 logger = logging.getLogger(__name__)
 
@@ -51,13 +52,22 @@ class DownstreamEvaluationStage:
                 "alpha_values", [0.0, 0.5, 1.0, 1.5, 2.0, 2.5],
             )
 
-        # Load direction
+        # Load a fitted direction or synthesize a deterministic causal control.
         d_dir = dio.direction_dir(bundle, trait_id, model_id)
-        npy_path = d_dir / f"{direction_type}.npy"
-        if not npy_path.exists():
-            logger.warning("Direction %s not found at %s, skipping", direction_type, npy_path)
+        direction, direction_metadata = resolve_direction(
+            d_dir,
+            direction_type,
+            base_seed=bundle.experiment.random_seed,
+            model_id=model_id,
+            trait_id=trait_id,
+        )
+        if direction is None:
+            logger.warning(
+                "Direction %s not found at %s, skipping",
+                direction_type,
+                direction_metadata["direction_source"],
+            )
             return {"status": "blocked", "reason": "direction_not_found"}
-        direction = normalize(np.load(npy_path))
 
         # Resolve layer
         selected_layer = payload.get("selected_layer")
@@ -173,6 +183,7 @@ class DownstreamEvaluationStage:
                         "direction_type": direction_type,
                         "direction_scale": direction_scale,
                         "scale_mode": scale_mode,
+                        **direction_metadata,
                     })
 
             gen_time = time.time() - t_alpha
