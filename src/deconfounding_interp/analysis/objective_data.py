@@ -81,7 +81,7 @@ def audit_objective_dataset(
                 source_counts[str(source.get("dataset", "<missing>"))] += 1
 
         evaluator = str(task["evaluator"])
-        if evaluator == "claim_agreement":
+        if evaluator in {"claim_agreement", "claim_choice"}:
             labels_by_trait[str(task["trait_id"])][
                 "claim_true" if bool(task.get("claim_truth")) else "claim_false"
             ] += 1
