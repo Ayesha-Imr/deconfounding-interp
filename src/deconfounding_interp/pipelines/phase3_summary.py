@@ -13,7 +13,10 @@ from deconfounding_interp.pipelines.base import StageContext
 
 logger = logging.getLogger(__name__)
 
-DIRECTION_TYPES = ("standard", "averaged", "subtracted", "single_variant")
+DIRECTION_TYPES = (
+    "standard", "averaged", "subtracted", "single_variant",
+    "random", "sign_reversed",
+)
 
 
 class Phase3SummaryStage:
@@ -208,6 +211,7 @@ def _plot_metric_vs_alpha(
     colors = {
         "standard": "#1f77b4", "averaged": "#2ca02c",
         "subtracted": "#d62728", "single_variant": "#9467bd",
+        "random": "#ff7f0e", "sign_reversed": "#8c564b",
     }
 
     for idx, (mid, tid) in enumerate(pairs):
@@ -262,6 +266,7 @@ def _plot_probing_auroc(fig_dir: Path, rows: list[dict]) -> str | None:
     colors = {
         "standard": "#1f77b4", "averaged": "#2ca02c",
         "subtracted": "#d62728", "single_variant": "#9467bd",
+        "random": "#ff7f0e", "sign_reversed": "#8c564b",
     }
 
     fig, ax = plt.subplots(figsize=(max(len(pairs) * 1.2, 6), 4))
