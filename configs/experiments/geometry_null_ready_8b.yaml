@@ -1,0 +1,84 @@
+id: geometry_null_ready_8b
+description: "Judge-free 8B extraction run sized for split-half nulls; not a behavioral validity run."
+random_seed: 17
+
+models:
+  - models/qwen2_5_7b_instruct_geometry.yaml
+  - models/llama_3_1_8b_instruct_geometry.yaml
+
+traits:
+  - traits/sycophancy.yaml
+  - traits/hallucination.yaml
+  - traits/toxicity.yaml
+  - traits/dramatic.yaml
+  - traits/formality.yaml
+  - traits/verbosity.yaml
+
+judge: judges/default_trait_judge.yaml
+backend: huggingface
+
+llm:
+  provider: openai  # unused in deterministic prompt mode with scoring.mode=none
+  generation_model: gpt-4.1-mini-2025-04-14
+  judge_model: gpt-4.1-mini-2025-04-14
+  generation_temperature: 0.0
+  generation_max_tokens: 512
+  judge_concurrency: 1
+  audit_csv: false
+  prompt_asset_mode: deterministic
+
+paths:
+  data_dir: data
+  raw_dir: data/raw/geometry_null_ready_8b
+  interim_dir: data/interim/geometry_null_ready_8b
+  processed_dir: data/processed/geometry_null_ready_8b
+  manifest_dir: outputs/manifests/geometry_null_ready_8b
+  direction_dir: outputs/directions/geometry_null_ready_8b
+  report_dir: outputs/reports/geometry_null_ready_8b
+
+generation:
+  system_prompt_pairs: 5
+  paraphrases_per_prompt: 0
+  extraction_questions: 1
+  evaluation_questions: 1
+  # Four responses per side per variant makes the split-half null estimable.
+  rollouts_per_prompt_question: 4
+  max_new_tokens: 64
+  temperature: 0.0
+  top_p: 1.0
+
+scoring:
+  mode: none
+  keep_positive_min_score: 50
+  keep_negative_max_score: 50
+  score_scale_min: 0
+  score_scale_max: 100
+
+extraction:
+  method: difference_in_means
+  activation_position: response_average
+
+surface_form:
+  same_side_prompt_pairs: all_unique_pairs
+  include_positive_side: true
+  include_negative_side: true
+  include_question_paraphrase_pairs: false
+
+corrections:
+  direction_types: [standard, averaged, subtracted, single_variant]
+  surface_basis:
+    max_rank: 3
+    variance_threshold: 0.90
+
+analysis:
+  stability:
+    within_trait_thresholds: {high: 0.90, moderate: 0.70}
+    compare_to_cross_trait: true
+  nulls:
+    repeats: 90
+
+steering:
+  enabled: false
+  alpha_values: [0.0]
+  rollouts_per_eval_question: 1
+  evaluate_cross_trait_leakage: false
