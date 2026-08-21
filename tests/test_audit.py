@@ -89,3 +89,27 @@ def test_audit_run_rejects_malformed_response(tmp_path):
     )
     assert result["status"] == "failed"
     assert any("missing" in error for error in result["errors"])
+
+
+def test_audit_run_rejects_out_of_range_objective_score(tmp_path):
+    project, manifest, run_dir, report_root = _write_fixture(tmp_path)
+    (report_root / "steering_standard_responses.json").write_text(json.dumps([{
+        "question": "q",
+        "response": "answer",
+        "alpha": 0.0,
+        "direction_type": "standard",
+        "direction_scale": 1.0,
+        "objective_task_id": "task-1",
+        "objective_score": 101.0,
+    }]))
+
+    result = audit_run(
+        manifest_path=manifest,
+        run_dir=run_dir,
+        project_root=project,
+        report_root=report_root,
+        phases=["downstream_evaluation"],
+    )
+
+    assert result["status"] == "failed"
+    assert any("objective_score" in error for error in result["errors"])

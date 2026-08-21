@@ -69,3 +69,28 @@ def test_compute_aggregates_judge_free_smoke():
     assert result["per_alpha"]["0.0"]["n_responses"] == 1
     assert result["per_alpha"]["0.0"]["trait_score_mean"] is None
     assert result["per_alpha"]["1.0"]["coherence_score_mean"] is None
+
+
+def test_compute_aggregates_objective_scores_by_task():
+    responses = [
+        {
+            "alpha": 0.0,
+            "trait_score": 100.0,
+            "objective_score": 0.0,
+            "objective_task_id": "task-a",
+        },
+        {
+            "alpha": 0.0,
+            "trait_score": 0.0,
+            "objective_score": 100.0,
+            "objective_task_id": "task-b",
+        },
+    ]
+
+    agg = _compute_aggregates(responses, [0.0])["per_alpha"]["0.0"]
+
+    assert agg["objective_score_mean"] == 50.0
+    assert agg["objective_by_task"] == {
+        "task-a": {"n_scored": 1, "mean": 0.0},
+        "task-b": {"n_scored": 1, "mean": 100.0},
+    }

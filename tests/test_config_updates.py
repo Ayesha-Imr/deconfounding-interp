@@ -23,3 +23,13 @@ def test_judge_config_has_logprobs_fields():
     assert bundle.judge["top_logprobs"] == 20
     assert bundle.judge["min_prob_threshold"] == 0.25
     assert bundle.judge["max_completion_tokens"] == 1
+
+
+def test_objective_config_validates_task_file():
+    bundle = load_config_bundle(
+        "configs/experiments/causal_objective_pilot_qwen_8b.yaml"
+    )
+    assert bundle.experiment.scoring["mode"] == "objective"
+    assert bundle.experiment.scoring["objective_tasks_path"] == (
+        "data/objective_tasks_8b.json"
+    )

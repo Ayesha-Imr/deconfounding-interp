@@ -61,6 +61,11 @@ def build_run_metadata(bundle, manifest: dict[str, Any], run_dir: Path) -> dict[
         if path.exists()
     }
     questions_path = bundle.project_root / "data" / "questions.json"
+    objective_tasks_ref = bundle.experiment.scoring.get("objective_tasks_path")
+    objective_tasks_path = (
+        bundle.project_root / str(objective_tasks_ref)
+        if objective_tasks_ref else None
+    )
     return {
         "created_at_utc": datetime.now(UTC).isoformat(),
         "run_dir": str(run_dir),
@@ -72,6 +77,15 @@ def build_run_metadata(bundle, manifest: dict[str, Any], run_dir: Path) -> dict[
         ).hexdigest(),
         "config_files": config_files,
         "questions_sha256": sha256_file(questions_path) if questions_path.exists() else None,
+        "objective_tasks_path": (
+            str(objective_tasks_path.relative_to(bundle.project_root))
+            if objective_tasks_path is not None else None
+        ),
+        "objective_tasks_sha256": (
+            sha256_file(objective_tasks_path)
+            if objective_tasks_path is not None and objective_tasks_path.exists()
+            else None
+        ),
         "models": {
             model_id: {
                 "model_name": model.model_name,

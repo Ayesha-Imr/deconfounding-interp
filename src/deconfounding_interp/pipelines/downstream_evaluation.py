@@ -10,6 +10,10 @@ from typing import Any
 import numpy as np
 
 from deconfounding_interp import io as dio
+from deconfounding_interp.analysis.objective_scoring import (
+    load_objective_tasks,
+    score_objective_response,
+)
 from deconfounding_interp.backends import create_backend
 from deconfounding_interp.directions import calibrate_steering_scale
 from deconfounding_interp.llm.base import create_client
@@ -120,16 +124,30 @@ class DownstreamEvaluationStage:
             self._backend.load_model(model_config)
             self._loaded_model_id = model_id
 
-        # Load evaluation questions
-        assets = dio.load_results_json(
-            dio.trait_raw_dir(bundle, trait_id) / "assets.json"
-        )
-        eval_questions = assets["evaluation_questions"]
-
         # Set up judges only for the scientific scoring path. A judge-free
         # steering smoke still records every response and the exact scale,
         # which validates the hook without silently inventing behavior scores.
         score_mode = bundle.experiment.scoring.get("mode", "judge")
+        objective_tasks: list[dict[str, Any]] = []
+        if score_mode == "objective":
+            task_ref = bundle.experiment.scoring.get("objective_tasks_path")
+            if not task_ref:
+                raise ValueError("objective scoring requires scoring.objective_tasks_path")
+            objective_tasks = load_objective_tasks(
+                bundle.project_root / str(task_ref),
+            )
+            eval_items = [task for task in objective_tasks if task["trait_id"] == trait_id]
+            if not eval_items:
+                raise ValueError(f"No objective tasks found for trait {trait_id!r}")
+        else:
+            assets = dio.load_results_json(
+                dio.trait_raw_dir(bundle, trait_id) / "assets.json"
+            )
+            eval_items = [
+                {"question": question}
+                for question in assets["evaluation_questions"]
+            ]
+
         if score_mode == "judge":
             llm_cfg = bundle.experiment.llm
             judge_client = create_client(
@@ -146,6 +164,14 @@ class DownstreamEvaluationStage:
             logger.info(
                 "Skipping steering judges for pilot: retaining generated responses",
             )
+        elif score_mode == "objective":
+            trait_judge = None
+            coherence_judge = None
+            concurrency = 1
+            logger.info(
+                "Using deterministic objective scorer with %d tasks for %s",
+                len(eval_items), trait_id,
+            )
         else:
             raise ValueError(f"Unknown scoring.mode: {score_mode!r}")
 
@@ -156,7 +182,7 @@ class DownstreamEvaluationStage:
             "Starting steering eval: %s/%s direction=%s layer=%d "
             "alphas=%s rollouts_per_q=%d eval_questions=%d",
             trait_id, model_id, direction_type, selected_layer,
-            alpha_values, rollouts_per_q, len(eval_questions),
+            alpha_values, rollouts_per_q, len(eval_items),
         )
 
         all_responses: list[dict[str, Any]] = []
@@ -164,8 +190,10 @@ class DownstreamEvaluationStage:
         for alpha_idx, alpha in enumerate(alpha_values):
             t_alpha = time.time()
             condition_responses = []
+            condition_tasks: list[dict[str, Any]] = []
 
-            for q in eval_questions:
+            for task in eval_items:
+                q = task["question"]
                 prompts = [{"system_prompt": "", "question": q}] * rollouts_per_q
                 responses = self._backend.generate_with_steering(
                     prompts,
@@ -185,6 +213,8 @@ class DownstreamEvaluationStage:
                         "scale_mode": scale_mode,
                         **direction_metadata,
                     })
+                    if score_mode == "objective":
+                        condition_tasks.append(task)
 
             gen_time = time.time() - t_alpha
             n_responses = len(condition_responses)
@@ -232,6 +262,16 @@ class DownstreamEvaluationStage:
                     alpha, n_responses, score_time,
                     alpha_idx + 1, len(alpha_values),
                 )
+            elif score_mode == "objective":
+                for response, task in zip(
+                    condition_responses, condition_tasks, strict=True,
+                ):
+                    objective = score_objective_response(task, response["response"])
+                    response.update({
+                        "objective_task_id": task["task_id"],
+                        "objective_evaluator": task["evaluator"],
+                        **objective,
+                    })
             else:
                 for r in condition_responses:
                     r["trait_score"] = None
@@ -288,6 +328,10 @@ def _compute_aggregates(
             r["coherence_score"] for r in alpha_resps
             if r.get("coherence_score") is not None
         ]
+        objective_scores = [
+            r["objective_score"] for r in alpha_resps
+            if r.get("objective_score") is not None
+        ]
 
         agg: dict[str, Any] = {
             "n_responses": len(alpha_resps),
@@ -295,7 +339,27 @@ def _compute_aggregates(
             "trait_score_std": float(np.std(trait_scores)) if trait_scores else None,
             "coherence_score_mean": float(np.mean(coherence_scores)) if coherence_scores else None,
             "coherence_score_std": float(np.std(coherence_scores)) if coherence_scores else None,
+            "objective_score_mean": float(np.mean(objective_scores)) if objective_scores else None,
+            "objective_score_std": float(np.std(objective_scores)) if objective_scores else None,
         }
+
+        objective_by_task: dict[str, dict[str, float | int | None]] = {}
+        for task_id in sorted({
+            str(r["objective_task_id"])
+            for r in alpha_resps
+            if r.get("objective_task_id") is not None
+        }):
+            task_scores = [
+                r["objective_score"]
+                for r in alpha_resps
+                if r.get("objective_task_id") == task_id
+                and r.get("objective_score") is not None
+            ]
+            objective_by_task[task_id] = {
+                "n_scored": len(task_scores),
+                "mean": float(np.mean(task_scores)) if task_scores else None,
+            }
+        agg["objective_by_task"] = objective_by_task
 
         # Cross-trait leakage
         cross_keys: set[str] = set()

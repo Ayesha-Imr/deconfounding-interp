@@ -299,6 +299,40 @@ def validate_bundle(bundle: ConfigBundle) -> list[str]:
             f"got `{bundle.experiment.backend}`"
         )
 
+    scoring_mode = bundle.experiment.scoring.get("mode", "judge")
+    valid_scoring_modes = {"judge", "none", "objective"}
+    if scoring_mode not in valid_scoring_modes:
+        errors.append(
+            f"Experiment scoring.mode must be one of {valid_scoring_modes}, "
+            f"got `{scoring_mode}`"
+        )
+    if scoring_mode == "objective":
+        task_ref = bundle.experiment.scoring.get("objective_tasks_path")
+        if not isinstance(task_ref, str) or not task_ref.strip():
+            errors.append(
+                "Objective scoring requires scoring.objective_tasks_path"
+            )
+        else:
+            task_path = bundle.project_root / task_ref
+            if not task_path.exists():
+                errors.append(f"Objective task file not found: {task_ref}")
+            else:
+                try:
+                    from deconfounding_interp.analysis.objective_scoring import (
+                        load_objective_tasks,
+                    )
+
+                    tasks = load_objective_tasks(task_path)
+                    task_traits = {str(task["trait_id"]) for task in tasks}
+                    missing_traits = sorted(trait_ids - task_traits)
+                    if missing_traits:
+                        errors.append(
+                            "Objective task coverage differs from configured traits: "
+                            + ", ".join(missing_traits)
+                        )
+                except (OSError, ValueError, json.JSONDecodeError) as exc:
+                    errors.append(f"Invalid objective task file `{task_ref}`: {exc}")
+
     for model in bundle.models.values():
         if model.backend is not None and model.backend not in valid_backends:
             errors.append(

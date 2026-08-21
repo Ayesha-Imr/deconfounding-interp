@@ -53,6 +53,20 @@ def _audit_response_file(path: Path) -> list[str]:
                 errors.append(f"{path}[{index}]: {key} must be finite numeric")
         if isinstance(row.get("direction_scale"), (int, float)) and row["direction_scale"] < 0:
             errors.append(f"{path}[{index}]: direction_scale must be non-negative")
+        if "objective_score" in row:
+            value = row.get("objective_score")
+            if value is not None and (
+                not isinstance(value, (int, float))
+                or not math.isfinite(float(value))
+                or not 0 <= float(value) <= 100
+            ):
+                errors.append(
+                    f"{path}[{index}]: objective_score must be null or finite in [0,100]"
+                )
+            if row.get("objective_task_id") is not None and not isinstance(
+                row.get("objective_task_id"), str
+            ):
+                errors.append(f"{path}[{index}]: objective_task_id must be a string")
     return errors
 
 
@@ -128,6 +142,22 @@ def audit_run(
         facts["config_checks"] = config_checks
     else:
         errors.append("run_metadata.json: config_files must be an object")
+
+    objective_tasks_path = metadata.get("objective_tasks_path")
+    recorded_objective_hash = metadata.get("objective_tasks_sha256")
+    if objective_tasks_path or recorded_objective_hash:
+        if not objective_tasks_path or not recorded_objective_hash:
+            errors.append(
+                "run_metadata.json: objective task path/hash must be recorded together"
+            )
+        else:
+            path = project_root / str(objective_tasks_path)
+            actual = sha256_file(path) if path.exists() else None
+            if actual != recorded_objective_hash:
+                errors.append(
+                    "objective task hash mismatch or missing: "
+                    f"{objective_tasks_path}"
+                )
 
     all_job_ids = _phase_job_ids(manifest, phases)
     completed = checkpoint.get("completed", {})
