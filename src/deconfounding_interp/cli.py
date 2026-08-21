@@ -85,6 +85,18 @@ def cmd_sample_questions(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_audit_objective_data(args: argparse.Namespace) -> int:
+    from deconfounding_interp.analysis.objective_data import audit_objective_dataset
+
+    result = audit_objective_dataset(
+        args.path,
+        min_tasks_per_trait=args.min_tasks_per_trait,
+        require_provenance=not args.allow_missing_provenance,
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0 if result["status"] == "passed" else 1
+
+
 def cmd_audit_run(args: argparse.Namespace) -> int:
     from deconfounding_interp.audit import audit_run
 
@@ -177,6 +189,19 @@ def build_parser() -> argparse.ArgumentParser:
     sample_q.add_argument("--dataset", default="HuggingFaceH4/ultrachat_200k")
     sample_q.add_argument("--output", type=Path, default=None)
     sample_q.set_defaults(func=cmd_sample_questions)
+
+    objective_data = subparsers.add_parser(
+        "audit-objective-data",
+        help="Check objective benchmark balance, provenance, and duplicates",
+    )
+    objective_data.add_argument("path", type=Path)
+    objective_data.add_argument("--min-tasks-per-trait", type=int, default=4)
+    objective_data.add_argument(
+        "--allow-missing-provenance",
+        action="store_true",
+        help="Permit legacy exploratory files without source metadata",
+    )
+    objective_data.set_defaults(func=cmd_audit_objective_data)
 
     audit = subparsers.add_parser(
         "audit-run",
