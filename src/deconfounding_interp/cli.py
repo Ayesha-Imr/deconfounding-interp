@@ -85,6 +85,26 @@ def cmd_sample_questions(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_audit_run(args: argparse.Namespace) -> int:
+    from deconfounding_interp.audit import audit_run
+
+    bundle = _load_or_exit(args.config)
+    from deconfounding_interp.io import resolve_paths
+
+    report_root = args.report_root
+    if report_root is None and args.include_responses:
+        report_root = resolve_paths(bundle)["report_dir"]
+    result = audit_run(
+        manifest_path=args.manifest,
+        run_dir=args.run_dir,
+        project_root=bundle.project_root,
+        report_root=report_root,
+        phases=args.phase,
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0 if result["status"] == "passed" else 1
+
+
 def cmd_run_pipeline(args: argparse.Namespace) -> int:
     import logging
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -157,6 +177,30 @@ def build_parser() -> argparse.ArgumentParser:
     sample_q.add_argument("--dataset", default="HuggingFaceH4/ultrachat_200k")
     sample_q.add_argument("--output", type=Path, default=None)
     sample_q.set_defaults(func=cmd_sample_questions)
+
+    audit = subparsers.add_parser(
+        "audit-run",
+        help="Audit manifest metadata, checkpoint completion, config hashes, and responses",
+    )
+    audit.add_argument("--config", default=DEFAULT_CONFIG)
+    audit.add_argument("--manifest", type=Path, required=True)
+    audit.add_argument("--run-dir", type=Path, required=True)
+    audit.add_argument(
+        "--phase",
+        action="append",
+        help="Audit only this phase; repeat for multiple phases (default: all)",
+    )
+    audit.add_argument(
+        "--report-root",
+        type=Path,
+        help="Response-artifact root; omit to skip response validation",
+    )
+    audit.add_argument(
+        "--include-responses",
+        action="store_true",
+        help="Validate response files under the config's report_dir",
+    )
+    audit.set_defaults(func=cmd_audit_run)
 
     # --- Pipeline execution commands ---
     run_pipeline = subparsers.add_parser("run-pipeline", help="Run all jobs in the manifest")
