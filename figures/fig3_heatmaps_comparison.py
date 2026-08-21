@@ -8,13 +8,12 @@ import pandas as pd
 from matplotlib.colors import TwoSlopeNorm
 
 from figures.theme import (
-    DIVERGING_CMAP,
     CORAL,
-    SLATE_BLUE,
     DEEP_CHARCOAL,
-    CAPTION_GRAY,
-    apply_theme,
+    DIVERGING_CMAP,
+    SLATE_BLUE,
     add_caption,
+    apply_theme,
     savefig,
 )
 
@@ -50,8 +49,9 @@ def plot(data_dir: Path, output_dir: Path) -> None:
                 if i != j:
                     val = mat[i, j]
                     text_color = "white" if val < 0.5 else DEEP_CHARCOAL
-                    ax.text(j, i, f"{val:.2f}", ha="center", va="center",
-                            fontsize=6.5, color=text_color)
+                    ax.text(
+                        j, i, f"{val:.2f}", ha="center", va="center", fontsize=6.5, color=text_color
+                    )
 
         ax.set_xticks(range(10))
         ax.set_yticks(range(10))
@@ -74,7 +74,8 @@ def plot(data_dir: Path, output_dir: Path) -> None:
 
     fig.suptitle(
         "Direction Stability: Sycophancy vs. Toxicity (Qwen2.5-7B)",
-        fontsize=14, fontweight="semibold",
+        fontsize=14,
+        fontweight="semibold",
     )
 
     add_caption(

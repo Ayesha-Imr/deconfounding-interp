@@ -2,7 +2,6 @@
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
 # ── Core palette ──────────────────────────────────────────────────────────────
@@ -90,47 +89,54 @@ SEQUENTIAL_CMAP = LinearSegmentedColormap.from_list(
 
 # ── Theme application ────────────────────────────────────────────────────────
 
+
 def apply_theme():
     """Set global matplotlib rcParams for the Anthropic aesthetic."""
     font_families = ["Inter", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"]
-    mpl.rcParams.update({
-        "figure.facecolor": "#FFFFFF",
-        "axes.facecolor": "#FFFFFF",
-        "axes.edgecolor": MEDIUM_GRAY,
-        "axes.linewidth": 0.8,
-        "axes.spines.top": False,
-        "axes.spines.right": False,
-        "axes.grid": True,
-        "grid.color": "#ECECEC",
-        "grid.linewidth": 0.5,
-        "grid.alpha": 1.0,
-        "font.family": "sans-serif",
-        "font.sans-serif": font_families,
-        "font.size": 10,
-        "axes.titlesize": 14,
-        "axes.titleweight": "semibold",
-        "axes.labelsize": 11,
-        "xtick.labelsize": 10,
-        "ytick.labelsize": 10,
-        "xtick.color": DEEP_CHARCOAL,
-        "ytick.color": DEEP_CHARCOAL,
-        "axes.labelcolor": DEEP_CHARCOAL,
-        "text.color": DEEP_CHARCOAL,
-        "legend.frameon": False,
-        "legend.fontsize": 9,
-        "figure.dpi": 150,
-        "savefig.dpi": 300,
-        "savefig.bbox": "tight",
-        "savefig.pad_inches": 0.2,
-    })
+    mpl.rcParams.update(
+        {
+            "figure.facecolor": "#FFFFFF",
+            "axes.facecolor": "#FFFFFF",
+            "axes.edgecolor": MEDIUM_GRAY,
+            "axes.linewidth": 0.8,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "axes.grid": True,
+            "grid.color": "#ECECEC",
+            "grid.linewidth": 0.5,
+            "grid.alpha": 1.0,
+            "font.family": "sans-serif",
+            "font.sans-serif": font_families,
+            "font.size": 10,
+            "axes.titlesize": 14,
+            "axes.titleweight": "semibold",
+            "axes.labelsize": 11,
+            "xtick.labelsize": 10,
+            "ytick.labelsize": 10,
+            "xtick.color": DEEP_CHARCOAL,
+            "ytick.color": DEEP_CHARCOAL,
+            "axes.labelcolor": DEEP_CHARCOAL,
+            "text.color": DEEP_CHARCOAL,
+            "legend.frameon": False,
+            "legend.fontsize": 9,
+            "figure.dpi": 150,
+            "savefig.dpi": 300,
+            "savefig.bbox": "tight",
+            "savefig.pad_inches": 0.2,
+        }
+    )
 
 
 def add_caption(fig, text, y=-0.02):
     """Add an italic interpretation caption below the figure."""
     fig.text(
-        0.5, y, text,
-        ha="center", va="top",
-        fontsize=9, fontstyle="italic",
+        0.5,
+        y,
+        text,
+        ha="center",
+        va="top",
+        fontsize=9,
+        fontstyle="italic",
         color=CAPTION_GRAY,
         wrap=True,
         transform=fig.transFigure,

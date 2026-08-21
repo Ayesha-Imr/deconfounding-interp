@@ -6,15 +6,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from figures.theme import (
-    TRAIT_COLORS,
-    TRAIT_DISPLAY,
-    TRAIT_TYPE,
-    MODEL_DISPLAY,
-    MODEL_MARKERS,
     CAPTION_GRAY,
     MEDIUM_GRAY,
-    apply_theme,
+    MODEL_MARKERS,
+    TRAIT_COLORS,
+    TRAIT_DISPLAY,
     add_caption,
+    apply_theme,
     savefig,
 )
 
@@ -80,14 +78,46 @@ def plot(data_dir: Path, output_dir: Path) -> None:
     ax.axvline(0.9, color=MEDIUM_GRAY, linewidth=0.6, linestyle="--", alpha=0.5)
 
     # Quadrant labels
-    ax.text(0.62, 0.88, "unstable\nhigh confound", fontsize=7.5, color=CAPTION_GRAY,
-            ha="center", va="center", alpha=0.7)
-    ax.text(0.96, 0.88, "stable but\nconfounded", fontsize=7.5, color=CAPTION_GRAY,
-            ha="center", va="center", alpha=0.7)
-    ax.text(0.62, 0.12, "unstable\nbut cleaner", fontsize=7.5, color=CAPTION_GRAY,
-            ha="center", va="center", alpha=0.7)
-    ax.text(0.96, 0.12, "stable\nand clean", fontsize=7.5, color=CAPTION_GRAY,
-            ha="center", va="center", alpha=0.7)
+    ax.text(
+        0.62,
+        0.88,
+        "unstable\nhigh confound",
+        fontsize=7.5,
+        color=CAPTION_GRAY,
+        ha="center",
+        va="center",
+        alpha=0.7,
+    )
+    ax.text(
+        0.96,
+        0.88,
+        "stable but\nconfounded",
+        fontsize=7.5,
+        color=CAPTION_GRAY,
+        ha="center",
+        va="center",
+        alpha=0.7,
+    )
+    ax.text(
+        0.62,
+        0.12,
+        "unstable\nbut cleaner",
+        fontsize=7.5,
+        color=CAPTION_GRAY,
+        ha="center",
+        va="center",
+        alpha=0.7,
+    )
+    ax.text(
+        0.96,
+        0.12,
+        "stable\nand clean",
+        fontsize=7.5,
+        color=CAPTION_GRAY,
+        ha="center",
+        va="center",
+        alpha=0.7,
+    )
 
     ax.set_xlabel("Direction stability (mean pairwise cosine)")
     ax.set_ylabel("Surface-form overlap fraction")
@@ -98,22 +128,52 @@ def plot(data_dir: Path, output_dir: Path) -> None:
 
     # Legend for model markers
     from matplotlib.lines import Line2D
+
     legend_elements = [
-        Line2D([0], [0], marker="o", color="none", markerfacecolor=CAPTION_GRAY,
-               markersize=7, label="Qwen2.5-7B"),
-        Line2D([0], [0], marker="^", color="none", markerfacecolor=CAPTION_GRAY,
-               markersize=7, label="Llama-3.1-8B"),
-        Line2D([0], [0], marker="s", color="none", markerfacecolor=TRAIT_COLORS["sycophancy"],
-               markersize=7, label="Behavioral"),
-        Line2D([0], [0], marker="s", color="none", markerfacecolor=TRAIT_COLORS["toxicity"],
-               markersize=7, label="Stylistic"),
+        Line2D(
+            [0],
+            [0],
+            marker="o",
+            color="none",
+            markerfacecolor=CAPTION_GRAY,
+            markersize=7,
+            label="Qwen2.5-7B",
+        ),
+        Line2D(
+            [0],
+            [0],
+            marker="^",
+            color="none",
+            markerfacecolor=CAPTION_GRAY,
+            markersize=7,
+            label="Llama-3.1-8B",
+        ),
+        Line2D(
+            [0],
+            [0],
+            marker="s",
+            color="none",
+            markerfacecolor=TRAIT_COLORS["sycophancy"],
+            markersize=7,
+            label="Behavioral",
+        ),
+        Line2D(
+            [0],
+            [0],
+            marker="s",
+            color="none",
+            markerfacecolor=TRAIT_COLORS["toxicity"],
+            markersize=7,
+            label="Stylistic",
+        ),
     ]
     ax.legend(handles=legend_elements, loc="upper left", fontsize=8.5)
 
     add_caption(
         fig,
         "Stable ≠ clean. Formality produces a consistent direction every time (cos 0.94) "
-        "— but 83% of it is surface-form artifact. Sycophancy is both inconsistent and contaminated.",
+        "— but 83% of it is surface-form artifact. "
+        "Sycophancy is both inconsistent and contaminated.",
         y=0.01,
     )
     fig.tight_layout(rect=[0, 0.05, 1, 1])

@@ -7,18 +7,15 @@ import numpy as np
 import pandas as pd
 
 from figures.theme import (
-    TRAIT_COLORS,
-    TRAIT_DISPLAY,
-    TRAIT_TYPE,
+    CAPTION_GRAY,
+    CORAL,
+    MEDIUM_GRAY,
     MODEL_DISPLAY,
     MODEL_MARKERS,
-    DEEP_CHARCOAL,
-    CAPTION_GRAY,
-    MEDIUM_GRAY,
-    CORAL,
     SLATE_BLUE,
-    apply_theme,
+    TRAIT_DISPLAY,
     add_caption,
+    apply_theme,
     savefig,
 )
 
@@ -65,27 +62,61 @@ def plot(data_dir: Path, output_dir: Path) -> None:
             max_val = r["max_cosine"]
 
             # Min-max range bar
-            ax.plot([min_val, max_val], [i, i], color=model_colors[model],
-                    linewidth=1.2, alpha=0.35, zorder=2)
+            ax.plot(
+                [min_val, max_val],
+                [i, i],
+                color=model_colors[model],
+                linewidth=1.2,
+                alpha=0.35,
+                zorder=2,
+            )
 
             # Mean dot
             ax.scatter(
-                mean_val, i,
+                mean_val,
+                i,
                 color=model_colors[model],
                 marker=MODEL_MARKERS[model],
-                s=90, edgecolors="white", linewidth=0.6, zorder=4,
+                s=90,
+                edgecolors="white",
+                linewidth=0.6,
+                zorder=4,
             )
 
     # Stability threshold lines
     ax.axvline(0.9, color=CAPTION_GRAY, linewidth=0.8, linestyle="--", alpha=0.5)
     ax.axvline(0.7, color=CAPTION_GRAY, linewidth=0.8, linestyle="--", alpha=0.5)
 
-    ax.text(0.92, len(traits) - 0.3, "high\nstability", fontsize=7, color=CAPTION_GRAY,
-            ha="left", va="top", alpha=0.7)
-    ax.text(0.72, len(traits) - 0.3, "moderate", fontsize=7, color=CAPTION_GRAY,
-            ha="left", va="top", alpha=0.7)
-    ax.text(0.05, len(traits) - 0.3, "unstable", fontsize=7, color=CAPTION_GRAY,
-            ha="left", va="top", alpha=0.7)
+    ax.text(
+        0.92,
+        len(traits) - 0.3,
+        "high\nstability",
+        fontsize=7,
+        color=CAPTION_GRAY,
+        ha="left",
+        va="top",
+        alpha=0.7,
+    )
+    ax.text(
+        0.72,
+        len(traits) - 0.3,
+        "moderate",
+        fontsize=7,
+        color=CAPTION_GRAY,
+        ha="left",
+        va="top",
+        alpha=0.7,
+    )
+    ax.text(
+        0.05,
+        len(traits) - 0.3,
+        "unstable",
+        fontsize=7,
+        color=CAPTION_GRAY,
+        ha="left",
+        va="top",
+        alpha=0.7,
+    )
 
     ax.set_yticks(y_pos)
     ax.set_yticklabels([TRAIT_DISPLAY[t] for t in traits], fontsize=10)
@@ -95,13 +126,34 @@ def plot(data_dir: Path, output_dir: Path) -> None:
 
     # Legend
     from matplotlib.lines import Line2D
+
     legend_elements = [
-        Line2D([0], [0], marker="o", color="none", markerfacecolor=CORAL,
-               markersize=7, label=MODEL_DISPLAY["qwen2_5_7b_instruct"]),
-        Line2D([0], [0], marker="^", color="none", markerfacecolor=SLATE_BLUE,
-               markersize=7, label=MODEL_DISPLAY["llama_3_1_8b_instruct"]),
-        Line2D([0], [0], color=CAPTION_GRAY, linewidth=0.8, linestyle="--",
-               label="Stability thresholds"),
+        Line2D(
+            [0],
+            [0],
+            marker="o",
+            color="none",
+            markerfacecolor=CORAL,
+            markersize=7,
+            label=MODEL_DISPLAY["qwen2_5_7b_instruct"],
+        ),
+        Line2D(
+            [0],
+            [0],
+            marker="^",
+            color="none",
+            markerfacecolor=SLATE_BLUE,
+            markersize=7,
+            label=MODEL_DISPLAY["llama_3_1_8b_instruct"],
+        ),
+        Line2D(
+            [0],
+            [0],
+            color=CAPTION_GRAY,
+            linewidth=0.8,
+            linestyle="--",
+            label="Stability thresholds",
+        ),
     ]
     ax.legend(handles=legend_elements, loc="lower right", fontsize=8.5)
 
@@ -109,7 +161,8 @@ def plot(data_dir: Path, output_dir: Path) -> None:
         fig,
         "Mean pairwise cosine between 10 prompt-variant directions per trait. "
         "Thin lines show the min–max range. "
-        "Sycophancy is the clear outlier — some variant pairs are nearly orthogonal (min cos 0.07 on Llama). "
+        "Sycophancy is the clear outlier — some variant pairs are nearly "
+        "orthogonal (min cos 0.07 on Llama). "
         "Rankings are consistent across both models.",
         y=0.01,
     )

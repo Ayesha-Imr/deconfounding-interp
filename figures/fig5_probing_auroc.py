@@ -9,13 +9,10 @@ import pandas as pd
 from figures.theme import (
     DIRECTION_COLORS,
     DIRECTION_DISPLAY,
-    TRAIT_DISPLAY,
-    MODEL_DISPLAY,
-    DEEP_CHARCOAL,
-    CAPTION_GRAY,
     MEDIUM_GRAY,
-    apply_theme,
+    TRAIT_DISPLAY,
     add_caption,
+    apply_theme,
     savefig,
 )
 
@@ -45,13 +42,20 @@ def plot(data_dir: Path, output_dir: Path) -> None:
     for k, dtype in enumerate(DIRECTION_ORDER):
         aurocs = []
         for trait, model in groups:
-            row = df[(df["trait_id"] == trait) & (df["model_id"] == model) & (df["direction_type"] == dtype)]
+            row = df[
+                (df["trait_id"] == trait)
+                & (df["model_id"] == model)
+                & (df["direction_type"] == dtype)
+            ]
             aurocs.append(row["auroc"].values[0] if len(row) > 0 else 0)
         offset = (k - n_dirs / 2 + 0.5) * bar_width
-        bars = ax.bar(
-            x + offset, aurocs, bar_width * 0.88,
+        ax.bar(
+            x + offset,
+            aurocs,
+            bar_width * 0.88,
             color=DIRECTION_COLORS[dtype],
-            edgecolor="white", linewidth=0.3,
+            edgecolor="white",
+            linewidth=0.3,
             label=DIRECTION_DISPLAY[dtype],
             zorder=2,
         )
@@ -73,14 +77,14 @@ def plot(data_dir: Path, output_dir: Path) -> None:
         sep_x = i * 2 - 0.5
         ax.axvline(sep_x, color=MEDIUM_GRAY, linewidth=0.4, linestyle="-", alpha=0.4)
 
-    ax.legend(loc="upper right", ncol=4, fontsize=9,
-              framealpha=0.9, edgecolor="#E0E0E0")
+    ax.legend(loc="upper right", ncol=4, fontsize=9, framealpha=0.9, edgecolor="#E0E0E0")
 
     add_caption(
         fig,
         "AUROC of each direction type as a linear probe on held-out activations. "
         "Standard and averaged perform similarly. Subtracted sometimes degrades "
-        "(Llama formality: 1.00 to 0.84) -- surface-form signal may carry useful discriminative information.",
+        "(Llama formality: 1.00 to 0.84) -- surface-form signal may carry "
+        "useful discriminative information.",
         y=0.01,
     )
     fig.tight_layout(rect=[0, 0.06, 1, 1])

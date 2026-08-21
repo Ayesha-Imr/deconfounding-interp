@@ -7,12 +7,12 @@ import numpy as np
 import pandas as pd
 
 from figures.theme import (
+    CAPTION_GRAY,
+    DEEP_CHARCOAL,
     DIVERGING_CMAP,
     TRAIT_DISPLAY,
-    DEEP_CHARCOAL,
-    CAPTION_GRAY,
-    apply_theme,
     add_caption,
+    apply_theme,
     savefig,
 )
 
@@ -54,11 +54,18 @@ def plot(data_dir: Path, output_dir: Path) -> None:
                 val = mat[i, j]
                 fontweight = "bold" if abs(val) > 0.3 else "normal"
                 text_color = "white" if abs(val) > 0.4 else DEEP_CHARCOAL
-                ax.text(j, i, f"{val:.2f}", ha="center", va="center",
-                        fontsize=10, color=text_color, fontweight=fontweight)
+                ax.text(
+                    j,
+                    i,
+                    f"{val:.2f}",
+                    ha="center",
+                    va="center",
+                    fontsize=10,
+                    color=text_color,
+                    fontweight=fontweight,
+                )
             else:
-                ax.text(j, i, "—", ha="center", va="center",
-                        fontsize=10, color=CAPTION_GRAY)
+                ax.text(j, i, "—", ha="center", va="center", fontsize=10, color=CAPTION_GRAY)
 
     labels = [TRAIT_DISPLAY[t] for t in TRAIT_ORDER]
     ax.set_xticks(range(n))
@@ -68,8 +75,11 @@ def plot(data_dir: Path, output_dir: Path) -> None:
 
     # Diagonal shading
     for i in range(n):
-        ax.add_patch(plt.Rectangle((i - 0.5, i - 0.5), 1, 1,
-                                   fill=True, facecolor="#F5F5F5", edgecolor="none", zorder=0))
+        ax.add_patch(
+            plt.Rectangle(
+                (i - 0.5, i - 0.5), 1, 1, fill=True, facecolor="#F5F5F5", edgecolor="none", zorder=0
+            )
+        )
 
     for spine in ax.spines.values():
         spine.set_visible(True)
@@ -80,14 +90,19 @@ def plot(data_dir: Path, output_dir: Path) -> None:
     cbar.set_label("Cosine similarity", fontsize=10)
     cbar.ax.tick_params(labelsize=9)
 
-    ax.set_title("Cross-Trait Direction Cosines\n(averaged across Qwen & Llama)",
-                 fontsize=13, fontweight="semibold", pad=12)
+    ax.set_title(
+        "Cross-Trait Direction Cosines\n(averaged across Qwen & Llama)",
+        fontsize=13,
+        fontweight="semibold",
+        pad=12,
+    )
 
     add_caption(
         fig,
         "Cosine similarity between standard DiM directions for different traits. "
         "Blue = anti-aligned, white = independent, warm = correlated. "
-        "Toxicity–formality anti-correlation (−0.39) reflects that toxic language tends to be informal.",
+        "Toxicity–formality anti-correlation (−0.39) reflects that toxic "
+        "language tends to be informal.",
         y=0.01,
     )
     fig.tight_layout(rect=[0, 0.05, 1, 1])
