@@ -119,6 +119,31 @@ def build_manifest(bundle: ConfigBundle) -> dict[str, Any]:
                     )
                 )
 
+            layer_robustness_cfg = bundle.experiment.analysis.get(
+                "layer_robustness", {}
+            )
+            if layer_robustness_cfg.get("enabled", False):
+                holdout_index = int(
+                    layer_robustness_cfg.get("holdout_index", variant_count - 1)
+                )
+                jobs.append(
+                    ManifestJob(
+                        phase="layer_robustness",
+                        model_id=model_id,
+                        trait_id=trait_id,
+                        job_id=f"layer_robustness__{model_id}__{trait_id}",
+                        payload={
+                            "variant_count": variant_count,
+                            "holdout_index": holdout_index,
+                            "train_variant_indices": [
+                                index for index in range(variant_count)
+                                if index != holdout_index
+                            ],
+                            "direction_types": ["standard", "random", "sign_reversed"],
+                        },
+                    )
+                )
+
             jobs.append(
                 ManifestJob(
                     phase="probing",

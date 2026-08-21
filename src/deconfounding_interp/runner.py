@@ -13,6 +13,7 @@ from deconfounding_interp.pipelines.base import StageContext
 from deconfounding_interp.pipelines.direction_analysis import DirectionAnalysisStage
 from deconfounding_interp.pipelines.direction_summary import DirectionSummaryStage
 from deconfounding_interp.pipelines.downstream_evaluation import DownstreamEvaluationStage
+from deconfounding_interp.pipelines.layer_robustness import LayerRobustnessStage
 from deconfounding_interp.pipelines.null_analysis import NullAnalysisStage
 from deconfounding_interp.pipelines.phase3_summary import Phase3SummaryStage
 from deconfounding_interp.pipelines.probing import ProbingStage
@@ -31,6 +32,7 @@ STAGE_REGISTRY: dict[str, type] = {
     "probing": ProbingStage,
     "phase3_summary": Phase3SummaryStage,
     "null_analysis": NullAnalysisStage,
+    "layer_robustness": LayerRobustnessStage,
 }
 
 
