@@ -49,3 +49,26 @@ def test_compute_layer_results_blocks_without_complete_holdout():
     )
     assert result["status"] == "blocked"
     assert result["reason"] == "no_complete_train_holdout_layers"
+
+
+def test_compute_layer_results_records_near_zero_layers():
+    result = compute_layer_results(
+        train_by_layer={
+            1: {"pos": [np.zeros((2, 3))], "neg": [np.zeros((2, 3))]},
+        },
+        holdout={
+            1: {
+                "pos": np.ones((2, 3)),
+                "neg": -np.ones((2, 3)),
+            },
+        },
+        base_seed=23,
+        model_id="qwen",
+        trait_id="toxicity",
+        train_variant_indices=[0, 1],
+        holdout_index=2,
+    )
+    assert result["status"] == "completed"
+    assert result["analysis_status"] == "no_valid_layers"
+    assert result["layers"] == []
+    assert result["skipped_layers"][0]["reason"] == "near_zero_standard_direction"

@@ -114,6 +114,8 @@ def compute_layer_results(
     """Return all-layer standard/control probe results without filesystem I/O."""
 
     rows: list[dict[str, Any]] = []
+    skipped_layers: list[dict[str, Any]] = []
+    candidate_layers = 0
     for layer in sorted(set(train_by_layer) & set(holdout)):
         train_sides = train_by_layer[layer]
         test_sides = holdout[layer]
@@ -121,9 +123,18 @@ def compute_layer_results(
             continue
         if "pos" not in test_sides or "neg" not in test_sides:
             continue
+        candidate_layers += 1
         train_pos = np.concatenate(train_sides["pos"])
         train_neg = np.concatenate(train_sides["neg"])
-        standard = normalize(difference_in_means(train_pos, train_neg))
+        try:
+            standard = normalize(difference_in_means(train_pos, train_neg))
+        except ValueError as exc:
+            skipped_layers.append({
+                "layer": int(layer),
+                "reason": "near_zero_standard_direction",
+                "detail": str(exc),
+            })
+            continue
         random_seed = stable_control_seed(base_seed, model_id, trait_id)
         random_direction = normalize(
             np.random.default_rng(random_seed).normal(size=standard.shape)
@@ -155,17 +166,29 @@ def compute_layer_results(
             }
         rows.append(row)
 
-    if not rows:
+    if not rows and candidate_layers == 0:
         return {
             "status": "blocked",
             "reason": "no_complete_train_holdout_layers",
             "train_variant_indices": list(train_variant_indices),
             "holdout_index": int(holdout_index),
             "layers": [],
+            "skipped_layers": skipped_layers,
+        }
+    if not rows:
+        return {
+            "status": "completed",
+            "analysis_status": "no_valid_layers",
+            "train_variant_indices": list(train_variant_indices),
+            "holdout_index": int(holdout_index),
+            "layers": [],
+            "skipped_layers": skipped_layers,
         }
     return {
         "status": "completed",
+        "analysis_status": "completed",
         "train_variant_indices": list(train_variant_indices),
         "holdout_index": int(holdout_index),
         "layers": rows,
+        "skipped_layers": skipped_layers,
     }
