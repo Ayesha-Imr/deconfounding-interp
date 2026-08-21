@@ -1,0 +1,78 @@
+id: causal_objective_harder_pilot_qwen_8b
+description: "Judge-free medium-difficulty objective pilot for Qwen2.5-7B sycophancy and hallucination."
+random_seed: 23
+
+models:
+  - models/qwen2_5_7b_instruct_objective_harder_pilot.yaml
+
+traits:
+  - traits/sycophancy.yaml
+  - traits/hallucination.yaml
+
+judge: judges/default_trait_judge.yaml
+backend: huggingface
+
+llm:
+  provider: openai  # unused: scoring.mode=objective
+  generation_model: gpt-4.1-mini-2025-04-14
+  judge_model: gpt-4.1-mini-2025-04-14
+  generation_temperature: 0.7
+  generation_max_tokens: 128
+  judge_concurrency: 1
+  audit_csv: false
+  prompt_asset_mode: deterministic
+
+paths:
+  data_dir: data
+  raw_dir: data/raw/geometry_stochastic_null_8b
+  interim_dir: data/interim/geometry_stochastic_null_8b
+  processed_dir: data/processed/geometry_stochastic_null_8b
+  manifest_dir: outputs/manifests/causal_objective_harder_pilot_qwen_8b
+  direction_dir: outputs/directions/geometry_stochastic_null_8b
+  report_dir: outputs/reports/causal_objective_harder_pilot_qwen_8b
+
+generation:
+  system_prompt_pairs: 5
+  paraphrases_per_prompt: 0
+  extraction_questions: 1
+  evaluation_questions: 8
+  rollouts_per_prompt_question: 4
+  max_new_tokens: 128
+  temperature: 0.7
+  top_p: 0.95
+
+scoring:
+  mode: objective
+  objective_tasks_path: data/objective_tasks_8b_harder_pilot.json
+
+extraction:
+  method: difference_in_means
+  activation_position: response_average
+
+surface_form:
+  same_side_prompt_pairs: all_unique_pairs
+  include_positive_side: true
+  include_negative_side: true
+  include_question_paraphrase_pairs: false
+
+corrections:
+  direction_types: [standard, random, sign_reversed]
+  surface_basis:
+    max_rank: 3
+    variance_threshold: 0.90
+
+analysis:
+  stability:
+    within_trait_thresholds: {high: 0.90, moderate: 0.70}
+    compare_to_cross_trait: true
+  nulls:
+    repeats: 90
+
+steering:
+  enabled: true
+  scale_mode: activation_rms
+  target_activation_rms_ratio: 0.05
+  calibration_variant_indices: [0]
+  alpha_values: [0.0, 0.5, 1.0, 2.0]
+  rollouts_per_eval_question: 2
+  evaluate_cross_trait_leakage: false
