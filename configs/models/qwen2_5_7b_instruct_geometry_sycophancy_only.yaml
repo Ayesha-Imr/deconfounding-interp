@@ -1,0 +1,14 @@
+id: qwen2_5_7b_instruct_geometry
+display_name: Qwen2.5-7B-Instruct (sycophancy-only data pilot)
+provider: huggingface
+model_name: Qwen/Qwen2.5-7B-Instruct
+tokenizer_name: Qwen/Qwen2.5-7B-Instruct
+dtype: bfloat16
+device_map: auto
+trust_remote_code: true
+chat_template: tokenizer_default
+residual_stream_name: model.layers.{layer}.input_layernorm.input
+num_layers: 28
+default_max_new_tokens: 128
+trait_layers:
+  sycophancy: 20
