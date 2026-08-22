@@ -129,8 +129,19 @@ def audit_objective_dataset(
         review = {}
     if review.get("status") != "frozen":
         warnings.append("dataset is not frozen; it is eligible only for exploratory smoke runs")
-    if int(review.get("reviewer_count", 0) or 0) < 2:
-        warnings.append("fewer than two independent reviewers are recorded")
+    try:
+        minimum_reviewers = int(review.get("minimum_reviewer_count", 2) or 2)
+    except (TypeError, ValueError):
+        errors.append("review.minimum_reviewer_count must be an integer")
+        minimum_reviewers = 2
+    if minimum_reviewers < 1:
+        errors.append("review.minimum_reviewer_count must be at least 1")
+        minimum_reviewers = 1
+    reviewer_count = int(review.get("reviewer_count", 0) or 0)
+    if reviewer_count < minimum_reviewers:
+        warnings.append(
+            f"fewer than {minimum_reviewers} independent reviewers are recorded"
+        )
 
     payload = dataset_path.read_bytes()
     return {

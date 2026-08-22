@@ -1,11 +1,19 @@
 {
   "dataset_id": "deconfounding_interp_objective_candidate_v4",
   "version": 4,
-  "description": "Candidate objective set with balanced claim ordering and answer-option positions; content and source labels are unchanged from v1.",
+  "description": "Frozen objective set with balanced claim ordering and answer-option positions; content and source labels are unchanged from v1.",
   "review": {
-    "status": "candidate",
+    "status": "frozen",
     "reviewer_count": 1,
-    "notes": "Mechanical confound repair only: interleave true/false claim rows and balance expected option positions. Requires a fresh independent review before use as a frozen test."
+    "minimum_reviewer_count": 1,
+    "reviewers": [
+      {
+        "name": "Ayesha (independent reviewer)",
+        "date_utc": "2026-08-22 08:26 UTC",
+        "decision": "PASS"
+      }
+    ],
+    "notes": "Mechanical confound repair only: interleave true/false claim rows and balance expected option positions. One independent reviewer passed all 20 rows and the set-level checks; project decision accepts one reviewer for this frozen v4 release."
   },
   "source_registry": {
     "truthfulqa": {

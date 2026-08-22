@@ -106,6 +106,30 @@ def test_audit_counts_expected_positions_for_abstention_items(tmp_path):
                for warning in result["warnings"])
 
 
+def test_frozen_dataset_can_declare_one_reviewer_policy(tmp_path):
+    path = tmp_path / "tasks.json"
+    path.write_text(json.dumps({
+        "dataset_id": "frozen-one-reviewer",
+        "version": 1,
+        "review": {
+            "status": "frozen",
+            "reviewer_count": 1,
+            "minimum_reviewer_count": 1,
+        },
+        "tasks": [
+            _task("a", "sycophancy", True, "1"),
+            _task("b", "sycophancy", False, "2"),
+            _task("c", "sycophancy", True, "3"),
+            _task("d", "sycophancy", False, "4"),
+        ],
+    }))
+
+    result = audit_objective_dataset(path)
+
+    assert result["status"] == "passed"
+    assert not any("reviewers" in warning for warning in result["warnings"])
+
+
 def test_candidate_v4_preserves_v1_labels_and_provenance():
     root = Path(__file__).parents[1]
     v1 = json.loads((root / "data/objective_tasks_8b_data_candidate_v1.json").read_text())
