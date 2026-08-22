@@ -76,6 +76,12 @@ def request(method: str, path: str, body: dict | None = None) -> dict:
     """
     url = f"{API_BASE}{path}"
     cmd = ["curl", "-sS", "-X", method, "-u", f"{api_key()}:"]
+    # Some managed laptops have a broken local DNS resolver while direct
+    # DNS queries still work. Allow a temporary, explicit curl resolution
+    # without changing the API URL or weakening TLS verification.
+    curl_resolve = os.environ.get("LAMBDA_CURL_RESOLVE")
+    if curl_resolve:
+        cmd += ["--resolve", curl_resolve]
     input_data = None
     if body is not None:
         cmd += ["-H", "Content-Type: application/json", "--data-binary", "@-"]
