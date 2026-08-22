@@ -7,6 +7,27 @@ source /lambda/nfs/ic-fs-2/envs/deconfounding-interp.env
 cd /lambda/nfs/ic-fs-2/repos/deconfounding-interp
 git pull --ff-only
 
+RUN_ID=objective_data_headroom_pilot_qwen_8b_v4_20260822
+CONFIG=configs/experiments/objective_data_headroom_pilot_qwen_8b_v4.yaml
+MANIFEST=outputs/manifests/objective_data_headroom_pilot_qwen_8b_v4_20260822/objective_data_headroom_pilot_qwen_8b_v4_20260822.json
+RUN_DIR=outputs/runs/objective_data_headroom_pilot_qwen_8b_v4_20260822
+REPORT_DIR=outputs/reports/objective_data_headroom_pilot_qwen_8b_v4
+AUDIT_PATH=outputs/audits/objective_data_headroom_pilot_qwen_8b_v4_audit.json
+
+# The prior fail-fast attempt reached the runner before discovering a path
+# mismatch. Remove only this run's exact, unpromoted artifacts so a retry
+# cannot inherit its checkpoint or empty phase-3 summary.
+for path in \
+  data/raw/geometry_null_repair_8b \
+  data/interim/geometry_null_repair_8b \
+  outputs/directions/geometry_null_repair_8b \
+  "$(dirname "$MANIFEST")" \
+  "$RUN_DIR" \
+  "$REPORT_DIR" \
+  "$AUDIT_PATH"; do
+  rm -rf -- "$path"
+done
+
 python - <<'PY'
 from pathlib import Path
 import shutil
@@ -66,15 +87,86 @@ for source, target in pairs:
 print(f"MATERIALIZATION_GATE_PASSED {len(pairs)}")
 PY
 
+python - "$CONFIG" <<'PY'
+from pathlib import Path
+import sys
+
+from deconfounding_interp import io as dio
+from deconfounding_interp.config import load_config_bundle
+
+config_path = Path(sys.argv[1])
+bundle = load_config_bundle(config_path)
+missing = []
+for trait_id in bundle.trait_ids:
+    raw_assets = dio.trait_raw_dir(bundle, trait_id) / "assets.json"
+    if not raw_assets.exists():
+        missing.append(str(raw_assets))
+    for model_id in bundle.model_ids:
+        model = bundle.models[model_id]
+        layer = model.trait_layers.get(trait_id)
+        interim = dio.trait_interim_dir(bundle, trait_id, model_id)
+        direction = dio.direction_dir(bundle, trait_id, model_id)
+        if layer is None:
+            missing.append(f"{model_id}/{trait_id}: selected layer is unset")
+            continue
+        for side in ("pos", "neg"):
+            path = interim / "activations" / "variant_00" / f"layer_{layer:02d}_{side}.npy"
+            if not path.exists():
+                missing.append(str(path))
+        for path in (direction / "selected_layer.json", direction / "standard.npy"):
+            if not path.exists():
+                missing.append(str(path))
+if missing:
+    raise SystemExit("CONFIG_ARTIFACT_GATE_FAILED\n" + "\n".join(missing))
+print(f"CONFIG_ARTIFACT_GATE_PASSED {len(bundle.model_ids) * len(bundle.trait_ids)}")
+PY
+
 export DECONFOUND_CODE_COMMIT="$(git rev-parse HEAD)"
-RUN_ID=objective_data_headroom_pilot_qwen_8b_v4_20260822
-CONFIG=configs/experiments/objective_data_headroom_pilot_qwen_8b_v4.yaml
-MANIFEST=outputs/manifests/objective_data_headroom_pilot_qwen_8b_v4_20260822/objective_data_headroom_pilot_qwen_8b_v4_20260822.json
-RUN_DIR=outputs/runs/objective_data_headroom_pilot_qwen_8b_v4_20260822
 
 mkdir -p "$(dirname "$MANIFEST")"
 deconfound make-manifest --config "$CONFIG" --output "$MANIFEST"
+python - "$MANIFEST" <<'PY'
+import json
+import sys
+
+manifest = json.loads(open(sys.argv[1]).read())
+downstream = [job for job in manifest["jobs"] if job["phase"] == "downstream_evaluation"]
+expected = len(manifest["model_ids"]) * len(manifest["trait_ids"])
+if len(downstream) != expected or any(
+    not job["payload"].get("alpha_values") for job in downstream
+):
+    raise SystemExit(
+        f"MANIFEST_GATE_FAILED downstream={len(downstream)} expected={expected}"
+    )
+print(f"MANIFEST_GATE_PASSED downstream={len(downstream)}")
+PY
 deconfound run-stage --config "$CONFIG" --manifest "$MANIFEST" --run-dir "$RUN_DIR" --phase downstream_evaluation
+python - "$MANIFEST" "$RUN_DIR" "$REPORT_DIR" <<'PY'
+import json
+from pathlib import Path
+import sys
+
+manifest = json.loads(Path(sys.argv[1]).read_text())
+run_dir = Path(sys.argv[2])
+report_dir = Path(sys.argv[3])
+checkpoint = json.loads((run_dir / "checkpoint.json").read_text())
+completed = checkpoint.get("completed", {})
+downstream = [job for job in manifest["jobs"] if job["phase"] == "downstream_evaluation"]
+failures = []
+for job in downstream:
+    result = completed.get(job["job_id"], {}).get("result", {})
+    if result.get("status") != "completed" or int(result.get("n_responses", 0)) <= 0:
+        failures.append(f"{job['job_id']}: {result}")
+    response_path = (
+        report_dir / "phase3" / job["trait_id"] / job["model_id"]
+        / f"steering_{job['payload']['direction_type']}_responses.json"
+    )
+    if not response_path.exists() or not json.loads(response_path.read_text()):
+        failures.append(f"missing_or_empty_responses: {response_path}")
+if failures:
+    raise SystemExit("RESPONSE_GATE_FAILED\n" + "\n".join(failures))
+print(f"RESPONSE_GATE_PASSED {len(downstream)}")
+PY
 deconfound run-stage --config "$CONFIG" --manifest "$MANIFEST" --run-dir "$RUN_DIR" --phase phase3_summary
 mkdir -p outputs/audits
 deconfound audit-run \
@@ -83,7 +175,16 @@ deconfound audit-run \
   --run-dir "$RUN_DIR" \
   --phase downstream_evaluation \
   --phase phase3_summary \
-  --include-responses > outputs/audits/objective_data_headroom_pilot_qwen_8b_v4_audit.json
+  --include-responses > "$AUDIT_PATH"
+python - "$AUDIT_PATH" <<'PY'
+import json
+import sys
+
+audit = json.loads(open(sys.argv[1]).read())
+if audit.get("status") != "passed" or int(audit.get("facts", {}).get("response_file_count", 0)) < 2:
+    raise SystemExit(f"AUDIT_GATE_FAILED: {audit}")
+print("AUDIT_GATE_PASSED", audit["facts"]["response_file_count"])
+PY
 
 python - <<'PY'
 import json
