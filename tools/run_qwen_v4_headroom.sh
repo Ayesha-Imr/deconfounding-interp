@@ -29,6 +29,7 @@ for path in \
 done
 
 python - <<'PY'
+import json
 from pathlib import Path
 import shutil
 
@@ -36,44 +37,12 @@ from huggingface_hub import hf_hub_download
 
 repo = "ic-org/deconfounding-interp-shared"
 prefix = "experiments/geometry_null_repair_8b_20260821"
-pairs = [
+static_pairs = [
     ("data/raw/sycophancy/assets.json", "data/raw/geometry_null_repair_8b/sycophancy/assets.json"),
     ("data/raw/hallucination/assets.json", "data/raw/geometry_null_repair_8b/hallucination/assets.json"),
-    (
-        "data/interim/sycophancy/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_neg.npy",
-        "data/interim/geometry_null_repair_8b/sycophancy/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_neg.npy",
-    ),
-    (
-        "data/interim/sycophancy/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_pos.npy",
-        "data/interim/geometry_null_repair_8b/sycophancy/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_pos.npy",
-    ),
-    (
-        "data/interim/hallucination/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_neg.npy",
-        "data/interim/geometry_null_repair_8b/hallucination/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_neg.npy",
-    ),
-    (
-        "data/interim/hallucination/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_pos.npy",
-        "data/interim/geometry_null_repair_8b/hallucination/qwen2_5_7b_instruct_geometry/activations/variant_00/layer_16_pos.npy",
-    ),
-    (
-        "outputs/directions/sycophancy/qwen2_5_7b_instruct_geometry/selected_layer.json",
-        "outputs/directions/geometry_null_repair_8b/sycophancy/qwen2_5_7b_instruct_geometry/selected_layer.json",
-    ),
-    (
-        "outputs/directions/sycophancy/qwen2_5_7b_instruct_geometry/standard.npy",
-        "outputs/directions/geometry_null_repair_8b/sycophancy/qwen2_5_7b_instruct_geometry/standard.npy",
-    ),
-    (
-        "outputs/directions/hallucination/qwen2_5_7b_instruct_geometry/selected_layer.json",
-        "outputs/directions/geometry_null_repair_8b/hallucination/qwen2_5_7b_instruct_geometry/selected_layer.json",
-    ),
-    (
-        "outputs/directions/hallucination/qwen2_5_7b_instruct_geometry/standard.npy",
-        "outputs/directions/geometry_null_repair_8b/hallucination/qwen2_5_7b_instruct_geometry/standard.npy",
-    ),
 ]
 
-for source, target in pairs:
+def materialize(source, target):
     cached = hf_hub_download(
         repo_id=repo,
         repo_type="dataset",
@@ -83,8 +52,37 @@ for source, target in pairs:
     destination = Path(target)
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(cached, destination)
+    return cached
 
-print(f"MATERIALIZATION_GATE_PASSED {len(pairs)}")
+
+count = 0
+for source, target in static_pairs:
+    materialize(source, target)
+    count += 1
+
+# Read each archived direction's selected layer and fetch exactly that layer;
+# this keeps the materialization contract coupled to the direction metadata
+# instead of silently assuming every trait uses layer 16.
+for trait in ("sycophancy", "hallucination"):
+    model = "qwen2_5_7b_instruct_geometry"
+    selected_source = f"outputs/directions/{trait}/{model}/selected_layer.json"
+    selected_target = f"outputs/directions/geometry_null_repair_8b/{trait}/{model}/selected_layer.json"
+    cached_selected = materialize(selected_source, selected_target)
+    selected_layer = int(json.loads(Path(cached_selected).read_text())["best_layer"])
+    materialize(
+        f"outputs/directions/{trait}/{model}/standard.npy",
+        f"outputs/directions/geometry_null_repair_8b/{trait}/{model}/standard.npy",
+    )
+    count += 2
+    for side in ("neg", "pos"):
+        filename = f"layer_{selected_layer:02d}_{side}.npy"
+        materialize(
+            f"data/interim/{trait}/{model}/activations/variant_00/{filename}",
+            f"data/interim/geometry_null_repair_8b/{trait}/{model}/activations/variant_00/{filename}",
+        )
+        count += 1
+
+print(f"MATERIALIZATION_GATE_PASSED {count}")
 PY
 
 python - "$CONFIG" <<'PY'
